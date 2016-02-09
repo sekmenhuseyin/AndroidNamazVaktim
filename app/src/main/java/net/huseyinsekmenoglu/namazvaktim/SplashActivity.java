@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  * Created by huseyin on 25.1.2016.
- * http://emreardic.blogspot.com.tr/2014/08/diyanet-ezan-vakitleri-api.html
+ * https://www.bignerdranch.com/blog/splash-screens-the-right-way/ *
  */
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -45,8 +45,8 @@ public class SplashActivity extends AppCompatActivity {
                 editor.commit();
             }
             //show main page
-            //Intent intent = new Intent(this, MainActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             finish();
         }
     }

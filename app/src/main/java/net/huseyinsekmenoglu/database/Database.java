@@ -196,4 +196,10 @@ public class Database extends SQLiteOpenHelper {
         // return
         return liste;
     }
+
+    /*update vakit*/
+    public void UpdateNamazVakit() {
+        //TODO: android internet bağlantısı
+        //TODO: android udpate database
+    }
 }

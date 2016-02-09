@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Namaz Vaktim</string>
-    <string name="action_settings">Ayarlar</string>
     <string name="title_activity_setup">Kurulum Sihirbazı</string>
-    <string name="database_version">1</string>
-    <string name="google_app_id">996871107088</string>
+    <string name="database_version" translatable="false">1</string>
+    <string name="google_app_id" translatable="false">996871107088</string>
     <!-- Tab names -->
     <string name="tabVakit">Vakit</string>
     <string name="tabKible">Kıble</string>
@@ -13,7 +12,7 @@
     <string name="tabOnemliGun">Önemli Günler</string>
     <string name="tabAyarlar">Ayarlar</string>
     <!-- vakitler -->
-    <string name="vakit_none">-</string>
+    <string name="vakit_none" translatable="false">-</string>
     <string name="vakit_imsak">İmsak</string>
     <string name="vakit_kible">Kıble</string>
     <string name="vakit_gunes">Güneş</string>
@@ -29,4 +28,5 @@
     <string name="Town">İlçe</string>
     <string name="next">İleri</string>
     <string name="save">Kaydet</string>
+    <string name="language">Dil</string>
 </resources>
