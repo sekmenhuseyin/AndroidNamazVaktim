@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by huseyin.sekmenoglu on 8.2.2016.
+ * ülke, şehir, ilçe seçiminden sonra vakitleri güncelle
  * copied from: http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
  */
 public class SetupActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class SetupActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listDataChild;
     private int lastExpandedPosition = -1;
     private String nameCountry, nameCity, nameTown;
+    private String[] SehirliUlkeler = {"TURKIYE", "ABD", "KANADA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,10 @@ public class SetupActivity extends AppCompatActivity {
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
         // preparing list data
-        prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
+        prepareListData("", "");
         expListView.expandGroup(0);
+        expListView.collapseGroup(1);
+        expListView.collapseGroup(2);
         // Listview Group click listener
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -66,65 +67,92 @@ public class SetupActivity extends AppCompatActivity {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if (listDataHeader.get(groupPosition) == getString(R.string.Country)) {
+                //select case by group name
+                if (listDataHeader.get(groupPosition).equals(getString(R.string.Country))) {
                     nameCountry = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                    prepareListCity(nameCountry);
+                    prepareListData(nameCountry, "");
                     expListView.collapseGroup(0);
                     expListView.expandGroup(1);
 
-                } else if (listDataHeader.get(groupPosition) == getString(R.string.City)) {
+                } else if (listDataHeader.get(groupPosition).equals(getString(R.string.City))) {
                     nameCity = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                    prepareListTown(nameCity);
-                    expListView.collapseGroup(1);
-                    expListView.expandGroup(2);
+                    if (nameCountry.equals(SehirliUlkeler[0]) || nameCountry.equals(SehirliUlkeler[1]) || nameCountry.equals(SehirliUlkeler[2])) {
+                        prepareListData(nameCountry, nameCity);
+                        expListView.collapseGroup(1);
+                        expListView.expandGroup(2);
+                    } else {
+                        nameTown = nameCity;
+                        nameCity = nameCountry;
+                        expListView.collapseGroup(1);
+                        SelectCity();
+                    }
 
-                } else if (listDataHeader.get(groupPosition) == getString(R.string.Town)) {
+                } else if (listDataHeader.get(groupPosition).equals(getString(R.string.Town))) {
                     expListView.collapseGroup(2);
                     nameTown = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                    Toast.makeText(getApplicationContext(), nameCountry + ", " + nameCity + ", " + nameTown, Toast.LENGTH_SHORT).show();
+                    SelectCity();
                 }
                 return false;
             }
         });
     }
 
+    /*end selcet city*/
+    private void SelectCity() {
+        Toast.makeText(getApplicationContext(), nameCountry + ", " + nameTown, Toast.LENGTH_SHORT).show();
+    }
+
     /*
      * Preparing the list data
      */
-    private void prepareListData() {
+    private void prepareListData(String country, String city) {
         // Adding main groups
         listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
         listDataHeader.add(getString(R.string.Country));
-        listDataHeader.add(getString(R.string.City));
-        listDataHeader.add(getString(R.string.Town));
-        // Adding child data
-        Database db = new Database(getApplicationContext());
-        List<String> liste = db.getContries();
-        List<String> tmp = new ArrayList<>();
-//add to first group items
-        listDataChild = new HashMap<>();
-        listDataChild.put(listDataHeader.get(0), liste); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), tmp);
-        listDataChild.put(listDataHeader.get(2), tmp);
+        listDataChild.put(listDataHeader.get(0), prepareListCountry());
+        if (!country.equals("")) {//şehir istenmişse şihir grubunu ekle
+            List<String> tmp;
+            if (country.equals(SehirliUlkeler[0]) || country.equals(SehirliUlkeler[1]) || country.equals(SehirliUlkeler[2])) {
+                tmp = prepareListCity(country);
+            } else {
+                tmp = prepareListTown(country);
+            }
+            listDataHeader.add(getString(R.string.City));
+            listDataChild.put(listDataHeader.get(1), tmp);
+        }
+        if (!city.equals("")) {//ilçe istenmişse ilçe grubunu ekle
+            listDataHeader.add(getString(R.string.Town));
+            listDataChild.put(listDataHeader.get(1), prepareListCity(country));
+            listDataChild.put(listDataHeader.get(2), prepareListTown(city));
+        }
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter.notifyDataSetChanged();
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
     }
 
-    private void prepareListCity(String ulke) {
+    private List<String> prepareListCountry() {
         // Adding child data
         Database db = new Database(getApplicationContext());
-        List<String> liste = db.getCities(ulke);
-        List<String> tmp = new ArrayList<>();
-        //add to first group items
-        listDataChild = new HashMap<>();
-        listDataChild.put(listDataHeader.get(1), liste); // Header, Child data
-        listDataChild.put(listDataHeader.get(2), tmp);
+        return db.getContries();
     }
 
-    private void prepareListTown(String city) {
-        // Adding child data
-        Database db = new Database(getApplicationContext());
-        List<String> liste = db.getTown(city);
-        //add to first group items
-        listDataChild = new HashMap<>();
-        listDataChild.put(listDataHeader.get(2), liste); // Header, Child data
+    private List<String> prepareListCity(String country) {
+        if (country.equals("")) {
+            return new ArrayList<>();
+        } else {
+            Database db = new Database(getApplicationContext());
+            return db.getCities(country);
+        }
+    }
+
+    private List<String> prepareListTown(String city) {
+        if (city.equals("")) {
+            return new ArrayList<>();
+        } else {
+            Database db = new Database(getApplicationContext());
+            return db.getTown(city);
+        }
     }
 }
