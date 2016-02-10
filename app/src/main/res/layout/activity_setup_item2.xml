@@ -2,26 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="50dp"
-    android:paddingBottom="4dp"
-    android:paddingTop="4dp">
+    android:layout_marginLeft="@dimen/elli"
+    android:paddingBottom="@dimen/dort"
+    android:paddingTop="@dimen/dort">
 
     <TextView
         android:id="@+id/country_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/flag"
-        android:layout_marginBottom="14dp"
-        android:layout_marginLeft="29dp"
+        android:layout_marginBottom="@dimen/ondort"
+        android:layout_marginLeft="@dimen/yirmidokuz"
         android:layout_toRightOf="@+id/flag"
-        android:textSize="20dp" />
+        android:textSize="@dimen/yirmi" />
 
     <ImageView
         android:id="@+id/flag"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/yetmis"
+        android:layout_height="@dimen/elli"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="27dp" />
+        android:layout_marginLeft="@dimen/yirmiyedi" />
 
 </RelativeLayout>

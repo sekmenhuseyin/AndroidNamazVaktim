@@ -36,7 +36,8 @@
         <!-- setup screen on first launch -->
         <activity
             android:name=".SetupActivity"
-            android:label="@string/title_activity_setup" />
+            android:label="@string/title_activity_setup"
+            android:theme="@style/SetupTheme" />
         <!-- home page -->
         <activity
             android:name=".MainActivity"

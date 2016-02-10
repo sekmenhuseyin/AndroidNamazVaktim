@@ -1,5 +1,6 @@
 package net.huseyinsekmenoglu.namazvaktim;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Language;
@@ -123,18 +123,6 @@ public class SetupActivity extends AppCompatActivity {
         });
     }
 
-    /*end select city*/
-    private void SelectCity() {
-        //save to preferences
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getString(R.string.Country), nameCountry);
-        editor.putString(getString(R.string.City), nameCity);
-        editor.putString(getString(R.string.Town), nameTown);
-        editor.commit();
-        //show message
-        Toast.makeText(getApplicationContext(), nameCountry + ", " + nameTown, Toast.LENGTH_SHORT).show();
-    }
-
     /*prepare language list for expandable listview*/
     private void prepareListLanguageData() {
         listDataHeader = new ArrayList<>();
@@ -225,7 +213,19 @@ public class SetupActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.language), localeCode);
         editor.commit();
-        //show message
-        Toast.makeText(getApplicationContext(), localeCode, Toast.LENGTH_SHORT).show();
+    }
+
+    /*end select city*/
+    private void SelectCity() {
+        //save to preferences
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getString(R.string.Country), nameCountry);
+        editor.putString(getString(R.string.City), nameCity);
+        editor.putString(getString(R.string.Town), nameTown);
+        editor.commit();
+        //finish
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

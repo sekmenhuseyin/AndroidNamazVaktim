@@ -8,9 +8,10 @@
         android:id="@+id/lblListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
+        android:paddingBottom="@dimen/bes"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingTop="5dp"
-        android:textSize="17dip" />
+        android:paddingRight="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="@dimen/bes"
+        android:textSize="@dimen/onyedi" />
 
 </LinearLayout>

@@ -2,5 +2,5 @@
     <color name="colorPrimary">#E7545E</color>
     <color name="colorPrimaryDark">#FC1F2C</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="splashBackground">#EE8F96</color>
+    <color name="setupBackground">#EE8F96</color>
 </resources>
