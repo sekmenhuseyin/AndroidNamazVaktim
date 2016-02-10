@@ -3,6 +3,7 @@ package net.huseyinsekmenoglu.namazvaktim;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import net.huseyinsekmenoglu.database.Language;
 import net.huseyinsekmenoglu.database.LanguageChild;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -35,11 +37,9 @@ public class SetupActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private int lastExpandedPosition = -1;
     private String nameCountry, nameCity, nameTown;
-    //may change in next versions
-    private String[] SehirliUlkeler = {"TURKIYE", "ABD", "KANADA"};
-    private String languages[] = {"Türkçe", "English"};
-    private String languageCodes[] = {"TR", "EN"};
-    private int images[] = {R.drawable.lang_tr, R.drawable.lang_en};
+    private Database db = new Database(this);
+    private String[] SehirliUlkeler, Diller, DilKodlari;
+    private int[] images = {R.drawable.lang_tr, R.drawable.lang_en};
     private Boolean expWithImage = true;
 
     @Override
@@ -48,6 +48,10 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         // SharedPreferences
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Resources res = getResources();
+        SehirliUlkeler = res.getStringArray(R.array.SehirliUlkeler);
+        Diller = res.getStringArray(R.array.Diller);
+        DilKodlari = res.getStringArray(R.array.DilKodlari);
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
         // preparing list data
@@ -86,7 +90,7 @@ public class SetupActivity extends AppCompatActivity {
                 //if language clicked
                 if (expWithImage) {
                     expWithImage = false;
-                    setLocale(languageCodes[childPosition]);
+                    setLocale(DilKodlari[childPosition]);
                     //get country names
                     prepareListData("", "");
                     expListView.expandGroup(0);
@@ -126,20 +130,20 @@ public class SetupActivity extends AppCompatActivity {
     /*prepare language list for expandable listview*/
     private void prepareListLanguageData() {
         listDataHeader = new ArrayList<>();
-        listDataHeader.add(getString(R.string.language));
+        listDataHeader.add(getString(R.string.lang));
         //diller tanımlanır
         ArrayList<Language> list = new ArrayList<>();
         ArrayList<LanguageChild> ch_list = new ArrayList<>();
         //dillerin adları ve resimleri diziye atılır
         for (int j = 0; images.length > j; j++) {
             LanguageChild ch = new LanguageChild();
-            ch.setName(languages[j]);
+            ch.setName(Diller[j]);
             ch.setImage(images[j]);
             ch_list.add(ch);
         }
         //listview için son hazırlık
         Language lang = new Language();
-        lang.setName(getString(R.string.language));
+        lang.setName(getString(R.string.lang));
         lang.setItems(ch_list);
         list.add(lang);
         //listview
@@ -179,7 +183,6 @@ public class SetupActivity extends AppCompatActivity {
 
     private List<String> prepareListCountry() {
         // Adding child data
-        Database db = new Database(getApplicationContext());
         return db.getContries();
     }
 
@@ -187,7 +190,6 @@ public class SetupActivity extends AppCompatActivity {
         if (country.equals("")) {
             return new ArrayList<>();
         } else {
-            Database db = new Database(getApplicationContext());
             return db.getCities(country);
         }
     }
@@ -196,7 +198,6 @@ public class SetupActivity extends AppCompatActivity {
         if (city.equals("")) {
             return new ArrayList<>();
         } else {
-            Database db = new Database(getApplicationContext());
             return db.getTown(city);
         }
     }
@@ -207,24 +208,27 @@ public class SetupActivity extends AppCompatActivity {
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getString(R.string.language), localeCode);
+        editor.putString(getString(R.string.prefLang), localeCode);
         editor.commit();
     }
 
     /*end select city*/
     private void SelectCity() {
         //save to preferences
+        int now = (int) new Date().getTime();
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getString(R.string.Country), nameCountry);
-        editor.putString(getString(R.string.City), nameCity);
-        editor.putString(getString(R.string.Town), nameTown);
+        editor.putString(getString(R.string.prefCountry), nameCountry);
+        editor.putString(getString(R.string.prefCity), nameCity);
+        editor.putString(getString(R.string.prefTown), nameTown);
+        editor.putBoolean(getString(R.string.prefSetup), true);
+        editor.putInt(getString(R.string.prefUpdate), now);
         editor.commit();
-        //finish
-        Intent intent = new Intent(this, MainActivity.class);
+        //finish and show splash screen again
+        //this it will update namaz vakits and show homepage
+        Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         finish();
     }

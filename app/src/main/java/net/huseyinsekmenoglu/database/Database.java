@@ -1,5 +1,6 @@
 package net.huseyinsekmenoglu.database;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -198,8 +199,17 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /*update vakit*/
-    public void UpdateNamazVakit() {
-        //TODO: android internet bağlantısı
+    public void UpdateNamazVakit(String country, String town, String message) {
+        ProgressDialog dialog = new ProgressDialog(myContext);
+        dialog.setMessage(message);
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
+        //internet bağlantısı: "http://diyanet-api.herokuapp.com/namaz_vakti/2/500/9146"
+
         //TODO: android udpate database
+
+        //finish
+        dialog.hide();
     }
 }
