@@ -18,13 +18,14 @@
                 android:id="@+id/lblImsak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_column="0"
                 android:text="@string/vakit_imsak" />
 
             <TextView
                 android:id="@+id/txtImsak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="2"
+                android:layout_column="1"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/vakit_none" />
         </TableRow>

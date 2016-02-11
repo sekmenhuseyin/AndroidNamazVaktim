@@ -20,7 +20,7 @@
     <string name="tabOnemliGun">Önemli Günler</string>
     <string name="tabAyarlar">Ayarlar</string>
     <!-- vakitler -->
-    <string name="vakit_none" translatable="false"> </string>
+    <string name="vakit_none" translatable="false">-----</string>
     <string name="vakit_imsak">İmsak</string>
     <string name="vakit_kible">Kıble</string>
     <string name="vakit_gunes">Güneş</string>
@@ -28,8 +28,10 @@
     <string name="vakit_ikindi">İkindi</string>
     <string name="vakit_aksam">Akşam</string>
     <string name="vakit_yatsi">Yatsı</string>
-    <string name="vakit_teheccud">Teheccüd</string>
-    <string name="vakit_duha">Duha</string>
+    <string name="vakit_teheccud">Teheccüd Namazı</string>
+    <string name="vakit_duha">Duha Namazı</string>
+    <string name="vakit_israk">İşrak Namazı</string>
+    <string name="vakit_evvabin">Evvabin Namazı</string>
     <!-- Setup screen -->
     <string name="Country">Ülke</string>
     <string name="City">Şehir</string>

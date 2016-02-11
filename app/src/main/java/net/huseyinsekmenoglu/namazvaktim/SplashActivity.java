@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import net.huseyinsekmenoglu.database.ApiConnect;
 import net.huseyinsekmenoglu.database.Database;
 
 import java.io.IOException;
@@ -47,7 +48,8 @@ public class SplashActivity extends AppCompatActivity {
             //updatevakit
             String nameCountry = prefs.getString(getString(R.string.prefCountry), "");
             String nameTown = prefs.getString(getString(R.string.prefTown), "");
-            db.UpdateNamazVakit(nameCountry, nameTown, getString(R.string.Updating));
+            //db.UpdateNamazVakit(nameCountry, nameTown, getString(R.string.Updating));
+            new ApiConnect().execute("http://diyanet-api.herokuapp.com/namaz_vakti/2/500/9146");
             //show main page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
