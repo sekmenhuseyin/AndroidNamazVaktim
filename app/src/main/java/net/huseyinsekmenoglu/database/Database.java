@@ -1,5 +1,6 @@
 package net.huseyinsekmenoglu.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -13,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -134,10 +136,13 @@ public class Database extends SQLiteOpenHelper {
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        String tmp;
         // looping through all rows and adding to list
+        liste.add(myContext.getString(R.string.Turkiye));
         if (cursor.moveToFirst()) {
             do {
-                liste.add(cursor.getString(cursor.getColumnIndex(Ulke.Ad)));
+                tmp = cursor.getString(cursor.getColumnIndex(Ulke.Ad));
+                if (!tmp.equals(myContext.getString(R.string.Turkiye))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -160,10 +165,14 @@ public class Database extends SQLiteOpenHelper {
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        String tmp;
         // looping through all rows and adding to list
+        if (country.equals(myContext.getString(R.string.Turkiye)))
+            liste.add(myContext.getString(R.string.Istanbul));
         if (cursor.moveToFirst()) {
             do {
-                liste.add(cursor.getString(cursor.getColumnIndex(Ulke.Ad)));
+                tmp = cursor.getString(cursor.getColumnIndex(Sehir.Ad));
+                if (!tmp.equals(myContext.getString(R.string.Istanbul))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -186,10 +195,14 @@ public class Database extends SQLiteOpenHelper {
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        String tmp;
         // looping through all rows and adding to list
+        if (city.equals(myContext.getString(R.string.Istanbul)))
+            liste.add(myContext.getString(R.string.Istanbul));
         if (cursor.moveToFirst()) {
             do {
-                liste.add(cursor.getString(cursor.getColumnIndex(Ulke.Ad)));
+                tmp = cursor.getString(cursor.getColumnIndex(Ilce.Ad));
+                if (!tmp.equals(myContext.getString(R.string.Istanbul))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -199,10 +212,19 @@ public class Database extends SQLiteOpenHelper {
         return liste;
     }
 
-    /*update vakit*/
-    public void UpdateNamazVakit() {
-        //internet bağlantısı: "http://diyanet-api.herokuapp.com/namaz_vakti/2/500/9146"
+    /*add new record to vakit table*/
+    public long insertNewVakit(Date tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, int ilce_id) {
+        ContentValues newRow = new ContentValues();
+        newRow.put(Vakit.tarih, tarih.toString());
+        newRow.put(Vakit.imsak, imsak);
+        newRow.put(Vakit.gunes, gunes);
+        newRow.put(Vakit.ogle, ogle);
+        newRow.put(Vakit.ikindi, ikindi);
+        newRow.put(Vakit.aksam, aksam);
+        newRow.put(Vakit.yatsi, yatsi);
+        newRow.put(Vakit.kible, kible);
+        newRow.put(Vakit.Ilce_id, ilce_id);
+        return myDataBase.insert(Vakit.name, null, newRow);
 
-        //TODO: android udpate database
     }
 }

@@ -86,10 +86,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    // {@link FragmentPagerAdapter} returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -126,19 +123,19 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 6:
-                    return String.valueOf(R.string.tabAyarlar);
+                    return getString(R.string.tabAyarlar);
                 case 5:
-                    return String.valueOf(R.string.tabKitaplik);
+                    return getString(R.string.tabKitaplik);
                 case 4:
-                    return String.valueOf(R.string.tabOnemliGun);
+                    return getString(R.string.tabOnemliGun);
                 case 3:
-                    return String.valueOf(R.string.tabTakvim);
+                    return getString(R.string.tabTakvim);
                 case 2:
-                    return String.valueOf(R.string.tabImsakiye);
+                    return getString(R.string.tabImsakiye);
                 case 1:
-                    return String.valueOf(R.string.tabKible);
+                    return getString(R.string.tabKible);
                 default://0
-                    return String.valueOf(R.string.tabVakit);
+                    return getString(R.string.tabVakit);
             }
         }
     }

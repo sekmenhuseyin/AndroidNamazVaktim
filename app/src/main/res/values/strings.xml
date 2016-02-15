@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Namaz Vaktim</string>
-    <string name="title_activity_setup">Kurulum Sihirbazı</string>
     <string name="database_version" translatable="false">1</string>
     <string name="google_app_id" translatable="false">996871107088</string>
-    <string name="Updating">Güncelleniyor…</string>
-    <string name="Updated">Vakitler güncellendi</string>
     <!-- Preferences -->
     <string name="prefSetup" translatable="false">isSetupFinished</string>
     <string name="prefUpdate" translatable="false">LastUpdate</string>
@@ -34,12 +31,20 @@
     <string name="vakit_israk">İşrak Namazı</string>
     <string name="vakit_evvabin">Evvabin Namazı</string>
     <!-- Setup screen -->
+    <string name="title_activity_setup">Kurulum Sihirbazı</string>
+    <string name="Updating">Güncelleniyor…</string>
+    <string name="Updated">Vakitler güncellendi</string>
+    <string name="UpdateLink" translatable="false">http://diyanet-api.herokuapp.com/namaz_vakti/%s/Aylik</string>
+    <string name="get" translatable="false">GET</string>
+    <string name="utf8" translatable="false">UTF-8</string>
     <string name="Country">Ülke</string>
     <string name="City">Şehir</string>
     <string name="Town">İlçe</string>
     <string name="next">İleri</string>
     <string name="save">Kaydet</string>
     <string name="lang">Dil</string>
+    <string name="Turkiye" translatable="false">TURKIYE</string>
+    <string name="Istanbul" translatable="false">İSTANBUL</string>
     <!-- arrays -->
     <string-array name="SehirliUlkeler">
         <item>TURKIYE</item>

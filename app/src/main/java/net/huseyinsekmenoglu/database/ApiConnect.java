@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import net.huseyinsekmenoglu.namazvaktim.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +37,7 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     private ProgressDialog progressDialog;
     private Context myContext;
     private Activity myActivity;
+    private JSONObject veri_json;
 
 
     public ApiConnect(Activity activity) {
@@ -54,7 +55,7 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
         progressDialog.setCancelable(false);
         progressDialog.setInverseBackgroundForced(false);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage(String.valueOf((R.string.Updating)));
+        progressDialog.setMessage(myContext.getString(R.string.Updating));
         progressDialog.show();
 
 
@@ -67,52 +68,45 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... params) {
 
         // params comes from the execute() call: params[0] is the url.
-        InputStream is = null;
         try {
             int len = 500;
             String contentAsString = "";
-            URL url = new URL(String.format("http://diyanet-api.herokuapp.com/namaz_vakti/%s/Aylik", params[0]));
+            URL url = new URL(String.format(myContext.getString(R.string.UpdateLink), params[0]));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod(myContext.getString(R.string.get));
             conn.setDoInput(true);
             // Starts the query
             conn.connect();
             int response = conn.getResponseCode();
             //if connect properly
             if (response == 200) {
-                is = conn.getInputStream();
+                InputStream is = conn.getInputStream();
                 // Convert the InputStream into a string
                 contentAsString = readIt(is, len);
-                //
-                JSONObject jsonReader = new JSONObject(contentAsString);
-                JSONArray names = jsonReader.names();
-                if (names == null) return String.valueOf((R.string.errorConnection));
-                for (int i = 0; i < names.length(); i++) {
-                    String name = names.getString(i);
+                // Makes sure that the InputStream is closed after the app is finished using it.
+                is.close();
+                //gelen veri_string değerini json arraye çeviriyoruz.
+                veri_json = new JSONObject(contentAsString);
+                Vakit vakit = new Vakit();
+                //vakit.SetTarih();
+                //isim = veri_json.getString("isim");
+                Log.d("myLog", contentAsString);
 
-                    //treeMap.put(jsonReader.getString(name), Integer.parseInt(name));
-                }
-                //veritabanına kaydet
+                // db.open();
+                // db.insertLog(....);
+                // db.close();
 
-
-                contentAsString = "Updated";
+                contentAsString = myContext.getString(R.string.Updated);
             }
             return contentAsString;
 
         } catch (IOException e) {
-            return String.valueOf((R.string.errorConnection));
+            return myContext.getString((R.string.errorConnection));
 
         } catch (JSONException e) {
-            return String.valueOf((R.string.errorConnection));
-        } finally {
-            // Makes sure that the InputStream is closed after the app is finished using it.
-            if (is != null) try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return myContext.getString((R.string.errorConnection));
         }
     }
 
@@ -121,8 +115,8 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if (result.equals("Updated")) {
-            Toast.makeText(myActivity, "Updated: " + R.string.Updated, Toast.LENGTH_LONG).show();
+        if (result.equals(myContext.getString(R.string.Updated))) {
+            Toast.makeText(myActivity, "Updated: " + myContext.getString(R.string.Updated), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(myActivity, "result: " + result, Toast.LENGTH_LONG).show();
         }
@@ -138,7 +132,7 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     }
 
     //Eğer herhangi bir sebepten dolayı AsyncTask iptal edilirse bu metod uyarılır.
-    // Burada kullanıdığınız kaynakları temizleyebilirsiniz.
+    // Burada kullandığınız kaynakları temizleyebilirsiniz.
     @Override
     protected void onCancelled(String result) {
         super.onCancelled(result);
@@ -148,7 +142,7 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     // Reads an InputStream and converts it to a String.
     public String readIt(InputStream stream, int len) throws IOException {
         Reader reader;
-        reader = new InputStreamReader(stream, "UTF-8");
+        reader = new InputStreamReader(stream, myContext.getString(R.string.utf8));
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);

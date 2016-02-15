@@ -7,74 +7,136 @@ import java.sql.Date;
  * table: vakit
  */
 public class Vakit {
+    // Labels table details
+    public static final String name = "Vakit";
+    public static final String _id = "_id";
+    public static final String tarih = "tarih";
+    public static final String imsak = "imsak";
+    public static final String gunes = "gunes";
+    public static final String ogle = "ogle";
+    public static final String ikindi = "ikindi";
+    public static final String aksam = "aksam";
+    public static final String yatsi = "yatsi";
+    public static final String kible = "kible";
+    public static final String Ilce_id = "Ilce_id";
     //private variables
-    int _id;
-    int _ilce_id;
-    Date _tarih;
-    String _imsak;
-    String _gunes;
-    String _ogle;
-    String _ikindi;
-    String _aksam;
-    String _yatsi;
-    String _kible;
-    String _teheccud;
+    private int key_id;
+    private Date key_tarih;
+    private String key_imsak;
+    private String key_gunes;
+    private String key_ogle;
+    private String key_ikindi;
+    private String key_aksam;
+    private String key_yatsi;
+    private String key_kible;
+    private int key_ilce_id;
 
     // Empty constructor
     public Vakit() {
     }
 
     // constructor
-    public Vakit(int id, int ilce_id, Date tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, String teheccud) {
-        this._id = id;
-        this._ilce_id = ilce_id;
-        this._tarih = tarih;
-        this._imsak = imsak;
-        this._gunes = gunes;
-        this._ogle = ogle;
-        this._ikindi = ikindi;
-        this._aksam = aksam;
-        this._yatsi = yatsi;
-        this._kible = kible;
-        this._teheccud = teheccud;
+    public Vakit(int id, Date tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, int ilce_id) {
+        this.key_id = id;
+        this.key_tarih = tarih;
+        this.key_imsak = imsak;
+        this.key_gunes = gunes;
+        this.key_ogle = ogle;
+        this.key_ikindi = ikindi;
+        this.key_aksam = aksam;
+        this.key_yatsi = yatsi;
+        this.key_kible = kible;
+        this.key_ilce_id = ilce_id;
     }
 
-    // constructor
-    public Vakit(int ilce_id) {
-        this._ilce_id = ilce_id;
+    //id
+    public int GetId() {
+        return this.key_id;
     }
 
-    // vakitler
-    public String get_imsak(int ilce_id, Date _tarih) {
-        return this._imsak;
+    public void SetId(int key_id) {
+        this.key_id = key_id;
     }
 
-    public String get_gunes(int ilce_id, Date _tarih) {
-        return this._gunes;
+    //tarih
+    public Date GetTarih() {
+        return this.key_tarih;
     }
 
-    public String get_ogle(int ilce_id, Date _tarih) {
-        return this._ogle;
+    public void SetTarih(Date key_tarih) {
+        this.key_tarih = key_tarih;
     }
 
-    public String get_ikindi(int ilce_id, Date _tarih) {
-        return this._ikindi;
+    //imsak
+    public String GetImsak() {
+        return this.key_imsak;
     }
 
-    public String get_aksam(int ilce_id, Date _tarih) {
-        return this._aksam;
+    public void SetImsak(String key_imsak) {
+        this.key_imsak = key_imsak;
     }
 
-    public String get_yatsi(int ilce_id, Date _tarih) {
-        return this._yatsi;
+    //güneş
+    public String GetGunes() {
+        return this.key_gunes;
     }
 
-    public String get_kible(int ilce_id, Date _tarih) {
-        return this._kible;
+    public void SetGunes(String key_gunes) {
+        this.key_gunes = key_gunes;
     }
 
-    public String get_teheccud(int ilce_id, Date _tarih) {
-        return this._teheccud;
+    //öğle
+    public String GetOgle() {
+        return this.key_ogle;
+    }
+
+    public void SettOgle(String key_ogle) {
+        this.key_ogle = key_ogle;
+    }
+
+    //ikindi
+    public String GetIkindi() {
+        return this.key_ikindi;
+    }
+
+    public void SetIkindi(String key_ikindi) {
+        this.key_ikindi = key_ikindi;
+    }
+
+    //akşa
+    public String GetAksam() {
+        return this.key_aksam;
+    }
+
+    public void SetAksam(String key_aksam) {
+        this.key_aksam = key_aksam;
+    }
+
+    //yatsı
+    public String GetYatsi() {
+        return this.key_yatsi;
+    }
+
+    public void SetYatsi(String key_yatsi) {
+        this.key_yatsi = key_yatsi;
+    }
+
+    //kıble
+    public String GetKible() {
+        return this.key_kible;
+    }
+
+    public void SetKible(String key_kible) {
+        this.key_kible = key_kible;
+    }
+
+    //ilçe id
+    public int GetIlce() {
+        return this.key_ilce_id;
+    }
+
+    public void SetIlce(int key_ilce_id) {
+        this.key_ilce_id = key_ilce_id;
     }
 
 }

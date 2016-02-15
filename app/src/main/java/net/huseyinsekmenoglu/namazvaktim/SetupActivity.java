@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Language;
@@ -26,6 +27,7 @@ import java.util.Locale;
  * http://emreardic.blogspot.com.tr/2014/08/diyanet-ezan-vakitleri-api.html
  */
 public class SetupActivity extends AppCompatActivity {
+    TextView title;
     //expandable listview adapter
     private ExpandableListWithImageAdapter ExpAdapter;
     private ExpandableListAdapter listAdapter;
@@ -54,6 +56,7 @@ public class SetupActivity extends AppCompatActivity {
         DilKodlari = res.getStringArray(R.array.DilKodlari);
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        title = (TextView) findViewById(R.id.lblListHeader);
         // preparing list data
         prepareListLanguageData();
         expListView.expandGroup(0);
@@ -87,23 +90,23 @@ public class SetupActivity extends AppCompatActivity {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                //if language clicked
                 if (expWithImage) {
+                    //if language clicked
                     expWithImage = false;
                     setLocale(DilKodlari[childPosition]);
                     //get country names
                     prepareListData("", "");
                     expListView.expandGroup(0);
 
-                    // if country clicked
                 } else if (listDataHeader.get(groupPosition).equals(getString(R.string.Country))) {
+                    // if country clicked
                     nameCountry = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                     prepareListData(nameCountry, "");
                     expListView.collapseGroup(0);
                     expListView.expandGroup(1);
 
-                    //if city clicked
                 } else if (listDataHeader.get(groupPosition).equals(getString(R.string.City))) {
+                    //if city clicked
                     nameCity = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                     if (nameCountry.equals(SehirliUlkeler[0]) || nameCountry.equals(SehirliUlkeler[1]) || nameCountry.equals(SehirliUlkeler[2])) {
                         prepareListData(nameCountry, nameCity);
@@ -116,8 +119,8 @@ public class SetupActivity extends AppCompatActivity {
                         SelectCity();
                     }
 
-                    //if town clicked
                 } else if (listDataHeader.get(groupPosition).equals(getString(R.string.Town))) {
+                    //if town clicked
                     expListView.collapseGroup(2);
                     nameTown = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                     SelectCity();
@@ -213,6 +216,8 @@ public class SetupActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.prefLang), localeCode);
         editor.commit();
+        //refresh title
+        this.setTitle(getResources().getString(R.string.title_activity_setup));
     }
 
     /*end select city*/

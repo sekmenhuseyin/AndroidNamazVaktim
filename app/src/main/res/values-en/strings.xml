@@ -29,4 +29,5 @@
     <string name="vakit_israk">Ishraq</string>
     <string name="vakit_evvabin">----</string>
     <string name="errorConnection">Couldn\'t connect to Internet</string>
+    <string name="Updated">Updated</string>
 </resources>
