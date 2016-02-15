@@ -41,6 +41,7 @@
         <!-- setup screen on first launch -->
         <activity
             android:name=".SetupActivity"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_setup"
             android:theme="@style/SetupTheme" />
         <!-- home page -->
@@ -48,6 +49,11 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NotificationActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="" />
     </application>
 
 </manifest>

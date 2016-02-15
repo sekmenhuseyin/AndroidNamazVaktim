@@ -228,7 +228,7 @@ public class SetupActivity extends AppCompatActivity {
         editor.commit();
         //finish and show splash screen again
         //this it will update namaz vakits and show homepage
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

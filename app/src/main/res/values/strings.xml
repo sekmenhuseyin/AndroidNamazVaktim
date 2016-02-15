@@ -4,6 +4,7 @@
     <string name="database_version" translatable="false">1</string>
     <string name="google_app_id" translatable="false">996871107088</string>
     <string name="Updating">Güncelleniyor…</string>
+    <string name="Updated">Vakitler güncellendi</string>
     <!-- Preferences -->
     <string name="prefSetup" translatable="false">isSetupFinished</string>
     <string name="prefUpdate" translatable="false">LastUpdate</string>
@@ -55,4 +56,5 @@
     </string-array>
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
+    <string name="errorConnection">İnternete bağlanamadı</string>
 </resources>

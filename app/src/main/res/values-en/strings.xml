@@ -17,15 +17,16 @@
     <string name="vakit_imsak">Fajr</string>
     <string name="vakit_kible">Qibla</string>
     <string name="vakit_ogle">Dhuhr</string>
-    <string name="vakit_teheccud">Tahajjud Prayer</string>
+    <string name="vakit_teheccud">Tahajjud</string>
     <string name="vakit_yatsi">Isha</string>
-    <string name="vakit_duha">Duha Prayer</string>
+    <string name="vakit_duha">Duha</string>
     <string name="tabImsakiye">Salah Calendar</string>
     <string name="tabKible">Qibla</string>
     <string name="tabOnemliGun">Important Days</string>
     <string name="Updating">Updating...</string>
     <string name="errorSetup">Setup error</string>
     <string name="lang">Language</string>
-    <string name="vakit_israk">Ishraq Prayer</string>
+    <string name="vakit_israk">Ishraq</string>
     <string name="vakit_evvabin">----</string>
+    <string name="errorConnection">Couldn\'t connect to Internet</string>
 </resources>

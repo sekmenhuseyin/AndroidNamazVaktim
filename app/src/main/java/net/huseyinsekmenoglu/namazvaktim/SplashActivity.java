@@ -5,13 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
-import net.huseyinsekmenoglu.database.ApiConnect;
 import net.huseyinsekmenoglu.database.Database;
 
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * Created by huseyin on 25.1.2016.
@@ -35,22 +32,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
 
-        } else {// if not first launch check for updatetime
-            int datetime = prefs.getInt(getString(R.string.prefUpdate), 0);
-            int now = (int) new Date().getTime();
-            if (now != datetime) {
-                Toast.makeText(this, Integer.toString(now) + " &  " + Integer.toString(datetime), Toast.LENGTH_LONG).show();
-                //save settings
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt(getString(R.string.prefUpdate), now);
-                editor.commit();
-            }
-            //updatevakit
-            String nameCountry = prefs.getString(getString(R.string.prefCountry), "");
-            String nameTown = prefs.getString(getString(R.string.prefTown), "");
-            //db.UpdateNamazVakit(nameCountry, nameTown, getString(R.string.Updating));
-            new ApiConnect().execute("http://diyanet-api.herokuapp.com/namaz_vakti/2/500/9146");
-            //show main page
+        } else {// if not first launch show main page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

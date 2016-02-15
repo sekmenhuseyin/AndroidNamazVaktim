@@ -1,12 +1,13 @@
 package net.huseyinsekmenoglu.database;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import net.huseyinsekmenoglu.namazvaktim.R;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,10 +20,10 @@ import java.util.ArrayList;
  * http://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
  */
 public class Database extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/net.huseyinsekmenoglu.namazvaktim/databases/";
-    private static String DB_NAME = "namazvaktim.db";
+    private static final String DB_PATH = "/data/data/net.huseyinsekmenoglu.namazvaktim/databases/";
+    private static final String DB_NAME = "namazvaktim.db";
+    private static final int DB_VERSION = 1;
     private final Context myContext;
     private SQLiteDatabase myDataBase;
 
@@ -47,7 +48,7 @@ public class Database extends SQLiteOpenHelper {
             try {
                 copyDataBase();
             } catch (IOException e) {
-                throw new Error("Error copying database");
+                throw new Error(String.valueOf(R.string.errorSetup));
             }
         }
     }
@@ -199,17 +200,9 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /*update vakit*/
-    public void UpdateNamazVakit(String country, String town, String message) {
-        ProgressDialog dialog = new ProgressDialog(myContext);
-        dialog.setMessage(message);
-        dialog.setCancelable(false);
-        dialog.setInverseBackgroundForced(false);
-        dialog.show();
+    public void UpdateNamazVakit() {
         //internet bağlantısı: "http://diyanet-api.herokuapp.com/namaz_vakti/2/500/9146"
 
         //TODO: android udpate database
-
-        //finish
-        dialog.hide();
     }
 }
