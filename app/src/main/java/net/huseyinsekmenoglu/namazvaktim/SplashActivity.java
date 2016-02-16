@@ -33,6 +33,11 @@ public class SplashActivity extends AppCompatActivity {
             finish();
 
         } else {// if not first launch show main page
+            //new NotificationActivity();
+            //Intent intent = new Intent(this, NotificationActivity.class);
+            //startActivity(intent);
+            //new Update().execute("13/11075");
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

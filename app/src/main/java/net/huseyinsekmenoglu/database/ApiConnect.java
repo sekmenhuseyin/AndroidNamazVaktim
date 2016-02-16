@@ -3,21 +3,24 @@ package net.huseyinsekmenoglu.database;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import net.huseyinsekmenoglu.namazvaktim.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Created by huseyin.sekmenoglu on 11.2.2016.
@@ -37,8 +40,6 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     private ProgressDialog progressDialog;
     private Context myContext;
     private Activity myActivity;
-    private JSONObject veri_json;
-
 
     public ApiConnect(Activity activity) {
         this.myActivity = activity;
@@ -50,15 +51,10 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setMax(100);
-        progressDialog.setProgress(0);
         progressDialog.setCancelable(false);
         progressDialog.setInverseBackgroundForced(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMessage(myContext.getString(R.string.Updating));
         progressDialog.show();
-
-
     }
 
     //Arka planda yapılması istenen işlem burada gerçekleşir.
@@ -69,7 +65,6 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
 
         // params comes from the execute() call: params[0] is the url.
         try {
-            int len = 500;
             String contentAsString = "";
             URL url = new URL(String.format(myContext.getString(R.string.UpdateLink), params[0]));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -82,22 +77,36 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
             int response = conn.getResponseCode();
             //if connect properly
             if (response == 200) {
-                InputStream is = conn.getInputStream();
                 // Convert the InputStream into a string
-                contentAsString = readIt(is, len);
-                // Makes sure that the InputStream is closed after the app is finished using it.
+                String sb = "", line;
+                InputStream is = conn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 8);
+                while ((line = reader.readLine()) != null) sb += line;
                 is.close();
+                //veritabanı ile bağlantı kuruyoruz
+                Database db = new Database(myContext);
                 //gelen veri_string değerini json arraye çeviriyoruz.
-                veri_json = new JSONObject(contentAsString);
-                Vakit vakit = new Vakit();
-                //vakit.SetTarih();
-                //isim = veri_json.getString("isim");
-                Log.d("myLog", contentAsString);
-
-                // db.open();
-                // db.insertLog(....);
-                // db.close();
-
+                JSONArray jsonArray = new JSONArray(sb);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    //verilen tarih ve ilçe için kayır kontrolü
+                    String tarih = jsonObject.getString(Vakit.tarih);
+                    boolean varmi = db.VakitVar(Integer.parseInt(params[1]), tarih);
+                    if (!varmi) {//eğer bu ilçe için o tarihte vakti yoksa
+                        Vakit tablo = new Vakit();
+                        tablo.SetTarih(tarih);
+                        tablo.SetImsak(jsonObject.getString(Vakit.imsak));
+                        tablo.SetGunes(jsonObject.getString(Vakit.gunes));
+                        tablo.SettOgle(jsonObject.getString(Vakit.ogle));
+                        tablo.SetIkindi(jsonObject.getString(Vakit.ikindi));
+                        tablo.SetAksam(jsonObject.getString(Vakit.aksam));
+                        tablo.SetYatsi(jsonObject.getString(Vakit.yatsi));
+                        tablo.SetKible(jsonObject.getString(Vakit.kible));
+                        tablo.SetIlce(Integer.parseInt(params[1]));
+                        //yeni vakit kaydı ekle
+                        db.insertNewVakit(tablo);
+                    }
+                }
                 contentAsString = myContext.getString(R.string.Updated);
             }
             return contentAsString;
@@ -116,9 +125,15 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if (result.equals(myContext.getString(R.string.Updated))) {
-            Toast.makeText(myActivity, "Updated: " + myContext.getString(R.string.Updated), Toast.LENGTH_LONG).show();
+            //save to preferences
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(myContext);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong(myContext.getString(R.string.prefUpdate), new Date().getTime());
+            editor.apply();
+            //show updated message
+            Toast.makeText(myActivity, myContext.getString(R.string.Updated), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(myActivity, "result: " + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(myActivity, result, Toast.LENGTH_LONG).show();
         }
         if (progressDialog.isShowing()) progressDialog.dismiss();
     }
@@ -127,8 +142,6 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        Integer currentProgress = values[0];
-        progressDialog.setProgress(currentProgress);
     }
 
     //Eğer herhangi bir sebepten dolayı AsyncTask iptal edilirse bu metod uyarılır.
@@ -137,14 +150,5 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     protected void onCancelled(String result) {
         super.onCancelled(result);
         if (progressDialog.isShowing()) progressDialog.dismiss();
-    }
-
-    // Reads an InputStream and converts it to a String.
-    public String readIt(InputStream stream, int len) throws IOException {
-        Reader reader;
-        reader = new InputStreamReader(stream, myContext.getString(R.string.utf8));
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 }

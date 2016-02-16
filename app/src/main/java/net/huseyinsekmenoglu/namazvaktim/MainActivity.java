@@ -1,6 +1,8 @@
 package net.huseyinsekmenoglu.namazvaktim;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +22,10 @@ import net.huseyinsekmenoglu.home.tOnemliGunler;
 import net.huseyinsekmenoglu.home.tTakvim;
 import net.huseyinsekmenoglu.home.tVakit;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SharedPreferences prefs;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -41,27 +48,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+        // the adapter that will return a fragment for each the sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        //tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
+        //check and update vakit
+        int diffInDays = 0;
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //find days passed after last update
+        try {
+            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0)),
+                    dayUpdate, dayNow;
+            SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
+            dayUpdate = dfDate.parse(dfDate.format(updateTime));
+            dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));//Returns 15/10/2012
+            diffInDays = (int) ((dayNow.getTime() - dayUpdate.getTime()) / (1000 * 60 * 60 * 24));
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
         //update namaz vakit
-        new ApiConnect(this).execute("13/11075");
-        //new NotificationActivity();
-        //Intent intent = new Intent(this, NotificationActivity.class);
-        //startActivity(intent);
-        //new Update().execute("13/11075");
-
+        if (diffInDays > 21) {
+            //get preferences
+            String countryID = prefs.getString(getString(R.string.prefCountryID), getString(R.string.standartUlkeID)),
+                    cityID = prefs.getString(getString(R.string.prefCityID), getString(R.string.standartSehirID)),
+                    townID = prefs.getString(getString(R.string.prefTownID), getString(R.string.standartIlceID)),
+                    updateLink;
+            if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
+            else updateLink = countryID + "/" + cityID + "/" + townID;
+            new ApiConnect(this).execute(updateLink, townID);
+        }
     }
 
     @Override
@@ -77,13 +99,42 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.lblListHeader) {
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     // {@link FragmentPagerAdapter} returns a fragment corresponding to one of the tabs

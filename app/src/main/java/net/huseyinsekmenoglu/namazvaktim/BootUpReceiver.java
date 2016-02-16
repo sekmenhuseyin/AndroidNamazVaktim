@@ -16,14 +16,12 @@ public class BootUpReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            if (!prefs.getBoolean(String.valueOf((R.string.prefSetup)), false)) {
-                return;//if not installed yet... exit
-            }
-
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-                int datetime = prefs.getInt(String.valueOf(R.string.prefUpdate), 0);
-                Toast.makeText(context, String.valueOf(R.string.Updating), Toast.LENGTH_LONG).show();
+            //if not installed yet... exit
+            if (!prefs.getBoolean(context.getString(R.string.prefSetup), false)) return;
+            //saat yada zaman dilimi değiştiğinde
+            if (intent.getAction().equals(Intent.ACTION_TIME_CHANGED) || intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+                int datetime = prefs.getInt(context.getString(R.string.prefUpdate), 0);
+                Toast.makeText(context, context.getString(R.string.Updating), Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -31,10 +29,12 @@ public class BootUpReceiver extends BroadcastReceiver {
     //telefon açıldığını farkettiğinde
     @Override
     public void onReceive(Context context, Intent intent) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        //if not installed yet... exit
+        if (!prefs.getBoolean(context.getString(R.string.prefSetup), false)) return;
+        //after boot complete
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Toast.makeText(context, String.valueOf(R.string.app_name), Toast.LENGTH_LONG).show();
-
-            /* or do something different */
+            Toast.makeText(context, context.getString(R.string.app_name), Toast.LENGTH_LONG).show();
             /* show notifactions*/
             /*Intent i = new Intent(context, StartupActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

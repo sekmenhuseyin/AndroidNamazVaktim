@@ -22,9 +22,11 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signature
+            proguardFile 'D:/Projects/Android/NamazVaktim/app/proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
         }
     }
     productFlavors {

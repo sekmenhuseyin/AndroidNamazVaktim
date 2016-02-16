@@ -14,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -213,18 +212,48 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /*add new record to vakit table*/
-    public long insertNewVakit(Date tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, int ilce_id) {
+    public boolean insertNewVakit(Vakit tablo) {
+        SQLiteDatabase db = this.getReadableDatabase();
         ContentValues newRow = new ContentValues();
-        newRow.put(Vakit.tarih, tarih.toString());
-        newRow.put(Vakit.imsak, imsak);
-        newRow.put(Vakit.gunes, gunes);
-        newRow.put(Vakit.ogle, ogle);
-        newRow.put(Vakit.ikindi, ikindi);
-        newRow.put(Vakit.aksam, aksam);
-        newRow.put(Vakit.yatsi, yatsi);
-        newRow.put(Vakit.kible, kible);
-        newRow.put(Vakit.Ilce_id, ilce_id);
-        return myDataBase.insert(Vakit.name, null, newRow);
+        newRow.put(Vakit.tarih, tablo.GetTarih());
+        newRow.put(Vakit.imsak, tablo.GetImsak());
+        newRow.put(Vakit.gunes, tablo.GetGunes());
+        newRow.put(Vakit.ogle, tablo.GetOgle());
+        newRow.put(Vakit.ikindi, tablo.GetIkindi());
+        newRow.put(Vakit.aksam, tablo.GetAksam());
+        newRow.put(Vakit.yatsi, tablo.GetYatsi());
+        newRow.put(Vakit.kible, tablo.GetKible());
+        newRow.put(Vakit.Ilce_id, tablo.GetIlce());
+        db.insert(Vakit.name, null, newRow);
+        db.close();
+        return true;
+    }
 
+    //check if vakit exists
+    public boolean VakitVar(int ilce, String tarih) {
+        boolean sonuc = false;
+        String selectQuery = "SELECT " + Vakit._id + " FROM " + Vakit.name + " WHERE " + Vakit.Ilce_id + "=" + ilce + " and " + Vakit.tarih + "='" + tarih + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            sonuc = true;
+        }
+        cursor.close();
+        db.close();
+        return sonuc;
+    }
+
+    //returns id of a table
+    public String GetAnyID(String tablo, String Ad) {
+        String sonuc = "";
+        String selectQuery = "SELECT _id FROM " + tablo + " WHERE Ad='" + Ad + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));
+        }
+        cursor.close();
+        db.close();
+        return sonuc;
     }
 }

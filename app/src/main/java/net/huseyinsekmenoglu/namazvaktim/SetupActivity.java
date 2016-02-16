@@ -12,11 +12,13 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import net.huseyinsekmenoglu.database.Database;
+import net.huseyinsekmenoglu.database.Ilce;
 import net.huseyinsekmenoglu.database.Language;
 import net.huseyinsekmenoglu.database.LanguageChild;
+import net.huseyinsekmenoglu.database.Sehir;
+import net.huseyinsekmenoglu.database.Ulke;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -72,9 +74,8 @@ public class SetupActivity extends AppCompatActivity {
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
+                if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition)
                     expListView.collapseGroup(lastExpandedPosition);
-                }
                 lastExpandedPosition = groupPosition;
             }
         });
@@ -165,11 +166,9 @@ public class SetupActivity extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(0), prepareListCountry());
         if (!country.equals("")) {//şehir istenmişse şehir grubunu ekle
             List<String> tmp;
-            if (country.equals(SehirliUlkeler[0]) || country.equals(SehirliUlkeler[1]) || country.equals(SehirliUlkeler[2])) {
+            if (country.equals(SehirliUlkeler[0]) || country.equals(SehirliUlkeler[1]) || country.equals(SehirliUlkeler[2]))
                 tmp = prepareListCity(country);
-            } else {
-                tmp = prepareListTown(country);
-            }
+            else tmp = prepareListTown(country);
             listDataHeader.add(getString(R.string.City));
             listDataChild.put(listDataHeader.get(1), tmp);
         }
@@ -190,19 +189,13 @@ public class SetupActivity extends AppCompatActivity {
     }
 
     private List<String> prepareListCity(String country) {
-        if (country.equals("")) {
-            return new ArrayList<>();
-        } else {
-            return db.getCities(country);
-        }
+        if (country.equals("")) return new ArrayList<>();
+        else return db.getCities(country);
     }
 
     private List<String> prepareListTown(String city) {
-        if (city.equals("")) {
-            return new ArrayList<>();
-        } else {
-            return db.getTown(city);
-        }
+        if (city.equals("")) return new ArrayList<>();
+        else return db.getTown(city);
     }
 
     //change language
@@ -215,24 +208,30 @@ public class SetupActivity extends AppCompatActivity {
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.prefLang), localeCode);
-        editor.commit();
+        editor.apply();
         //refresh title
         this.setTitle(getResources().getString(R.string.title_activity_setup));
     }
 
     /*end select city*/
     private void SelectCity() {
+        ExpAdapter = null;
+        listAdapter = null;
+        String countryID = db.GetAnyID(Ulke.name, nameCountry),
+                cityID = db.GetAnyID(Sehir.name, nameCity),
+                townID = db.GetAnyID(Ilce.name, nameTown),
+                updateLink;
         //save to preferences
-        int now = (int) new Date().getTime();
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.prefCountry), nameCountry);
+        editor.putString(getString(R.string.prefCountryID), countryID);
         editor.putString(getString(R.string.prefCity), nameCity);
+        editor.putString(getString(R.string.prefCityID), cityID);
         editor.putString(getString(R.string.prefTown), nameTown);
+        editor.putString(getString(R.string.prefTownID), townID);
         editor.putBoolean(getString(R.string.prefSetup), true);
-        editor.putInt(getString(R.string.prefUpdate), now);
-        editor.commit();
-        //finish and show splash screen again
-        //this it will update namaz vakits and show homepage
+        editor.apply();
+        //show home screen and update vakits there
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

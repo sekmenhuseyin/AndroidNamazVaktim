@@ -1,7 +1,5 @@
 package net.huseyinsekmenoglu.database;
 
-import java.sql.Date;
-
 /**
  * Created by huseyin on 2.2.2016
  * table: vakit
@@ -21,7 +19,7 @@ public class Vakit {
     public static final String Ilce_id = "Ilce_id";
     //private variables
     private int key_id;
-    private Date key_tarih;
+    private String key_tarih;
     private String key_imsak;
     private String key_gunes;
     private String key_ogle;
@@ -36,8 +34,7 @@ public class Vakit {
     }
 
     // constructor
-    public Vakit(int id, Date tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, int ilce_id) {
-        this.key_id = id;
+    public Vakit(String tarih, String imsak, String gunes, String ogle, String ikindi, String aksam, String yatsi, String kible, int ilce_id) {
         this.key_tarih = tarih;
         this.key_imsak = imsak;
         this.key_gunes = gunes;
@@ -49,21 +46,12 @@ public class Vakit {
         this.key_ilce_id = ilce_id;
     }
 
-    //id
-    public int GetId() {
-        return this.key_id;
-    }
-
-    public void SetId(int key_id) {
-        this.key_id = key_id;
-    }
-
     //tarih
-    public Date GetTarih() {
+    public String GetTarih() {
         return this.key_tarih;
     }
 
-    public void SetTarih(Date key_tarih) {
+    public void SetTarih(String key_tarih) {
         this.key_tarih = key_tarih;
     }
 
