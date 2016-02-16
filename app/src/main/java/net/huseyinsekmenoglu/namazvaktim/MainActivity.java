@@ -1,6 +1,8 @@
 package net.huseyinsekmenoglu.namazvaktim;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
@@ -38,15 +40,22 @@ public class MainActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SharedPreferences prefs;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+    private ViewPager mViewPager;//this will host the section contents.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //locales
+        String defaulLocale = Locale.getDefault().getLanguage();
+        String savedLocale = prefs.getString(getString(R.string.prefLang), "");
+        if (!defaulLocale.equals(savedLocale)) {
+            Locale locale = new Locale(getString(R.string.defaultLocale));
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        }
         setContentView(R.layout.activity_main);
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,8 +69,12 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         //check and update vakit
+        UpdateVakit();
+    }
+
+    public void UpdateVakit() {
+        //check and update vakit
         int diffInDays = 0;
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         //find days passed after last update
         try {
             Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0)),
@@ -76,16 +89,15 @@ public class MainActivity extends AppCompatActivity {
         //update namaz vakit
         if (diffInDays > 21) {
             //get preferences
-            String countryID = prefs.getString(getString(R.string.prefCountryID), getString(R.string.standartUlkeID)),
-                    cityID = prefs.getString(getString(R.string.prefCityID), getString(R.string.standartSehirID)),
-                    townID = prefs.getString(getString(R.string.prefTownID), getString(R.string.standartIlceID)),
+            String countryID = prefs.getString(getString(R.string.prefCountryID), getString(R.string.defaultUlkeID)),
+                    cityID = prefs.getString(getString(R.string.prefCityID), getString(R.string.defaultSehirID)),
+                    townID = prefs.getString(getString(R.string.prefTownID), getString(R.string.defaultIlceID)),
                     updateLink;
             if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
             else updateLink = countryID + "/" + cityID + "/" + townID;
             new ApiConnect(this).execute(updateLink, townID);
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -105,6 +117,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        startActivity(intent);
     }
 
     @Override

@@ -50,9 +50,10 @@
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>
-    <string name="standartUlkeID">2</string>
-    <string name="standartSehirID">539</string>
-    <string name="standartIlceID">9541</string>
+    <string name="defaultUlkeID">2</string>
+    <string name="defaultSehirID">539</string>
+    <string name="defaultIlceID">9541</string>
+    <string name="defaultLocale">TR</string>
     <!-- arrays -->
     <string-array name="SehirliUlkeler">
         <item>TURKIYE</item>
