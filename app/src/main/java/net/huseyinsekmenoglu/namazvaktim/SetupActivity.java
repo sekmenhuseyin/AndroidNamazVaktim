@@ -185,7 +185,7 @@ public class SetupActivity extends AppCompatActivity {
 
     private List<String> prepareListCountry() {
         // Adding child data
-        return db.getContries();
+        return db.getCountries();
     }
 
     private List<String> prepareListCity(String country) {

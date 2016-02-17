@@ -29,18 +29,14 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+    /* The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
     private SharedPreferences prefs;
-    private ViewPager mViewPager;//this will host the section contents.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +52,20 @@ public class MainActivity extends AppCompatActivity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
+        //check and update vakit
+        UpdateVakit();
         setContentView(R.layout.activity_main);
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // the adapter that will return a fragment for each the sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);//this will host the section contents.
         mViewPager.setAdapter(mSectionsPagerAdapter);
         //tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        //check and update vakit
-        UpdateVakit();
     }
 
     public void UpdateVakit() {
@@ -77,11 +73,10 @@ public class MainActivity extends AppCompatActivity {
         int diffInDays = 0;
         //find days passed after last update
         try {
-            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0)),
-                    dayUpdate, dayNow;
+            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0)), dayUpdate;
             SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
             dayUpdate = dfDate.parse(dfDate.format(updateTime));
-            dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));//Returns 15/10/2012
+            Date dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));//Returns 15/10/2012
             diffInDays = (int) ((dayNow.getTime() - dayUpdate.getTime()) / (1000 * 60 * 60 * 24));
         } catch (java.text.ParseException e) {
             e.printStackTrace();

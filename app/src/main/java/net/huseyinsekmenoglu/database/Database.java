@@ -28,18 +28,14 @@ public class Database extends SQLiteOpenHelper {
     private final Context myContext;
     private SQLiteDatabase myDataBase;
 
-    /**
-     * Constructor
-     * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
-     */
+    //Constructor
+    //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.myContext = context;
     }
 
-    /**
-     * Creates a empty database on the system and rewrites it with your own database.
-     */
+    // Creates a empty database on the system and rewrites it with your own database.
     public void createDataBase() throws IOException {
         boolean dbExist = checkDataBase();
         if (!dbExist) {
@@ -54,11 +50,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Check if the database already exist to avoid re-copying the file each time you open the application.
-     *
-     * @return true if it exists, false if it doesn't
-     */
+    // Check if the database already exist to avoid re-copying the file
     public boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
         try {
@@ -74,11 +66,7 @@ public class Database extends SQLiteOpenHelper {
         return checkDB != null;
     }
 
-    /**
-     * Copies your database from your local assets-folder to the just created empty database in the
-     * system folder, from where it can be accessed and handled.
-     * This is done by transfering bytestream.
-     */
+    // Copies database from assets-folder to the system folder by transfering bytestream.
     private void copyDataBase() throws IOException {
         //Open your local db as the input stream
         InputStream myInput = myContext.getAssets().open(DB_NAME);
@@ -120,15 +108,8 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    // Add your public helper methods to access and get content from the database.
-    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-    // to you to create adapters for your views.
-
-    /**
-     * ülkeler
-     * returns a list
-     */
-    public ArrayList<String> getContries() {
+    // ülkeler
+    public ArrayList<String> getCountries() {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT " + Ulke.Ad + " FROM " + Ulke.name + " order by " + Ulke.Ad;
@@ -151,10 +132,7 @@ public class Database extends SQLiteOpenHelper {
         return liste;
     }
 
-    /**
-     * şehirler
-     * returns a list
-     */
+    // şehirler
     public ArrayList<String> getCities(String country) {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
@@ -181,10 +159,7 @@ public class Database extends SQLiteOpenHelper {
         return liste;
     }
 
-    /**
-     * ilçeler
-     * returns a list
-     */
+    // ilçeler
     public ArrayList<String> getTown(String city) {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
@@ -255,5 +230,25 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return sonuc;
+    }
+
+    //get todays namaz vakits for selected towm
+    public Vakit getVakit(int IlceId, String Tarih) {
+        Vakit tablo = new Vakit();
+        String selectQuery = "SELECT * FROM " + Vakit.name + " WHERE " + Vakit.Ilce_id + "=" + IlceId + " AND " + Vakit.tarih + "='" + Tarih + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            tablo.SetImsak(cursor.getString(cursor.getColumnIndex(Vakit.imsak)));
+            tablo.SetGunes(cursor.getString(cursor.getColumnIndex(Vakit.gunes)));
+            tablo.SettOgle(cursor.getString(cursor.getColumnIndex(Vakit.ogle)));
+            tablo.SetIkindi(cursor.getString(cursor.getColumnIndex(Vakit.ikindi)));
+            tablo.SetAksam(cursor.getString(cursor.getColumnIndex(Vakit.aksam)));
+            tablo.SetYatsi(cursor.getString(cursor.getColumnIndex(Vakit.yatsi)));
+            tablo.SetKible(cursor.getString(cursor.getColumnIndex(Vakit.kible)));
+        }
+        cursor.close();
+        db.close();
+        return tablo;
     }
 }

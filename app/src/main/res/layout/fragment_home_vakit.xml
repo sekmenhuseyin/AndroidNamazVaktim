@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frmVakit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.huseyinsekmenoglu.home.tVakit">
@@ -136,14 +137,14 @@
             android:layout_margin="@dimen/on">
 
             <TextView
-                android:id="@+id/lblTeheccud"
+                android:id="@+id/lblKible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_teheccud" />
+                android:text="@string/vakit_kible" />
 
             <TextView
-                android:id="@+id/txtTeheccud"
+                android:id="@+id/txtKible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
