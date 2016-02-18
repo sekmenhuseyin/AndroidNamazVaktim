@@ -231,7 +231,7 @@ public class SetupActivity extends AppCompatActivity {
         editor.putBoolean(getString(R.string.prefSetup), true);
         editor.apply();
         //show home screen and update vakits there
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         finish();
     }

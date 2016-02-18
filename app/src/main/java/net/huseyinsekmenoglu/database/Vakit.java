@@ -47,6 +47,15 @@ public class Vakit {
     }
 
     //tarih
+    public int GetId() {
+        return this.key_id;
+    }
+
+    public void SetId(int key_id) {
+        this.key_id = key_id;
+    }
+
+    //tarih
     public String GetTarih() {
         return this.key_tarih;
     }

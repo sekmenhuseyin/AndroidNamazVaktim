@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import net.huseyinsekmenoglu.database.ApiConnect;
 import net.huseyinsekmenoglu.home.tAyarlar;
 import net.huseyinsekmenoglu.home.tImsakiye;
 import net.huseyinsekmenoglu.home.tKible;
@@ -24,7 +23,6 @@ import net.huseyinsekmenoglu.home.tOnemliGunler;
 import net.huseyinsekmenoglu.home.tTakvim;
 import net.huseyinsekmenoglu.home.tVakit;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SharedPreferences prefs;
+    private Helpers helpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        helpers = new Helpers(this);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(getString(R.string.prefLang), "");
@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
-        //check and update vakit
-        UpdateVakit();
+        //find days passed after last update
+        int diffInDays = helpers.getDayDifference(new Date(prefs.getLong(getString(R.string.prefUpdate), 0)));
+        //update namaz vakit
+        if (diffInDays > 21) helpers.UpdatevakitTable();
+        //layout
         setContentView(R.layout.activity_main);
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -68,35 +71,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    public void UpdateVakit() {
-        //check and update vakit
-        int diffInDays = 0;
-        //find days passed after last update
-        try {
-            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0));
-            SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
-            updateTime = dfDate.parse(dfDate.format(updateTime));
-            Date dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));
-            diffInDays = (int) ((dayNow.getTime() - updateTime.getTime()) / (1000 * 60 * 60 * 24));
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        //update namaz vakit
-        if (diffInDays > 21) {
-            //get preferences
-            String countryID = prefs.getString(getString(R.string.prefCountryID), getString(R.string.defaultUlkeID)),
-                    cityID = prefs.getString(getString(R.string.prefCityID), getString(R.string.defaultSehirID)),
-                    townID = prefs.getString(getString(R.string.prefTownID), getString(R.string.defaultIlceID)),
-                    updateLink;
-            if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
-            else updateLink = countryID + "/" + cityID + "/" + townID;
-            new ApiConnect(this).execute(updateLink, townID);
-
-            //refresh vakit
-            //tVakit tmp=new tVakit();
-            //tmp.RefreshVakit();
-        }
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

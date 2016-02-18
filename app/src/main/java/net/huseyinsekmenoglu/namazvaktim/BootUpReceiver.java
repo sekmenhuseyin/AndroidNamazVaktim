@@ -8,10 +8,11 @@ import android.preference.PreferenceManager;
 
 /**
  * Created by huseyin on 28.1.2016
+ * runs on certain times
  */
 public class BootUpReceiver extends BroadcastReceiver {
 
-    //tarih değiştiğini fark ettiğinde
+    /*//tarih değiştiğini fark ettiğinde
     private final BroadcastReceiver m_timeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -21,11 +22,11 @@ public class BootUpReceiver extends BroadcastReceiver {
             //saat yada zaman dilimi değiştiğinde
             if (intent.getAction().equals(Intent.ACTION_TIME_CHANGED) || intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED)) {
                 //update if necessary
-                MainActivity mac = new MainActivity();
-                mac.UpdateVakit();
+                //MainActivity mac = new MainActivity();
+                //mac.UpdateVakit();
             }
         }
-    };
+    };*/
 
     //telefon açıldığını farkettiğinde
     @Override
@@ -35,9 +36,12 @@ public class BootUpReceiver extends BroadcastReceiver {
         if (!prefs.getBoolean(context.getString(R.string.prefSetup), false)) return;
         //after boot complete
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            //update if necessary
+            //notify
             MainActivity mac = new MainActivity();
-            mac.UpdateVakit();
+            Helpers notify = new Helpers(mac);
+            notify.Notification();
+            //update if necessary
+            //mac.UpdateVakit();
         }
     }
 }

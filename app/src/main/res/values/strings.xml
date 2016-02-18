@@ -24,16 +24,16 @@
     <!-- vakitler -->
     <string name="vakit_none" translatable="false">00:00</string>
     <string name="vakit_imsak">İmsak</string>
-    <string name="vakit_kible">Kıble</string>
+    <string name="vakit_kible">Kıble Saati</string>
     <string name="vakit_gunes">Güneş</string>
     <string name="vakit_ogle">Öğle</string>
     <string name="vakit_ikindi">İkindi</string>
     <string name="vakit_aksam">Akşam</string>
     <string name="vakit_yatsi">Yatsı</string>
-    <string name="vakit_teheccud">Teheccüd Namazı</string>
-    <string name="vakit_duha">Duha Namazı</string>
-    <string name="vakit_israk">İşrak Namazı</string>
-    <string name="vakit_evvabin">Evvabin Namazı</string>
+    <string name="vakit_teheccud">Teheccüd</string>
+    <string name="vakit_duha">Duha</string>
+    <string name="vakit_israk">İşrak</string>
+    <string name="vakit_evvabin">Evvabin</string>
     <string name="remainingTime">Kalan Zamanınız</string>
     <!-- Setup screen -->
     <string name="title_activity_setup">Kurulum Sihirbazı</string>
