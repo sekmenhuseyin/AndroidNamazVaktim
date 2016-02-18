@@ -12,33 +12,34 @@
         android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/lblRemainingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/on"
-                android:text="@string/remainingTime"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/lblRemainingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/on"
+            android:text="@string/remainingTime"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtRemainingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/on"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/txtRemainingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/txtTarih"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txtTarih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/on"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/yirmi"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -58,12 +59,12 @@
                     android:src="@drawable/vakit_white" />
 
                 <TextView
-                    android:id="@+id/lblImsak"
+                    android:id="@+id/lblKible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="@dimen/bes"
                     android:text="@string/vakit_imsak"
                     android:textSize="@dimen/yirmibesT" />
 
@@ -71,8 +72,9 @@
                     android:id="@+id/txtImsak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/lblImsak"
+                    android:layout_below="@+id/lblKible"
                     android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
                     android:textSize="@dimen/yirmibesT" />
             </RelativeLayout>
 
@@ -96,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="@dimen/bes"
                     android:text="@string/vakit_gunes"
                     android:textSize="@dimen/yirmibesT" />
 
@@ -104,138 +106,170 @@
                     android:id="@+id/txtGunes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/lblGunes"
-                    android:layout_alignStart="@+id/lblGunes"
                     android:layout_below="@+id/lblGunes"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
                     android:textSize="@dimen/yirmibesT" />
             </RelativeLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/yirmi"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <ImageView
+                    android:id="@+id/imgOgle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_ogle"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblOgle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/bes"
+                    android:text="@string/vakit_ogle"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtOgle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblOgle"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <ImageView
+                    android:id="@+id/imgIkindi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_gunes"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblIkindi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/bes"
+                    android:text="@string/vakit_ikindi"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtIkindi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblIkindi"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/yirmi"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <ImageView
+                    android:id="@+id/imgAksam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_aksam"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblAksam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/bes"
+                    android:text="@string/vakit_aksam"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtAksam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblAksam"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <ImageView
+                    android:id="@+id/imgYatsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_yatsi"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblYatsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/bes"
+                    android:text="@string/vakit_yatsi"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtYatsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblYatsi"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/vakit_none"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
-
-            <TextView
-                android:id="@+id/lblOgle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_ogle"
-                android:textSize="@dimen/yirmiT" />
-
-            <TextView
-                android:id="@+id/txtOgle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/on"
-                android:textSize="@dimen/yirmiT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
-
-            <TextView
-                android:id="@+id/lblIkindi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_ikindi"
-                android:textSize="@dimen/yirmiT" />
-
-            <TextView
-                android:id="@+id/txtIkindi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/on"
-                android:textSize="@dimen/yirmiT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
-
-            <TextView
-                android:id="@+id/lblAksam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_aksam"
-                android:textSize="@dimen/yirmiT" />
-
-            <TextView
-                android:id="@+id/txtAksam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/on"
-                android:textSize="@dimen/yirmiT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
-
-            <TextView
-                android:id="@+id/lblYatsi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_yatsi"
-                android:textSize="@dimen/yirmiT" />
-
-            <TextView
-                android:id="@+id/txtYatsi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/on"
-                android:textSize="@dimen/yirmiT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
-
-            <TextView
-                android:id="@+id/lblKible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_kible"
-                android:textSize="@dimen/yirmiT" />
-
-            <TextView
-                android:id="@+id/txtKible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/on"
-                android:textSize="@dimen/yirmiT" />
-        </TableRow>
-
-    </TableLayout>
 
 </FrameLayout>

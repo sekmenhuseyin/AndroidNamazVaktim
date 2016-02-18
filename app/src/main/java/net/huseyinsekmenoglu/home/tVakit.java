@@ -41,8 +41,7 @@ public class tVakit extends Fragment {
                 txtOgle = (TextView) myInflatedView.findViewById(R.id.txtOgle),
                 txtIkindi = (TextView) myInflatedView.findViewById(R.id.txtIkindi),
                 txtAksam = (TextView) myInflatedView.findViewById(R.id.txtAksam),
-                txtYatsi = (TextView) myInflatedView.findViewById(R.id.txtYatsi),
-                txtKible = (TextView) myInflatedView.findViewById(R.id.txtKible);
+                txtYatsi = (TextView) myInflatedView.findViewById(R.id.txtYatsi);
         //variables
         int town = Integer.parseInt(prefs.getString(getString(R.string.prefTownID), ""));
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
@@ -55,8 +54,5 @@ public class tVakit extends Fragment {
         txtIkindi.setText(tablo.GetIkindi());
         txtAksam.setText(tablo.GetAksam());
         txtYatsi.setText(tablo.GetYatsi());
-        txtKible.setText(tablo.GetKible());
-        //return
-
     }
 }
