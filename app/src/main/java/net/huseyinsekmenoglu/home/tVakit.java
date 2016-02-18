@@ -20,11 +20,19 @@ import java.util.Locale;
 
 
 public class tVakit extends Fragment {
+    View myInflatedView;
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View myInflatedView = inflater.inflate(R.layout.fragment_home_vakit, container, false);
-        Context mContext = container.getContext();
+        myInflatedView = inflater.inflate(R.layout.fragment_home_vakit, container, false);
+        mContext = container.getContext();
+        RefreshVakit();
+        return myInflatedView;
+    }
+
+    //refresh vakit
+    public void RefreshVakit() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         Database db = new Database(mContext);
         //get textviews
@@ -49,6 +57,6 @@ public class tVakit extends Fragment {
         txtYatsi.setText(tablo.GetYatsi());
         txtKible.setText(tablo.GetKible());
         //return
-        return myInflatedView;
+
     }
 }

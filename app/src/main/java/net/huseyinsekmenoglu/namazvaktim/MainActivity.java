@@ -73,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
         int diffInDays = 0;
         //find days passed after last update
         try {
-            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0)), dayUpdate;
+            Date updateTime = new Date(prefs.getLong(getString(R.string.prefUpdate), 0));
             SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
-            dayUpdate = dfDate.parse(dfDate.format(updateTime));
-            Date dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));//Returns 15/10/2012
-            diffInDays = (int) ((dayNow.getTime() - dayUpdate.getTime()) / (1000 * 60 * 60 * 24));
+            updateTime = dfDate.parse(dfDate.format(updateTime));
+            Date dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));
+            diffInDays = (int) ((dayNow.getTime() - updateTime.getTime()) / (1000 * 60 * 60 * 24));
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
             if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
             else updateLink = countryID + "/" + cityID + "/" + townID;
             new ApiConnect(this).execute(updateLink, townID);
+
+            //refresh vakit
+            //tVakit tmp=new tVakit();
+            //tmp.RefreshVakit();
         }
     }
     @Override

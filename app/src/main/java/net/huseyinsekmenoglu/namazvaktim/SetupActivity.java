@@ -219,8 +219,7 @@ public class SetupActivity extends AppCompatActivity {
         listAdapter = null;
         String countryID = db.GetAnyID(Ulke.name, nameCountry),
                 cityID = db.GetAnyID(Sehir.name, nameCity),
-                townID = db.GetAnyID(Ilce.name, nameTown),
-                updateLink;
+                townID = db.GetAnyID(Ilce.name, nameTown);
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.prefCountry), nameCountry);

@@ -9,9 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/bes"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingRight="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="@dimen/bes"
-        android:textSize="@dimen/onyedi" />
+        android:textSize="@dimen/yirmiT" />
 
 </LinearLayout>

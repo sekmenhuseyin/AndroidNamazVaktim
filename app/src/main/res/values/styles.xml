@@ -25,4 +25,11 @@
         <item name="android:windowBackground">@color/setupBackground</item>
     </style>
 
+    <style name="Notification" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
 </resources>

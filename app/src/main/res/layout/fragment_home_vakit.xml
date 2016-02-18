@@ -5,51 +5,121 @@
     android:layout_height="match_parent"
     tools:context="net.huseyinsekmenoglu.home.tVakit">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/on">
+        android:layout_gravity="center_horizontal|top"
+        android:orientation="vertical">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
 
             <TextView
-                android:id="@+id/lblImsak"
+                android:id="@+id/lblRemainingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_imsak" />
-
-            <TextView
-                android:id="@+id/txtImsak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/vakit_none" />
-        </TableRow>
+                android:layout_margin="@dimen/on"
+                android:text="@string/remainingTime"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TableRow
+            <TextView
+                android:id="@+id/txtRemainingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/on"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/txtTarih"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/on">
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-            <TextView
-                android:id="@+id/lblGunes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:text="@string/vakit_gunes" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
 
-            <TextView
-                android:id="@+id/txtGunes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:text="@string/vakit_none" />
-        </TableRow>
+                <ImageView
+                    android:id="@+id/imgImsak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_imsak"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblImsak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    android:text="@string/vakit_imsak"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtImsak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblImsak"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <ImageView
+                    android:id="@+id/imgGunes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/vakit_gunes"
+                    android:src="@drawable/vakit_white" />
+
+                <TextView
+                    android:id="@+id/lblGunes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    android:text="@string/vakit_gunes"
+                    android:textSize="@dimen/yirmibesT" />
+
+                <TextView
+                    android:id="@+id/txtGunes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/lblGunes"
+                    android:layout_alignStart="@+id/lblGunes"
+                    android:layout_below="@+id/lblGunes"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/yirmibesT" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -61,14 +131,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_ogle" />
+                android:text="@string/vakit_ogle"
+                android:textSize="@dimen/yirmiT" />
 
             <TextView
                 android:id="@+id/txtOgle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/vakit_none" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/on"
+                android:textSize="@dimen/yirmiT" />
         </TableRow>
 
         <TableRow
@@ -81,14 +154,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_ikindi" />
+                android:text="@string/vakit_ikindi"
+                android:textSize="@dimen/yirmiT" />
 
             <TextView
                 android:id="@+id/txtIkindi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/vakit_none" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/on"
+                android:textSize="@dimen/yirmiT" />
         </TableRow>
 
         <TableRow
@@ -101,14 +177,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_aksam" />
+                android:text="@string/vakit_aksam"
+                android:textSize="@dimen/yirmiT" />
 
             <TextView
                 android:id="@+id/txtAksam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/vakit_none" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/on"
+                android:textSize="@dimen/yirmiT" />
         </TableRow>
 
         <TableRow
@@ -121,14 +200,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_yatsi" />
+                android:text="@string/vakit_yatsi"
+                android:textSize="@dimen/yirmiT" />
 
             <TextView
                 android:id="@+id/txtYatsi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/vakit_none" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/on"
+                android:textSize="@dimen/yirmiT" />
         </TableRow>
 
         <TableRow
@@ -141,14 +223,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:text="@string/vakit_kible" />
+                android:text="@string/vakit_kible"
+                android:textSize="@dimen/yirmiT" />
 
             <TextView
                 android:id="@+id/txtKible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="@string/vakit_none" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/on"
+                android:textSize="@dimen/yirmiT" />
         </TableRow>
 
     </TableLayout>

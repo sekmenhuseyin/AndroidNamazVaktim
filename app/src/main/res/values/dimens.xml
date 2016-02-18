@@ -1,18 +1,17 @@
 <resources>
+    <!-- text sizes-->
+    <dimen name="otuzT">30sp</dimen>
+    <dimen name="yirmibesT">25sp</dimen>
+    <dimen name="yirmiT">20sp</dimen>
+    <dimen name="onT">10sp</dimen>
+    <!-- margins and paddings-->
     <dimen name="yetmis">70dp</dimen>
-    <dimen name="altmisdort">64dp</dimen>
     <dimen name="elli">50dp</dimen>
-    <dimen name="yirmidokuz">29dp</dimen>
-    <dimen name="yirmiyedi">27dp</dimen>
-    <dimen name="yirmi">20sp</dimen>
-    <dimen name="onyedi">17sp</dimen>
-    <dimen name="onalti">16dp</dimen>
-    <dimen name="sekiz">8dp</dimen>
-    <dimen name="bes">5dp</dimen>
-    <dimen name="ondort">14dp</dimen>
-    <dimen name="dort">4dp</dimen>
+    <dimen name="otuz">30dp</dimen>
+    <dimen name="yirmibes">25dp</dimen>
+    <dimen name="tirmi">20dp</dimen>
+    <dimen name="onbes">15dp</dimen>
     <dimen name="on">10dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bes">5dp</dimen>
+    <dimen name="sifir">0dp</dimen>
 </resources>

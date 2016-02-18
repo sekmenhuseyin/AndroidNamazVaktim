@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingRight="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="@dimen/onyedi" />
+        android:textSize="@dimen/yirmibesT" />
 
 </LinearLayout>

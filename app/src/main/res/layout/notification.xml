@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/Notification">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/NlblImsak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_imsak" />
+
+        <TextView
+            android:id="@+id/NlblGunes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_gunes" />
+
+        <TextView
+            android:id="@+id/NlblOgle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_ogle" />
+
+        <TextView
+            android:id="@+id/NlblIkindi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_ikindi" />
+
+        <TextView
+            android:id="@+id/NlblAksam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="4"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_aksam" />
+
+        <TextView
+            android:id="@+id/NlblYatsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="5"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/vakit_yatsi" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/NtxtImsak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/NtxtGunes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/NtxtOgle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/NtxtIkindi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/NtxtAksam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="4"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/NtxtYatsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="5"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+    </TableRow>
+</TableLayout>

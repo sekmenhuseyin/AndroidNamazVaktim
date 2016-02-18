@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/onalti"
-    android:paddingLeft="@dimen/altmisdort"
-    android:paddingRight="@dimen/altmisdort"
-    android:paddingTop="@dimen/onalti"
+    android:paddingBottom="@dimen/onbes"
+    android:paddingLeft="@dimen/otuz"
+    android:paddingRight="@dimen/otuz"
+    android:paddingTop="@dimen/onbes"
     tools:context="net.huseyinsekmenoglu.namazvaktim.SetupActivity">
 
     <ExpandableListView

@@ -2,19 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/elli"
-    android:paddingBottom="@dimen/dort"
-    android:paddingTop="@dimen/dort">
+    android:layout_margin="5dp">
 
     <TextView
         android:id="@+id/country_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/flag"
-        android:layout_marginBottom="@dimen/ondort"
-        android:layout_marginLeft="@dimen/yirmidokuz"
+        android:layout_marginBottom="@dimen/onbes"
+        android:layout_marginLeft="@dimen/onbes"
         android:layout_toRightOf="@+id/flag"
-        android:textSize="@dimen/yirmi" />
+        android:textSize="@dimen/yirmiT" />
 
     <ImageView
         android:id="@+id/flag"
@@ -22,6 +20,8 @@
         android:layout_height="@dimen/elli"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/yirmiyedi" />
+        android:layout_marginBottom="@dimen/on"
+        android:layout_marginTop="@dimen/on"
+        android:contentDescription="@string/Flag" />
 
 </RelativeLayout>
