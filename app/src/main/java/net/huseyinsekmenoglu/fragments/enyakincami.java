@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.home;
+package net.huseyinsekmenoglu.fragments;
 
 /**
  * Created by huseyin.sekmenoglu on 17.2.2016.

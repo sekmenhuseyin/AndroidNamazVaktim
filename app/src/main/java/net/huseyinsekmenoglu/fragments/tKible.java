@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.home;
+package net.huseyinsekmenoglu.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.database;
+package net.huseyinsekmenoglu.namazvaktim;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,7 +8,8 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import net.huseyinsekmenoglu.namazvaktim.R;
+import net.huseyinsekmenoglu.database.Database;
+import net.huseyinsekmenoglu.database.Vakit;
 
 import org.json.JSONArray;
 import org.json.JSONException;

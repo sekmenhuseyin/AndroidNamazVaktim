@@ -3,7 +3,7 @@
     android:id="@+id/frmVakit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.huseyinsekmenoglu.home.tVakit">
+    tools:context="net.huseyinsekmenoglu.fragments.tVakit">
 
     <LinearLayout
         android:layout_width="match_parent"

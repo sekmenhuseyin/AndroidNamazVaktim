@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.home;
+package net.huseyinsekmenoglu.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.huseyinsekmenoglu.database.ApiConnect;
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Vakit;
+import net.huseyinsekmenoglu.namazvaktim.ApiConnect;
 import net.huseyinsekmenoglu.namazvaktim.Helpers;
 import net.huseyinsekmenoglu.namazvaktim.R;
 

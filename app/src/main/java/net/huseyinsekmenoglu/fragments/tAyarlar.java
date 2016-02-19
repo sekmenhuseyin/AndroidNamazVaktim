@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.home;
+package net.huseyinsekmenoglu.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -12,8 +12,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import net.huseyinsekmenoglu.database.ApiConnect;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

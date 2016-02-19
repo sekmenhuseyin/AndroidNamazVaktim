@@ -15,13 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import net.huseyinsekmenoglu.home.tAyarlar;
-import net.huseyinsekmenoglu.home.tImsakiye;
-import net.huseyinsekmenoglu.home.tKible;
-import net.huseyinsekmenoglu.home.tKitaplik;
-import net.huseyinsekmenoglu.home.tOnemliGunler;
-import net.huseyinsekmenoglu.home.tTakvim;
-import net.huseyinsekmenoglu.home.tVakit;
+import net.huseyinsekmenoglu.fragments.tAyarlar;
+import net.huseyinsekmenoglu.fragments.tImsakiye;
+import net.huseyinsekmenoglu.fragments.tKible;
+import net.huseyinsekmenoglu.fragments.tKitaplik;
+import net.huseyinsekmenoglu.fragments.tOnemliGunler;
+import net.huseyinsekmenoglu.fragments.tTakvim;
+import net.huseyinsekmenoglu.fragments.tVakit;
 
 import java.util.Date;
 import java.util.Locale;
