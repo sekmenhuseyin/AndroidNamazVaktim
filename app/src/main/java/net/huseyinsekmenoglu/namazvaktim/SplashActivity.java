@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import net.huseyinsekmenoglu.database.Database;
+import net.huseyinsekmenoglu.helpers.Functions;
 
 import java.io.IOException;
 
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
 
         } else {// if not first launch show main page
             //notify
-            Helpers notify = new Helpers(this);
+            Functions notify = new Functions(this);
             notify.Notification();
             //show home page
             Intent intent = new Intent(this, MainActivity.class);

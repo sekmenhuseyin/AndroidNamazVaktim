@@ -36,7 +36,8 @@
     <string name="vakit_duha">Duha</string>
     <string name="vakit_israk">İşrak</string>
     <string name="vakit_evvabin">Evvabin</string>
-    <string name="remainingTime">Kalan Zamanınız</string>
+    <string name="vakit_remaining">Kalan Zamanınız</string>
+    <string name="vakit_left">Vaktin Çıkmasına</string>
     <!-- Setup screen -->
     <string name="title_activity_setup">Kurulum Sihirbazı</string>
     <string name="Updating">Güncelleniyor…</string>
@@ -74,4 +75,5 @@
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>
+    <string name="Logo">logo</string>
 </resources>

@@ -22,6 +22,7 @@ import net.huseyinsekmenoglu.fragments.tKitaplik;
 import net.huseyinsekmenoglu.fragments.tOnemliGunler;
 import net.huseyinsekmenoglu.fragments.tTakvim;
 import net.huseyinsekmenoglu.fragments.tVakit;
+import net.huseyinsekmenoglu.helpers.Functions;
 
 import java.util.Date;
 import java.util.Locale;
@@ -36,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean doubleBackToExitPressedOnce = false;
     private SharedPreferences prefs;
-    private Helpers helpers;
+    private Functions functions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        helpers = new Helpers(this);
+        functions = new Functions(this);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(getString(R.string.prefLang), "");
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
         //find days passed after last update
-        int diffInDays = helpers.getDayDifference(new Date(prefs.getLong(getString(R.string.prefUpdate), 0)));
+        int diffInDays = functions.getDayDifference(new Date(prefs.getLong(getString(R.string.prefUpdate), 0)));
         //update namaz vakit
-        if (diffInDays > 21) helpers.UpdatevakitTable();
+        if (diffInDays > 21) functions.UpdatevakitTable();
         //layout
         setContentView(R.layout.activity_main);
         //toolbar

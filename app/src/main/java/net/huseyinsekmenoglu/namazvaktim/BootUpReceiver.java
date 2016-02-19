@@ -6,11 +6,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import net.huseyinsekmenoglu.helpers.Functions;
+
 /**
  * Created by huseyin on 28.1.2016
  * runs on certain times
  */
 public class BootUpReceiver extends BroadcastReceiver {
+
+
+    /*class AsyncTaskClass extends AsyncTask<Context, String, String> {
+        AsyncTaskClass() {
+        }
+
+        protected void onPreExecute() {
+        }
+
+        protected String doInBackground(Context... strings) {
+            new EzanAlarmManager().alarmlariKur(strings[0]);
+            return null;
+        }
+
+        protected void onPostExecute(String s) {
+        }
+    }*/
 
     /*//tarih değiştiğini fark ettiğinde
     private final BroadcastReceiver m_timeChangedReceiver = new BroadcastReceiver() {
@@ -37,8 +56,15 @@ public class BootUpReceiver extends BroadcastReceiver {
         //after boot complete
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             //notify
-            Helpers notify = new Helpers(context);
+            Functions notify = new Functions(context);
             notify.Notification();
+
+
+            /*if (set.getBoolean("isongoing", true)) {
+                context.startService(new Intent(context, WidgetService.class));
+            }
+            context.startService(new Intent(context, DummyWidgetUpdaterService.class));*/
+
             //update if necessary
             //mac.UpdateVakit();
         }

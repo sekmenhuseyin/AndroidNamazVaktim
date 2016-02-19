@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.namazvaktim;
+package net.huseyinsekmenoglu.helpers;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -12,6 +12,10 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import net.huseyinsekmenoglu.namazvaktim.ApiConnect;
+import net.huseyinsekmenoglu.namazvaktim.MainActivity;
+import net.huseyinsekmenoglu.namazvaktim.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -20,18 +24,18 @@ import java.util.Locale;
  * Created by huseyin.sekmenoglu on 17.2.2016.
  * general helper functions
  */
-public class Helpers {
+public class Functions {
     private Activity mActivity;
     private Context mContext;
     private SharedPreferences prefs;
 
     //constructor
-    public Helpers(Context tmp) {
+    public Functions(Context tmp) {
         mContext = tmp;
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
-    public Helpers(Activity tmp) {
+    public Functions(Activity tmp) {
         mActivity = tmp;
         mContext = tmp.getApplicationContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);

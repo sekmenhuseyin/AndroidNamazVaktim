@@ -1,4 +1,4 @@
-package net.huseyinsekmenoglu.namazvaktim;
+package net.huseyinsekmenoglu.helpers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import net.huseyinsekmenoglu.database.Language;
 import net.huseyinsekmenoglu.database.LanguageChild;
+import net.huseyinsekmenoglu.namazvaktim.R;
 
 import java.util.ArrayList;
 

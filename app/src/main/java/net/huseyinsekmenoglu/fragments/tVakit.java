@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Vakit;
+import net.huseyinsekmenoglu.helpers.Functions;
 import net.huseyinsekmenoglu.namazvaktim.ApiConnect;
-import net.huseyinsekmenoglu.namazvaktim.Helpers;
 import net.huseyinsekmenoglu.namazvaktim.R;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +30,15 @@ public class tVakit extends Fragment {
         myInflatedView = inflater.inflate(R.layout.fragment_home_vakit, container, false);
         mContext = container.getContext();
         RefreshVakit();
+
+        /*Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        try {
+            HicriHesaplayici hc = new HicriHesaplayici(cal, 0, getActivity());
+            this.tv.setText(hc.getHijriDay() + " " + getResources().getStringArray(R.array.hicriaylar)[hc.getHijriMonth() - 1] + " " + hc.getHijriYear());
+            this.tv2.setText(getResources().getStringArray(R.array.dinigunler)[hc.checkIfHolyDay()]);
+        } catch (ArrayIndexOutOfBoundsException e) {}*/
+
         return myInflatedView;
     }
 
@@ -37,7 +46,7 @@ public class tVakit extends Fragment {
     public void RefreshVakit() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         Database db = new Database(mContext);
-        Helpers helpers = new Helpers(this.getActivity());
+        Functions helpers = new Functions(this.getActivity());
         //get textviews
         TextView txtImsak = (TextView) myInflatedView.findViewById(R.id.txtImsak),
                 txtGunes = (TextView) myInflatedView.findViewById(R.id.txtGunes),
