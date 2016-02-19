@@ -2,6 +2,8 @@
     <string name="app_name">Namaz Vaktim</string>
     <string name="database_version" translatable="false">1</string>
     <string name="google_app_id" translatable="false">996871107088</string>
+    <string name="Flag" translatable="false">Flag</string>
+    <string name="DoubleClickToExit">Çıkmak için tekrar GERİ tuşuna basınız</string>
     <!-- Preferences -->
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
     <string name="prefSetup" translatable="false">isSetupFinished</string>
@@ -51,10 +53,10 @@
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>
-    <string name="defaultUlkeID">2</string>
-    <string name="defaultSehirID">539</string>
-    <string name="defaultIlceID">9541</string>
-    <string name="defaultLocale">TR</string>
+    <string name="defaultUlkeID" translatable="false">2</string>
+    <string name="defaultSehirID" translatable="false">539</string>
+    <string name="defaultIlceID" translatable="false">9541</string>
+    <string name="defaultLocale" translatable="false">TR</string>
     <!-- arrays -->
     <string-array name="SehirliUlkeler">
         <item>TURKIYE</item>
@@ -72,5 +74,4 @@
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>
-    <string name="Flag">Flag</string>
 </resources>

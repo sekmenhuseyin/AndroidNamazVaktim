@@ -37,8 +37,7 @@ public class BootUpReceiver extends BroadcastReceiver {
         //after boot complete
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             //notify
-            MainActivity mac = new MainActivity();
-            Helpers notify = new Helpers(mac);
+            Helpers notify = new Helpers(context);
             notify.Notification();
             //update if necessary
             //mac.UpdateVakit();

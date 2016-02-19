@@ -132,9 +132,10 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
             editor.putLong(myContext.getString(R.string.prefUpdate), new Date().getTime());
             editor.apply();
             //show updated message
-            Toast.makeText(myActivity, myContext.getString(R.string.Updated), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(myActivity, result, Toast.LENGTH_LONG).show();
+            Toast.makeText(myActivity, myContext.getString(R.string.Updated), Toast.LENGTH_SHORT).show();
+            myActivity.recreate();
+        } else {//internete bağlanamadı diye mesaj gönder
+            Toast.makeText(myActivity, result, Toast.LENGTH_SHORT).show();
         }
         if (progressDialog.isShowing()) progressDialog.dismiss();
     }

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+    private boolean doubleBackToExitPressedOnce = false;
     private SharedPreferences prefs;
     private Helpers helpers;
 

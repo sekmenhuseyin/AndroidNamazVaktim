@@ -2,7 +2,6 @@ package net.huseyinsekmenoglu.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -53,8 +52,6 @@ public class tVakit extends Fragment {
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
         if (tablo.GetId() == 0) {
-
-
             //get preferences
             String countryID = prefs.getString(mContext.getString(R.string.prefCountryID), mContext.getString(R.string.defaultUlkeID)),
                     cityID = prefs.getString(mContext.getString(R.string.prefCityID), mContext.getString(R.string.defaultSehirID)),
@@ -62,10 +59,7 @@ public class tVakit extends Fragment {
                     updateLink;
             if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
             else updateLink = countryID + "/" + cityID + "/" + townID;
-            AsyncTask<String, Integer, String> str_result = new ApiConnect(this.getActivity()).execute(updateLink, townID);
-
-
-            tablo = db.getVakit(town, today);
+            new ApiConnect(this.getActivity()).execute(updateLink, townID);
         }
         //write values of namaz vakits
         txtImsak.setText(tablo.GetImsak());
