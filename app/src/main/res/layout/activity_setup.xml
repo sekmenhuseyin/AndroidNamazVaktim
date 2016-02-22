@@ -10,7 +10,7 @@
     tools:context="net.huseyinsekmenoglu.namazvaktim.SetupActivity">
 
     <ExpandableListView
-        android:id="@+id/lvExp"
+        android:id="@+id/lvExpSetup"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

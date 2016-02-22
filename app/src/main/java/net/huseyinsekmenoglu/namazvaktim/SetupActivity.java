@@ -59,7 +59,7 @@ public class SetupActivity extends AppCompatActivity {
         Diller = res.getStringArray(R.array.Diller);
         DilKodlari = res.getStringArray(R.array.DilKodlari);
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        expListView = (ExpandableListView) findViewById(R.id.lvExpSetup);
         title = (TextView) findViewById(R.id.lblListHeader);
         // preparing list data
         prepareListLanguageData();
