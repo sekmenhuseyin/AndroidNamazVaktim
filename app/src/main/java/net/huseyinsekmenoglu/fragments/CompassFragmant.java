@@ -18,13 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class tKible extends Fragment {
+public class CompassFragmant extends Fragment {
     View myInflatedView;
     Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myInflatedView = inflater.inflate(R.layout.fragment_home_kible, container, false);
+        myInflatedView = inflater.inflate(R.layout.fragment_home_compass, container, false);
         mContext = container.getContext();
         RefreshVakit();
         return myInflatedView;

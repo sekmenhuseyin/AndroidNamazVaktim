@@ -21,13 +21,13 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class tVakit extends Fragment {
+public class TimesFragment extends Fragment {
     View myInflatedView;
     Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myInflatedView = inflater.inflate(R.layout.fragment_home_vakit, container, false);
+        myInflatedView = inflater.inflate(R.layout.fragment_home_times, container, false);
         mContext = container.getContext();
         RefreshVakit();
 
@@ -77,5 +77,7 @@ public class tVakit extends Fragment {
         txtIkindi.setText(tablo.GetIkindi());
         txtAksam.setText(tablo.GetAksam());
         txtYatsi.setText(tablo.GetYatsi());
+        //find active vakit
+
     }
 }

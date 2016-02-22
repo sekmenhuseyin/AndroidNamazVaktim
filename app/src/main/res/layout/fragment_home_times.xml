@@ -3,7 +3,7 @@
     android:id="@+id/frmVakit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.huseyinsekmenoglu.fragments.tVakit">
+    tools:context="net.huseyinsekmenoglu.fragments.TimesFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/on"
-            android:text="@string/remainingTime"
+            android:text="@string/vakit_remaining"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView

@@ -15,13 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import net.huseyinsekmenoglu.fragments.tAyarlar;
-import net.huseyinsekmenoglu.fragments.tImsakiye;
-import net.huseyinsekmenoglu.fragments.tKible;
-import net.huseyinsekmenoglu.fragments.tKitaplik;
-import net.huseyinsekmenoglu.fragments.tOnemliGunler;
-import net.huseyinsekmenoglu.fragments.tTakvim;
-import net.huseyinsekmenoglu.fragments.tVakit;
+import net.huseyinsekmenoglu.fragments.CalendarFragment;
+import net.huseyinsekmenoglu.fragments.CompassFragmant;
+import net.huseyinsekmenoglu.fragments.HolyDaysFragmant;
+import net.huseyinsekmenoglu.fragments.LibraryFragmant;
+import net.huseyinsekmenoglu.fragments.MonthlyFragmant;
+import net.huseyinsekmenoglu.fragments.TimesFragment;
 import net.huseyinsekmenoglu.helpers.Functions;
 
 import java.util.Date;
@@ -144,33 +143,29 @@ public class MainActivity extends AppCompatActivity {
         // Return a PlaceholderFragment (defined as a static inner class below).
         public Fragment getItem(int position) {
             switch (position) {
-                case 6:
-                    return new tAyarlar();
                 case 5:
-                    return new tKitaplik();
+                    return new LibraryFragmant();
                 case 4:
-                    return new tOnemliGunler();
+                    return new HolyDaysFragmant();
                 case 3:
-                    return new tTakvim();
+                    return new CalendarFragment();
                 case 2:
-                    return new tImsakiye();
+                    return new MonthlyFragmant();
                 case 1:
-                    return new tKible();
+                    return new CompassFragmant();
                 default:
-                    return new tVakit();
+                    return new TimesFragment();
             }
         }
 
         @Override
         public int getCount() {
-            return 7;
-        }//0-6, default:0
+            return 6;
+        }//0-5, default:0
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 6:
-                    return getString(R.string.tabAyarlar);
                 case 5:
                     return getString(R.string.tabKitaplik);
                 case 4:

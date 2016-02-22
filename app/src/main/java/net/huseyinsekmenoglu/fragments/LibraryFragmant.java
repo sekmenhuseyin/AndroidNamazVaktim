@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import net.huseyinsekmenoglu.namazvaktim.R;
 
-public class tImsakiye extends Fragment {
+public class LibraryFragmant extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home_imsakiye, container, false);
+        return inflater.inflate(R.layout.fragment_home_library, container, false);
     }
 }

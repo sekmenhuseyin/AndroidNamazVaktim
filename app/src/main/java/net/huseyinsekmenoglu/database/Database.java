@@ -252,4 +252,44 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return tablo;
     }
+
+    //
+    /*private String whichVakit(Vakit tablo) {
+        Calendar cal = new GregorianCalendar();
+        int hour = cal.get();
+        int min = cal.get(12);
+        if (vakitKarsilastir(tablo.GetYatsi(), hour, min) == 0) {
+            return "yatsi";
+        }
+        else if (vakitKarsilastir(tablo.GetAksam(), hour, min) == 0) {
+            return "aksam";
+        }
+        else if (vakitKarsilastir(tablo.GetIkindi(), hour, min) == 0) {
+            return "ikindi";
+        }
+        else if (vakitKarsilastir(tablo.GetOgle(), hour, min) == 0) {
+            return "ogle";
+        }
+        else if (vakitKarsilastir(tablo.GetGunes(), hour, min) == 0) {
+            return "gunes";
+        }
+        else if (vakitKarsilastir(tablo.GetImsak(), hour, min) == 0) {
+            return "imsak";
+        }
+        return null;
+    }
+
+    //verilen vakit ile verilen saat ve dakika ile karşılaştır
+    public boolean vakitKarsilastir(String dateTime, int ReqHour, int ReqMin) {
+        String[] s = dateTime.split(":");
+        int hour = Integer.valueOf(s[0]);
+        int mint = Integer.valueOf(s[1]);
+        if (ReqHour == hour && ReqMin == mint) {
+            return true;
+        }
+        if (ReqHour < hour || (ReqHour == hour && ReqMin < mint)) {
+            return false;
+        }
+        return false;
+    }*/
 }
