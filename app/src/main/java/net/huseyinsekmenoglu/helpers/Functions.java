@@ -73,7 +73,7 @@ public class Functions {
             SimpleDateFormat dfDate = new SimpleDateFormat(mContext.getString(R.string.dateFormat), Locale.ENGLISH);
             //gelen tarihi yeni formata çevir
             updateTime = dfDate.parse(dfDate.format(updateTime));
-            //bugğnğ yeni formata çevir
+            //bugünü yeni formata çevir
             Date dayNow = dfDate.parse(dfDate.format((new Date()).getTime()));
             //farkı bul
             diffInDays = (int) ((dayNow.getTime() - updateTime.getTime()) / (1000 * 60 * 60 * 24));
@@ -100,11 +100,11 @@ public class Functions {
         NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mContext)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!")
+                        .setContentTitle(mContext.getString(R.string.app_name))
+                        .setContentText(mContext.getString(R.string.vakit_left))
                         .setOngoing(true)
                         .setAutoCancel(false)
+                        .setVisibility(1)
                         .setContentIntent(resultPendingIntent);
         mNotificationManager.notify(1, mBuilder.build());
     }

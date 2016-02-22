@@ -3,9 +3,12 @@
     <string name="database_version" translatable="false">1</string>
     <string name="google_app_id" translatable="false">996871107088</string>
     <string name="Flag" translatable="false">Flag</string>
+    <string name="Logo" translatable="false">logo</string>
+    <string name="minus" translatable="false">-</string>
     <string name="DoubleClickToExit">Çıkmak için tekrar GERİ tuşuna basınız</string>
     <!-- Preferences -->
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
+    <string name="timeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
     <string name="prefSetup" translatable="false">isSetupFinished</string>
     <string name="prefUpdate" translatable="false">LastUpdate</string>
     <string name="prefLang" translatable="false">Language</string>
@@ -75,5 +78,4 @@
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>
-    <string name="Logo">logo</string>
 </resources>

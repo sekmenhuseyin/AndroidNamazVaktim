@@ -14,4 +14,6 @@
     <dimen name="on">10dp</dimen>
     <dimen name="bes">5dp</dimen>
     <dimen name="sifir">0dp</dimen>
+    <dimen name="eksibes">-5dp</dimen>
+    <dimen name="eksielli">-50dp</dimen>
 </resources>
