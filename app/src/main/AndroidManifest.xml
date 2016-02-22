@@ -18,6 +18,7 @@
         <!-- start this activity after phone starts -->
         <receiver
             android:name=".BootUpReceiver"
+            android:configChanges="locale"
             android:enabled="true"
             android:excludeFromRecents="true"
             android:exported="false"
@@ -31,6 +32,7 @@
         <!-- Splash screen -->
         <activity
             android:name=".SplashActivity"
+            android:configChanges="locale"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>

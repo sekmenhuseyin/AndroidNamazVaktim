@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Vakit;
+import net.huseyinsekmenoglu.helpers.Functions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,11 +42,13 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
     private ProgressDialog progressDialog;
     private Context myContext;
     private Activity myActivity;
+    private Functions fn;
 
     public ApiConnect(Activity activity) {
         this.myActivity = activity;
         this.myContext = activity.getApplicationContext();
         progressDialog = new ProgressDialog(activity);
+        fn = new Functions(myContext);
     }
 
     //Arka plan işlemi başlamadan önce ön yüzde değiştirilmesi istenen değişkenlerin ataması yapılır
@@ -134,6 +137,7 @@ public class ApiConnect extends AsyncTask<String, Integer, String> {
             //show updated message
             Toast.makeText(myActivity, myContext.getString(R.string.Updated), Toast.LENGTH_SHORT).show();
             myActivity.recreate();
+            fn.Notification();
         } else {//internete bağlanamadı diye mesaj gönder
             Toast.makeText(myActivity, result, Toast.LENGTH_SHORT).show();
         }

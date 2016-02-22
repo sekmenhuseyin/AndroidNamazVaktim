@@ -16,12 +16,17 @@ import java.io.IOException;
  * https://www.bignerdranch.com/blog/splash-screens-the-right-way/ *
  */
 public class SplashActivity extends AppCompatActivity {
-    private Database db = new Database(this);
+    SharedPreferences prefs;
+    private Database db;
+    private Functions fn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        db = new Database(this);
+        fn = new Functions(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //check for setup finished status
         if (!prefs.getBoolean(getString(R.string.prefSetup), false)) {
             try {//create database
                 db.createDataBase();
@@ -35,8 +40,7 @@ public class SplashActivity extends AppCompatActivity {
 
         } else {// if not first launch show main page
             //notify
-            Functions notify = new Functions(this);
-            notify.Notification();
+            fn.Notification();
             //show home page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

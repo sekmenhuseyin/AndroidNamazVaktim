@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import net.huseyinsekmenoglu.database.Database;
 import net.huseyinsekmenoglu.database.Vakit;
-import net.huseyinsekmenoglu.namazvaktim.ApiConnect;
+import net.huseyinsekmenoglu.helpers.Functions;
 import net.huseyinsekmenoglu.namazvaktim.R;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +30,7 @@ public class TimesFragment extends Fragment {
             txtImsak, txtGunes, txtOgle, txtIkindi, txtAksam, txtYatsi, txtRemainingTime;
     ImageView imgImsak, imgGunes, imgOgle, imgIkindi, imgAksam, imgYatsi;
     String today, townName;
+    private Functions fn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class TimesFragment extends Fragment {
         mContext = container.getContext();
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
         today = dfDate.format((new Date()).getTime());//Returns 15/10/2012
+        fn = new Functions(this.getActivity());
         //get textviews
         lblImsak = (TextView) myInflatedView.findViewById(R.id.lblImsak);
         lblGunes = (TextView) myInflatedView.findViewById(R.id.lblGunes);
@@ -62,7 +64,6 @@ public class TimesFragment extends Fragment {
         //refresh and load vakits
         RefreshVakit();
         WriteVakits();
-
         //show page
         return myInflatedView;
     }
@@ -95,16 +96,7 @@ public class TimesFragment extends Fragment {
         String townName = prefs.getString(getString(R.string.prefTown), "");
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
-        if (tablo.GetId() == 0) {
-            //get preferences
-            String countryID = prefs.getString(mContext.getString(R.string.prefCountryID), mContext.getString(R.string.defaultUlkeID)),
-                    cityID = prefs.getString(mContext.getString(R.string.prefCityID), mContext.getString(R.string.defaultSehirID)),
-                    townID = prefs.getString(mContext.getString(R.string.prefTownID), mContext.getString(R.string.defaultIlceID)),
-                    updateLink;
-            if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
-            else updateLink = countryID + "/" + cityID + "/" + townID;
-            new ApiConnect(this.getActivity()).execute(updateLink, townID);
-        }
+        if (tablo.GetId() == 0) fn.UpdatevakitTable();
         //write values of namaz vakits
         txtImsak.setText(tablo.GetImsak());
         txtGunes.setText(tablo.GetGunes());

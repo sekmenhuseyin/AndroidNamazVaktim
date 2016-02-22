@@ -56,8 +56,8 @@ public class BootUpReceiver extends BroadcastReceiver {
         //after boot complete
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             //notify
-            Functions notify = new Functions(context);
-            notify.Notification();
+            Functions fn = new Functions(context);
+            fn.Notification();
 
 
             /*if (set.getBoolean("isongoing", true)) {

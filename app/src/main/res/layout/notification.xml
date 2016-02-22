@@ -27,41 +27,44 @@
                     android:id="@+id/imageView"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:background="@android:color/white"
                     android:contentDescription="@string/Logo"
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/notifyCity"
                     android:layout_width="0dp"
                     android:layout_height="22dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="0.1"
-                    android:text="@string/Istanbul"
-                    android:textSize="15sp" />
+                    android:text="@string/Town"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/vakit_left"
+                    android:textColor="@android:color/black"
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/notifyTimeLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="6dp"
                     android:text="@string/vakit_none"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:background="@drawable/close"
+                    android:background="@drawable/settings"
                     android:text="" />
             </LinearLayout>
             <!-- aradaki çizgi -->
@@ -80,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
+                    android:baselineAligned="false"
                     android:weightSum="6">
 
                     <LinearLayout
@@ -92,18 +96,18 @@
                             android:id="@+id/textView21"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_imsak"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView11"
+                            android:id="@+id/notifyImsak"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -117,18 +121,18 @@
                             android:id="@+id/textView22"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_gunes"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView12"
+                            android:id="@+id/notifyGunes"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -142,18 +146,18 @@
                             android:id="@+id/textView23"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_ogle"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView13"
+                            android:id="@+id/notifyOgle"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -167,18 +171,18 @@
                             android:id="@+id/textView24"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_ikindi"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView14"
+                            android:id="@+id/notifyIkindi"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -192,18 +196,18 @@
                             android:id="@+id/textView25"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_aksam"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/notifyAksam"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -217,18 +221,18 @@
                             android:id="@+id/textView26"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_yatsi"
+                            android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/textView16"
+                            android:id="@+id/notifyYatsi"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/vakit_none"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
