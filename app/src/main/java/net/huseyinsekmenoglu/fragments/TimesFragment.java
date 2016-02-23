@@ -107,11 +107,11 @@ public class TimesFragment extends Fragment {
         lblTown.setText(townName);
     }
 
-    public void WriteVakits() {
-        SimpleDateFormat df = new SimpleDateFormat(getString(R.string.timeFormat), Locale.ENGLISH);
+    private void WriteVakits() {
         Date now = new Date(), imsak = now, gunes = now, ogle = now, ikindi = now, aksam = now, yatsi = now;
         //convert textviews to datetimes
         try {
+            SimpleDateFormat df = new SimpleDateFormat(getString(R.string.timeFormat), Locale.ENGLISH);
             imsak = df.parse((today + " " + txtImsak.getText()));
             gunes = df.parse((today + " " + txtGunes.getText()));
             ogle = df.parse((today + " " + txtOgle.getText()));
@@ -120,7 +120,7 @@ public class TimesFragment extends Fragment {
             yatsi = df.parse((today + " " + txtYatsi.getText()));
         } catch (Exception ignored) {
         }
-        //remaining time
+        //remaining time and active vakit
         String remaining = DateUtils.formatElapsedTime((now.getTime() - yatsi.getTime()) / 1000); // Remaining time to seconds
         if (!remaining.contains(getString(R.string.minus))) {//yatsi zamanı
             imgYatsi.setImageResource(R.drawable.vakit_red);

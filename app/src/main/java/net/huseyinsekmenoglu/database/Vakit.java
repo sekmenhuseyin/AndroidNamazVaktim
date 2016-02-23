@@ -46,7 +46,7 @@ public class Vakit {
         this.key_ilce_id = ilce_id;
     }
 
-    //tarih
+    //id
     public int GetId() {
         return this.key_id;
     }

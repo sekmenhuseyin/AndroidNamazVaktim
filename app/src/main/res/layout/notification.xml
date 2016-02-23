@@ -93,7 +93,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView21"
+                            android:id="@+id/notifyLblImsak"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -118,7 +118,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/notifyLblGunes"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -143,7 +143,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView23"
+                            android:id="@+id/notifyLblOgle"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -168,7 +168,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView24"
+                            android:id="@+id/notifyLblIkindi"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -193,7 +193,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView25"
+                            android:id="@+id/notifyLblAksam"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -218,7 +218,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView26"
+                            android:id="@+id/notifyLblYatsi"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
