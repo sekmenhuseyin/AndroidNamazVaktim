@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
@@ -24,13 +25,14 @@ import java.util.Locale;
 
 
 public class TimesFragment extends Fragment {
-    View myInflatedView;
-    Context mContext;
-    TextView lblImsak, lblGunes, lblOgle, lblIkindi, lblAksam, lblYatsi, lblTown,
-            txtImsak, txtGunes, txtOgle, txtIkindi, txtAksam, txtYatsi, txtRemainingTime;
-    ImageView imgImsak, imgGunes, imgOgle, imgIkindi, imgAksam, imgYatsi;
-    String today, townName;
+    private View myInflatedView;
+    private Context mContext;
     private Functions fn;
+    private TextView lblImsak, lblGunes, lblOgle, lblIkindi, lblAksam, lblYatsi, lblTown,
+            txtImsak, txtGunes, txtOgle, txtIkindi, txtAksam, txtYatsi, txtRemainingTime;
+    private ImageView imgImsak, imgGunes, imgOgle, imgIkindi, imgAksam, imgYatsi;
+    private String today;
+    private Long counterStartTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class TimesFragment extends Fragment {
         //refresh and load vakits
         RefreshVakit();
         WriteVakits();
+        CountDownTimer countDownTimer = new MyCountDownTimer(counterStartTime, 1000);
+        countDownTimer.start();
         //show page
         return myInflatedView;
     }
@@ -127,6 +131,7 @@ public class TimesFragment extends Fragment {
             lblYatsi.setTextColor(Color.WHITE);
             txtYatsi.setTextColor(Color.WHITE);
             remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24)) / 1000);
+            counterStartTime = imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24);
             txtRemainingTime.setText(remaining);
         } else {//aksam zamanı
             remaining = DateUtils.formatElapsedTime((now.getTime() - aksam.getTime()) / 1000);
@@ -135,6 +140,7 @@ public class TimesFragment extends Fragment {
                 lblAksam.setTextColor(Color.WHITE);
                 txtAksam.setTextColor(Color.WHITE);
                 remaining = DateUtils.formatElapsedTime((yatsi.getTime() - now.getTime()) / 1000);
+                counterStartTime = yatsi.getTime() - now.getTime();
                 txtRemainingTime.setText(remaining);
             } else {//ikindi zamanı
                 remaining = DateUtils.formatElapsedTime((now.getTime() - ikindi.getTime()) / 1000);
@@ -143,6 +149,7 @@ public class TimesFragment extends Fragment {
                     lblIkindi.setTextColor(Color.WHITE);
                     txtIkindi.setTextColor(Color.WHITE);
                     remaining = DateUtils.formatElapsedTime((aksam.getTime() - now.getTime()) / 1000);
+                    counterStartTime = aksam.getTime() - now.getTime();
                     txtRemainingTime.setText(remaining);
                 } else {//öğle zamanı
                     remaining = DateUtils.formatElapsedTime((now.getTime() - ogle.getTime()) / 1000);
@@ -151,6 +158,7 @@ public class TimesFragment extends Fragment {
                         lblOgle.setTextColor(Color.WHITE);
                         txtOgle.setTextColor(Color.WHITE);
                         remaining = DateUtils.formatElapsedTime((ikindi.getTime() - now.getTime()) / 1000);
+                        counterStartTime = ikindi.getTime() - now.getTime();
                         txtRemainingTime.setText(remaining);
                     } else {//güneş zamanı
                         remaining = DateUtils.formatElapsedTime((now.getTime() - gunes.getTime()) / 1000);
@@ -159,6 +167,7 @@ public class TimesFragment extends Fragment {
                             lblGunes.setTextColor(Color.WHITE);
                             txtGunes.setTextColor(Color.WHITE);
                             remaining = DateUtils.formatElapsedTime((ogle.getTime() - now.getTime()) / 1000);
+                            counterStartTime = ogle.getTime() - now.getTime();
                             txtRemainingTime.setText(remaining);
                         } else {//imsak zamanı
                             remaining = DateUtils.formatElapsedTime((now.getTime() - imsak.getTime()) / 1000);
@@ -167,18 +176,48 @@ public class TimesFragment extends Fragment {
                                 lblImsak.setTextColor(Color.WHITE);
                                 txtImsak.setTextColor(Color.WHITE);
                                 remaining = DateUtils.formatElapsedTime((gunes.getTime() - now.getTime()) / 1000);
+                                counterStartTime = gunes.getTime() - now.getTime();
                                 txtRemainingTime.setText(remaining);
                             } else {//yatsı zamanı
                                 imgYatsi.setImageResource(R.drawable.vakit_red);
                                 lblYatsi.setTextColor(Color.WHITE);
                                 txtYatsi.setTextColor(Color.WHITE);
                                 remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime()) / 1000);
+                                counterStartTime = imsak.getTime() - now.getTime();
                                 txtRemainingTime.setText(remaining);
                             }
                         }
                     }
                 }
             }
+        }
+    }
+
+    //countdown timer
+    public class MyCountDownTimer extends CountDownTimer {
+
+        /**
+         * @param millisInFuture    The number of millis in the future from the call
+         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+         *                          is called.
+         * @param countDownInterval The interval along the way to receive
+         *                          {@link #onTick(long)} callbacks.
+         */
+        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            txtRemainingTime.setText(DateUtils.formatElapsedTime(millisUntilFinished / 1000));
+        }
+
+        @Override
+        public void onFinish() {
+            //refresh aktif vakit and remaining time
+            RefreshVakit();
+            WriteVakits();
         }
     }
 }

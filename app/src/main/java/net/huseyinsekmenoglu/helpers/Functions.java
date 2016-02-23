@@ -195,18 +195,18 @@ public class Functions {
         mContentView.setTextColor(R.id.notifyGunes, Color.BLACK);
         mContentView.setTextColor(R.id.notifyLblImsak, Color.BLACK);
         mContentView.setTextColor(R.id.notifyImsak, Color.BLACK);
-        mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyLblAksam, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyAksam, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyLblIkindi, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyIkindi, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyLblOgle, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyOgle, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyLblGunes, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyGunes, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyLblImsak, "setBackgroundColor", Color.WHITE);
-        mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", Color.WHITE);
+        mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyLblAksam, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyAksam, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyLblIkindi, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyIkindi, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyLblOgle, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyOgle, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyLblGunes, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyGunes, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyLblImsak, "setBackgroundColor", 0);
+        mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", 0);
         //remaining time and active vakit
         Date now = new Date(), imsak = now, gunes = now, ogle = now, ikindi = now, aksam = now, yatsi = now;
         //convert textviews to datetimes
@@ -287,7 +287,8 @@ public class Functions {
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setVisibility(1)
-                .setContent(mContentView);
+                .setContent(mContentView)
+                .setContentIntent(resultPendingIntent);
         mNotificationManager.notify(1, mBuilder.build());
 
     }
