@@ -18,26 +18,22 @@
         <!-- start this activity after phone starts -->
         <receiver
             android:name=".BootUpReceiver"
-            android:configChanges="locale"
             android:enabled="true"
             android:excludeFromRecents="true"
             android:exported="false"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
         <!-- Splash screen -->
         <activity
             android:name=".SplashActivity"
-            android:configChanges="locale"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

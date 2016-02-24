@@ -57,12 +57,12 @@ public class Functions {
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(mContext.getString(R.string.prefLang), "");
-        if (!defaulLocale.equals(savedLocale) && mActivity != null) {
+        if (!defaulLocale.equals(savedLocale)) {
             Locale locale = new Locale(mContext.getString(R.string.defaultLocale));
             Locale.setDefault(locale);
             Configuration config = new Configuration();
             config.locale = locale;
-            mActivity.getBaseContext().getResources().updateConfiguration(config, mActivity.getBaseContext().getResources().getDisplayMetrics());
+            mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
         }
     }
 
@@ -162,7 +162,9 @@ public class Functions {
                 tblYatsi = tablo.GetYatsi();
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(mContext, MainActivity.class);
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NO_ANIMATION);
         resultIntent.setAction(Intent.ACTION_MAIN);
         // The stack builder object will contain an artificial back stack for the started Activity.
         // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
@@ -182,6 +184,14 @@ public class Functions {
         mContentView.setTextViewText(R.id.notifyAksam, tblAksam);
         mContentView.setTextViewText(R.id.notifyYatsi, tblYatsi);
         mContentView.setTextViewText(R.id.notifyCity, townName);
+        //reset texts
+        mContentView.setTextViewText(R.id.notifyLblTimeLeft, mContext.getString(R.string.vakit_left));
+        mContentView.setTextViewText(R.id.notifyLblImsak, mContext.getString(R.string.vakit_imsak));
+        mContentView.setTextViewText(R.id.notifyLblGunes, mContext.getString(R.string.vakit_gunes));
+        mContentView.setTextViewText(R.id.notifyLblOgle, mContext.getString(R.string.vakit_ogle));
+        mContentView.setTextViewText(R.id.notifyLblIkindi, mContext.getString(R.string.vakit_ikindi));
+        mContentView.setTextViewText(R.id.notifyLblAksam, mContext.getString(R.string.vakit_aksam));
+        mContentView.setTextViewText(R.id.notifyLblYatsi, mContext.getString(R.string.vakit_yatsi));
         //reset colors
         mContentView.setTextColor(R.id.notifyLblYatsi, Color.BLACK);
         mContentView.setTextColor(R.id.notifyYatsi, Color.BLACK);

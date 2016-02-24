@@ -3,16 +3,20 @@
     <dimen name="otuzT">30sp</dimen>
     <dimen name="yirmibesT">25sp</dimen>
     <dimen name="yirmiT">20sp</dimen>
+    <dimen name="onbesT">15sp</dimen>
     <dimen name="onT">10sp</dimen>
     <!-- margins and paddings-->
     <dimen name="yetmis">70dp</dimen>
     <dimen name="elli">50dp</dimen>
+    <dimen name="kirk">40dp</dimen>
     <dimen name="otuz">30dp</dimen>
     <dimen name="yirmibes">25dp</dimen>
+    <dimen name="yirmiiki">22dp</dimen>
     <dimen name="yirmi">20dp</dimen>
     <dimen name="onbes">15dp</dimen>
     <dimen name="on">10dp</dimen>
     <dimen name="bes">5dp</dimen>
+    <dimen name="bir">1dp</dimen>
     <dimen name="sifir">0dp</dimen>
     <dimen name="eksibes">-5dp</dimen>
     <dimen name="eksielli">-50dp</dimen>

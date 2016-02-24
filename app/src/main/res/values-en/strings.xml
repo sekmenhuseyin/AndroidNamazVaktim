@@ -32,4 +32,6 @@
     <string name="Updated">Updated</string>
     <string name="DoubleClickToExit">Please click BACK again to exit</string>
     <string name="remainingTime">Remaining Time</string>
+    <string name="vakit_left">Time Left</string>
+    <string name="vakit_remaining">Remaining Time</string>
 </resources>
