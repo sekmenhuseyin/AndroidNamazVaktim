@@ -66,6 +66,7 @@ public class TimesFragment extends Fragment {
         //refresh and load vakits
         RefreshVakit();
         WriteVakits();
+        fn.Notification();
         CountDownTimer countDownTimer = new MyCountDownTimer(counterStartTime, 1000);
         countDownTimer.start();
         //show page
@@ -195,6 +196,7 @@ public class TimesFragment extends Fragment {
 
     //countdown timer
     public class MyCountDownTimer extends CountDownTimer {
+        String kalanZaman = "";
 
         /**
          * @param millisInFuture    The number of millis in the future from the call
@@ -211,6 +213,10 @@ public class TimesFragment extends Fragment {
         @Override
         public void onTick(long millisUntilFinished) {
             txtRemainingTime.setText(DateUtils.formatElapsedTime(millisUntilFinished / 1000));
+            if (!kalanZaman.equals(String.valueOf(millisUntilFinished / (1000 * 60)))) {
+                fn.updateNotification(DateUtils.formatElapsedTime(millisUntilFinished / (1000 * 60)));
+                kalanZaman = String.valueOf(millisUntilFinished / (1000 * 60));
+            }
         }
 
         @Override
@@ -218,6 +224,7 @@ public class TimesFragment extends Fragment {
             //refresh aktif vakit and remaining time
             RefreshVakit();
             WriteVakits();
+            fn.Notification();
         }
     }
 }

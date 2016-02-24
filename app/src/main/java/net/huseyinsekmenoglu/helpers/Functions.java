@@ -32,11 +32,15 @@ import java.util.Locale;
  * general helper functions
  */
 public class Functions {
-    Database db;
-    String today;
+    private Database db;
     private Activity mActivity;
     private Context mContext;
     private SharedPreferences prefs;
+    private NotificationManager mNotificationManager;
+    private NotificationCompat.Builder mBuilder;
+    private RemoteViews mContentView;
+    private String today;
+    private int notifyID = 1;
 
     //constructor
     public Functions(Context tmp) {
@@ -174,8 +178,11 @@ public class Functions {
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        //settings activity
+        Intent settingsIntent = new Intent("com.corsalini.david.barcalc.STARTPAUSE");
+        PendingIntent startPendingIntent = PendingIntent.getBroadcast(mContext, 0, settingsIntent, 0);
         //remoteview
-        RemoteViews mContentView = new RemoteViews(mContext.getPackageName(), R.layout.notification);
+        mContentView = new RemoteViews(mContext.getPackageName(), R.layout.notification);
         mContentView.setTextViewText(R.id.notifyCity, townName);
         mContentView.setTextViewText(R.id.notifyImsak, tblImsak);
         mContentView.setTextViewText(R.id.notifyGunes, tblGunes);
@@ -236,7 +243,8 @@ public class Functions {
             mContentView.setTextColor(R.id.notifyYatsi, Color.WHITE);
             mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", Color.RED);
             mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", Color.RED);
-            remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24)) / 1000);
+            remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24)) / (1000 * 60));
+
         } else {//aksam zamanı
             remaining = DateUtils.formatElapsedTime((now.getTime() - aksam.getTime()) / 1000);
             if (!remaining.contains(mContext.getString(R.string.minus))) {
@@ -244,7 +252,8 @@ public class Functions {
                 mContentView.setTextColor(R.id.notifyAksam, Color.WHITE);
                 mContentView.setInt(R.id.notifyLblAksam, "setBackgroundColor", Color.RED);
                 mContentView.setInt(R.id.notifyAksam, "setBackgroundColor", Color.RED);
-                remaining = DateUtils.formatElapsedTime((yatsi.getTime() - now.getTime()) / 1000);
+                remaining = DateUtils.formatElapsedTime((yatsi.getTime() - now.getTime()) / (1000 * 60));
+
             } else {//ikindi zamanı
                 remaining = DateUtils.formatElapsedTime((now.getTime() - ikindi.getTime()) / 1000);
                 if (!remaining.contains(mContext.getString(R.string.minus))) {
@@ -252,7 +261,8 @@ public class Functions {
                     mContentView.setTextColor(R.id.notifyIkindi, Color.WHITE);
                     mContentView.setInt(R.id.notifyLblIkindi, "setBackgroundColor", Color.RED);
                     mContentView.setInt(R.id.notifyIkindi, "setBackgroundColor", Color.RED);
-                    remaining = DateUtils.formatElapsedTime((aksam.getTime() - now.getTime()) / 1000);
+                    remaining = DateUtils.formatElapsedTime((aksam.getTime() - now.getTime()) / (1000 * 60));
+
                 } else {//öğle zamanı
                     remaining = DateUtils.formatElapsedTime((now.getTime() - ogle.getTime()) / 1000);
                     if (!remaining.contains(mContext.getString(R.string.minus))) {
@@ -260,7 +270,8 @@ public class Functions {
                         mContentView.setTextColor(R.id.notifyOgle, Color.WHITE);
                         mContentView.setInt(R.id.notifyLblOgle, "setBackgroundColor", Color.RED);
                         mContentView.setInt(R.id.notifyOgle, "setBackgroundColor", Color.RED);
-                        remaining = DateUtils.formatElapsedTime((ikindi.getTime() - now.getTime()) / 1000);
+                        remaining = DateUtils.formatElapsedTime((ikindi.getTime() - now.getTime()) / (1000 * 60));
+
                     } else {//güneş zamanı
                         remaining = DateUtils.formatElapsedTime((now.getTime() - gunes.getTime()) / 1000);
                         if (!remaining.contains(mContext.getString(R.string.minus))) {
@@ -268,7 +279,8 @@ public class Functions {
                             mContentView.setTextColor(R.id.notifyGunes, Color.WHITE);
                             mContentView.setInt(R.id.notifyLblGunes, "setBackgroundColor", Color.RED);
                             mContentView.setInt(R.id.notifyGunes, "setBackgroundColor", Color.RED);
-                            remaining = DateUtils.formatElapsedTime((ogle.getTime() - now.getTime()) / 1000);
+                            remaining = DateUtils.formatElapsedTime((ogle.getTime() - now.getTime()) / (1000 * 60));
+
                         } else {//imsak zamanı
                             remaining = DateUtils.formatElapsedTime((now.getTime() - imsak.getTime()) / 1000);
                             if (!remaining.contains(mContext.getString(R.string.minus))) {
@@ -276,31 +288,38 @@ public class Functions {
                                 mContentView.setTextColor(R.id.notifyImsak, Color.WHITE);
                                 mContentView.setInt(R.id.notifyLblImsak, "setBackgroundColor", Color.RED);
                                 mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", Color.RED);
-                                remaining = DateUtils.formatElapsedTime((gunes.getTime() - now.getTime()) / 1000);
+                                remaining = DateUtils.formatElapsedTime((gunes.getTime() - now.getTime()) / (1000 * 60));
                             } else {//yatsı zamanı
                                 mContentView.setTextColor(R.id.notifyLblYatsi, Color.WHITE);
                                 mContentView.setTextColor(R.id.notifyYatsi, Color.WHITE);
                                 mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", Color.RED);
                                 mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", Color.RED);
-                                remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime()) / 1000);
+                                remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime()) / (1000 * 60));
                             }
                         }
                     }
                 }
             }
         }
+        //write remaining time
         mContentView.setTextViewText(R.id.notifyTimeLeft, remaining);
         //notification
-        NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext)
+        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mBuilder = new NotificationCompat.Builder(mContext)
                 .setSmallIcon(R.drawable.transparent)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setVisibility(1)
                 .setContent(mContentView)
                 .setContentIntent(resultPendingIntent);
-        mNotificationManager.notify(1, mBuilder.build());
+        mNotificationManager.notify(notifyID, mBuilder.build());
+    }
 
+    //just update notificatiob
+    public void updateNotification(String remaining) {
+        if (mContentView == null) return;
+        mContentView.setTextViewText(R.id.notifyTimeLeft, remaining);
+        mNotificationManager.notify(notifyID, mBuilder.build());
     }
 
 }

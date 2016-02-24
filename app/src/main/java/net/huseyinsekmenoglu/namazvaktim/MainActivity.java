@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean doubleBackToExitPressedOnce = false;
     private SharedPreferences prefs;
-    private Functions functions;
+    private Functions fn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        functions = new Functions(this);
+        fn = new Functions(this);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(getString(R.string.prefLang), "");
@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
         //find days passed after last update
-        int diffInDays = functions.getDayDifference(new Date(prefs.getLong(getString(R.string.prefUpdate), 0)));
+        int diffInDays = fn.getDayDifference(new Date(prefs.getLong(getString(R.string.prefUpdate), 0)));
         //update namaz vakit
-        if (diffInDays > 21) functions.UpdatevakitTable();
+        if (diffInDays > 21) fn.UpdatevakitTable();
         //layout
         setContentView(R.layout.activity_main);
         //toolbar
