@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/otuz"
     android:paddingRight="@dimen/otuz"
     android:paddingTop="@dimen/onbes"
-    tools:context="net.huseyinsekmenoglu.namazvaktim.SetupActivity">
+    tools:context="net.sekmetech.namazvaktim.SetupActivity">
 
     <ExpandableListView
         android:id="@+id/lvExpSetup"
