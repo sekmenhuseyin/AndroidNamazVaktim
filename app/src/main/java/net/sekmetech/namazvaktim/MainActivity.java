@@ -27,22 +27,12 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    /* The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private boolean doubleBackToExitPressedOnce = false;
-    private SharedPreferences prefs;
-    private Functions fn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        fn = new Functions(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Functions fn = new Functions(this);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(getString(R.string.prefLang), "");
@@ -162,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 6;
-        }//0-5, default:0
+            return 3;
+        }
 
         @Override
         public CharSequence getPageTitle(int position) {

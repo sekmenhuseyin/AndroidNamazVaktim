@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016. Tüm hakları saklıdır.
+ */
+
 package net.sekmetech.namazvaktim;
 
 import android.os.Bundle;
@@ -8,25 +12,17 @@ import android.view.View;
 
 import net.sekmetech.helpers.Functions;
 
-/*
- * Copyright (c) 2016. Tüm hakları saklıdır.
- *
- * Created by huseyin.sekmenoglu on 18.2.2016.
- * ayarlar sayfası
- */
 public class SettingsActivity extends AppCompatActivity {
-    private Functions fn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        final Functions fn = new Functions(this);
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //functions
-        fn = new Functions(this);
-        //floatingaction button
+        //floating action
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
                 fn.UpdatevakitTable();
             }
         });
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //back button
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

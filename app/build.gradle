@@ -13,10 +13,11 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId 'net.sekmetech.namazvaktim'
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.signature
     }
     buildTypes {
         release {
@@ -24,9 +25,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.signature
             proguardFile 'D:/Projects/Android/NamazVaktim/app/proguard-rules.pro'
+            pseudoLocalesEnabled true
         }
         debug {
             minifyEnabled false
+            jniDebuggable true
         }
     }
     productFlavors {

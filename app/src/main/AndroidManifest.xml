@@ -62,13 +62,14 @@
         <!-- settings -->
         <activity
             android:name=".SettingsActivity"
+            android:excludeFromRecents="true"
             android:label="@string/tabAyarlar"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.sekmetech.namazvaktim.MainActivity" />
         </activity>
-
     </application>
 
 </manifest>
