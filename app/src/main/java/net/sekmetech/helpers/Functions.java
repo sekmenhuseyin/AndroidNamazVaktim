@@ -22,6 +22,7 @@ import net.sekmetech.database.VakitAsDate;
 import net.sekmetech.namazvaktim.ApiConnect;
 import net.sekmetech.namazvaktim.MainActivity;
 import net.sekmetech.namazvaktim.R;
+import net.sekmetech.namazvaktim.SettingsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -178,9 +179,6 @@ public class Functions {
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        //settings activity
-        Intent settingsIntent = new Intent("com.corsalini.david.barcalc.STARTPAUSE");
-        PendingIntent startPendingIntent = PendingIntent.getBroadcast(mContext, 0, settingsIntent, 0);
         //remoteview
         mContentView = new RemoteViews(mContext.getPackageName(), R.layout.notification);
         mContentView.setTextViewText(R.id.notifyCity, townName);
@@ -303,6 +301,10 @@ public class Functions {
         }
         //write remaining time
         mContentView.setTextViewText(R.id.notifyTimeLeft, remaining);
+        //settings activity
+        Intent settingsIntent = new Intent(mContext, SettingsActivity.class);
+        PendingIntent settingsPendingIntent = PendingIntent.getActivity(mContext, 0, settingsIntent, 0);
+        mContentView.setOnClickPendingIntent(R.id.notifyBtnSettings, settingsPendingIntent);
         //notification
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(mContext)

@@ -23,9 +23,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
+/**
+ * Created by huseyin.sekmenoglu on 18.2.2016.
+ * vakitleri gösteren anasayfa
+ */
 public class TimesFragment extends Fragment {
-    private View myInflatedView;
     private Context mContext;
     private Functions fn;
     private TextView lblImsak, lblGunes, lblOgle, lblIkindi, lblAksam, lblYatsi, lblTown,
@@ -36,7 +38,7 @@ public class TimesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myInflatedView = inflater.inflate(R.layout.fragment_home_times, container, false);
+        View myInflatedView = inflater.inflate(R.layout.fragment_home_times, container, false);
         mContext = container.getContext();
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
         today = dfDate.format((new Date()).getTime());//Returns 15/10/2012

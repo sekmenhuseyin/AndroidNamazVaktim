@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <!-- application settings -->
     <application
         android:allowBackup="false"
@@ -55,10 +54,12 @@
         <!-- settings -->
         <activity
             android:name=".SettingsActivity"
-            android:configChanges="locale"
             android:label="@string/tabAyarlar"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.sekmetech.namazvaktim.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
