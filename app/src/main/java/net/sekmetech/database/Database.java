@@ -240,6 +240,7 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             tablo.SetId(cursor.getInt(cursor.getColumnIndex(Vakit._id)));
+            tablo.SetTarih(cursor.getString(cursor.getColumnIndex(Vakit.tarih)));
             tablo.SetImsak(cursor.getString(cursor.getColumnIndex(Vakit.imsak)));
             tablo.SetGunes(cursor.getString(cursor.getColumnIndex(Vakit.gunes)));
             tablo.SettOgle(cursor.getString(cursor.getColumnIndex(Vakit.ogle)));
@@ -247,49 +248,10 @@ public class Database extends SQLiteOpenHelper {
             tablo.SetAksam(cursor.getString(cursor.getColumnIndex(Vakit.aksam)));
             tablo.SetYatsi(cursor.getString(cursor.getColumnIndex(Vakit.yatsi)));
             tablo.SetKible(cursor.getString(cursor.getColumnIndex(Vakit.kible)));
-        }
+        } else tablo.SetTarih("");
         cursor.close();
         db.close();
         return tablo;
     }
 
-    //
-    /*private String whichVakit(Vakit tablo) {
-        Calendar cal = new GregorianCalendar();
-        int hour = cal.get();
-        int min = cal.get(12);
-        if (vakitKarsilastir(tablo.GetYatsi(), hour, min) == 0) {
-            return "yatsi";
-        }
-        else if (vakitKarsilastir(tablo.GetAksam(), hour, min) == 0) {
-            return "aksam";
-        }
-        else if (vakitKarsilastir(tablo.GetIkindi(), hour, min) == 0) {
-            return "ikindi";
-        }
-        else if (vakitKarsilastir(tablo.GetOgle(), hour, min) == 0) {
-            return "ogle";
-        }
-        else if (vakitKarsilastir(tablo.GetGunes(), hour, min) == 0) {
-            return "gunes";
-        }
-        else if (vakitKarsilastir(tablo.GetImsak(), hour, min) == 0) {
-            return "imsak";
-        }
-        return null;
-    }
-
-    //verilen vakit ile verilen saat ve dakika ile karşılaştır
-    public boolean vakitKarsilastir(String dateTime, int ReqHour, int ReqMin) {
-        String[] s = dateTime.split(":");
-        int hour = Integer.valueOf(s[0]);
-        int mint = Integer.valueOf(s[1]);
-        if (ReqHour == hour && ReqMin == mint) {
-            return true;
-        }
-        if (ReqHour < hour || (ReqHour == hour && ReqMin < mint)) {
-            return false;
-        }
-        return false;
-    }*/
 }

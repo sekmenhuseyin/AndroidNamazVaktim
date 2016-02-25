@@ -10,21 +10,28 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txtTarih"
-            android:layout_width="wrap_content"
+            android:id="@+id/monthlyTarih"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="New Text" />
+            android:layout_marginTop="@dimen/yirmi"
+            android:background="@color/transparentBlack"
+            android:gravity="center"
+            android:padding="@dimen/bes"
+            android:text="@string/Istanbul"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/yirmiT" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:background="@android:color/white"
         android:baselineAligned="false"
+        android:padding="@dimen/bes"
         android:weightSum="6">
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -36,20 +43,20 @@
                 android:gravity="center"
                 android:text="@string/vakit_imsak"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyImsak"
+                android:id="@+id/monthlyImsak"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -61,20 +68,20 @@
                 android:gravity="center"
                 android:text="@string/vakit_gunes"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyGunes"
+                android:id="@+id/monthlyGunes"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -86,20 +93,20 @@
                 android:gravity="center"
                 android:text="@string/vakit_ogle"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyOgle"
+                android:id="@+id/monthlyOgle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -111,20 +118,20 @@
                 android:gravity="center"
                 android:text="@string/vakit_ikindi"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyIkindi"
+                android:id="@+id/monthlyIkindi"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -136,20 +143,20 @@
                 android:gravity="center"
                 android:text="@string/vakit_aksam"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyAksam"
+                android:id="@+id/monthlyAksam"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -161,16 +168,16 @@
                 android:gravity="center"
                 android:text="@string/vakit_yatsi"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/onT" />
 
             <TextView
-                android:id="@+id/notifyYatsi"
+                android:id="@+id/monthlyYatsi"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/onbesT" />
         </LinearLayout>
     </LinearLayout>
 
