@@ -1,4 +1,4 @@
-package net.sekmetech.namazvaktim;
+package net.sekmetech.database;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,9 +8,8 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import net.sekmetech.database.Database;
-import net.sekmetech.database.Vakit;
 import net.sekmetech.helpers.Functions;
+import net.sekmetech.namazvaktim.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,13 +37,13 @@ import java.util.Date;
  * Tip2 doInBackground metodunun onProgressUpdate metoduna paslanacak değişkenin tipini belirtir.
  * Tip3 ise onPostExecute metoduna verilen değişkendir ve doInBackground metodunun return tipidir.
  */
-public class ApiConnect extends AsyncTask<String, Integer, String> {
+public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
     private ProgressDialog progressDialog;
     private Context myContext;
     private Activity myActivity;
     private Functions fn;
 
-    public ApiConnect(Activity activity) {
+    public DatabaseUpdate(Activity activity) {
         this.myActivity = activity;
         this.myContext = activity.getApplicationContext();
         progressDialog = new ProgressDialog(activity);

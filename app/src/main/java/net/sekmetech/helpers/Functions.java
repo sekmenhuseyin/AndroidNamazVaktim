@@ -1,6 +1,7 @@
 package net.sekmetech.helpers;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -17,14 +18,15 @@ import android.text.format.DateUtils;
 import android.widget.RemoteViews;
 
 import net.sekmetech.database.Database;
+import net.sekmetech.database.DatabaseUpdate;
 import net.sekmetech.database.Vakit;
 import net.sekmetech.database.VakitAsDate;
-import net.sekmetech.namazvaktim.ApiConnect;
 import net.sekmetech.namazvaktim.MainActivity;
 import net.sekmetech.namazvaktim.R;
 import net.sekmetech.namazvaktim.SettingsActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,11 +39,14 @@ public class Functions {
     private Activity mActivity;
     private Context mContext;
     private SharedPreferences prefs;
+    private AlarmManager service;
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder mBuilder;
     private RemoteViews mContentView;
     private String today;
     private int notifyID = 1;
+    private Date now = new Date(), imsak = now, gunes = now, ogle = now, ikindi = now, aksam = now, yatsi = now;
+
 
     //constructor
     public Functions(Context tmp) {
@@ -59,6 +64,8 @@ public class Functions {
         db = new Database(mContext);
         SimpleDateFormat dfDate = new SimpleDateFormat(mContext.getString(R.string.dateFormat), Locale.ENGLISH);
         today = dfDate.format((new Date()).getTime());//Returns 15/10/2012
+        //set alarm manager
+        service = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
         String savedLocale = prefs.getString(mContext.getString(R.string.prefLang), "");
@@ -88,7 +95,7 @@ public class Functions {
                 updateLink;
         if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
         else updateLink = countryID + "/" + cityID + "/" + townID;
-        new ApiConnect(mActivity).execute(updateLink, townID);
+        new DatabaseUpdate(mActivity).execute(updateLink, townID);
     }
 
     //bugün  ile girilen gün arasındaki fark
@@ -222,8 +229,6 @@ public class Functions {
         mContentView.setInt(R.id.notifyGunes, "setBackgroundColor", 0);
         mContentView.setInt(R.id.notifyLblImsak, "setBackgroundColor", 0);
         mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", 0);
-        //remaining time and active vakit
-        Date now = new Date(), imsak = now, gunes = now, ogle = now, ikindi = now, aksam = now, yatsi = now;
         //convert textviews to datetimes
         try {
             SimpleDateFormat df = new SimpleDateFormat(mContext.getString(R.string.timeFormat), Locale.ENGLISH);
@@ -317,11 +322,66 @@ public class Functions {
         mNotificationManager.notify(notifyID, mBuilder.build());
     }
 
-    //just update notificatiob
-    public void updateNotification(String remaining) {
-        if (mContentView == null) return;
+    //just update notification
+    public void updateNotification() {
+        String remaining = DateUtils.formatElapsedTime((now.getTime() - yatsi.getTime()) / 1000); // Remaining time to seconds
+        if (!remaining.contains(mContext.getString(R.string.minus))) {//yatsi zamanı
+            remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24)) / (1000 * 60));
+
+        } else {//aksam zamanı
+            remaining = DateUtils.formatElapsedTime((now.getTime() - aksam.getTime()) / 1000);
+            if (!remaining.contains(mContext.getString(R.string.minus))) {
+                remaining = DateUtils.formatElapsedTime((yatsi.getTime() - now.getTime()) / (1000 * 60));
+
+            } else {//ikindi zamanı
+                remaining = DateUtils.formatElapsedTime((now.getTime() - ikindi.getTime()) / 1000);
+                if (!remaining.contains(mContext.getString(R.string.minus))) {
+                    remaining = DateUtils.formatElapsedTime((aksam.getTime() - now.getTime()) / (1000 * 60));
+
+                } else {//öğle zamanı
+                    remaining = DateUtils.formatElapsedTime((now.getTime() - ogle.getTime()) / 1000);
+                    if (!remaining.contains(mContext.getString(R.string.minus))) {
+                        remaining = DateUtils.formatElapsedTime((ikindi.getTime() - now.getTime()) / (1000 * 60));
+
+                    } else {//güneş zamanı
+                        remaining = DateUtils.formatElapsedTime((now.getTime() - gunes.getTime()) / 1000);
+                        if (!remaining.contains(mContext.getString(R.string.minus))) {
+                            remaining = DateUtils.formatElapsedTime((ogle.getTime() - now.getTime()) / (1000 * 60));
+
+                        } else {//imsak zamanı
+                            remaining = DateUtils.formatElapsedTime((now.getTime() - imsak.getTime()) / 1000);
+                            if (!remaining.contains(mContext.getString(R.string.minus))) {
+                                remaining = DateUtils.formatElapsedTime((gunes.getTime() - now.getTime()) / (1000 * 60));
+                            } else {//yatsı zamanı
+                                remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime()) / (1000 * 60));
+                            }
+                        }
+                    }
+                }
+            }
+        }
         mContentView.setTextViewText(R.id.notifyTimeLeft, remaining);
         mNotificationManager.notify(notifyID, mBuilder.build());
     }
 
+    //set alarm for notify service
+    public void SetServiceAlarm() {
+        //set alarm
+        Intent notifyIntent = new Intent(mContext, BootUpReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(mContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // InexactRepeating allows Android to optimize the energy consumption
+        service.setInexactRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), 1000 * 60, pending);
+    }
+
+    public boolean isNotificationActive() {
+        Intent notificationIntent = new Intent(mContext, MainActivity.class);
+        PendingIntent test = PendingIntent.getActivity(mContext, notifyID, notificationIntent, PendingIntent.FLAG_NO_CREATE);
+        return test != null;
+    }
+
+    public boolean isAlarmActive() {
+        return (PendingIntent.getBroadcast(mContext, 0,
+                new Intent(mContext, BootUpReceiver.class),
+                PendingIntent.FLAG_NO_CREATE) != null);
+    }
 }

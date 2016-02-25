@@ -18,6 +18,7 @@
     <string name="prefCityID" translatable="false">CityID</string>
     <string name="prefTown" translatable="false">Town</string>
     <string name="prefTownID" translatable="false">TownID</string>
+    <string name="prefShowNotify" translatable="false">ShowNotification</string>
     <!-- Tab names -->
     <string name="tabVakit">Vakit</string>
     <string name="tabKible">Kıble</string>

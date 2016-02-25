@@ -39,8 +39,8 @@ public class SplashActivity extends AppCompatActivity {
             finish();
 
         } else {// if not first launch show main page
-            //notify
-            fn.Notification();
+            //notify with alarm manager
+            if (!fn.isAlarmActive()) fn.SetServiceAlarm();
             //show home page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
