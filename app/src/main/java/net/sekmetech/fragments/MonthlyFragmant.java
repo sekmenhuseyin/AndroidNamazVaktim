@@ -33,7 +33,7 @@ public class MonthlyFragmant extends Fragment {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
         //get data
-        int town = Integer.parseInt(prefs.getString(getString(R.string.prefTownID), getString(R.string.defaultIlceID)));
+        int town = Integer.parseInt(prefs.getString(getString(R.string.pref1TownID), getString(R.string.defaultIlceID)));
         List<Vakit> vakitler = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
             Vakit tablo = db.getVakit(town, dfDate.format(cal.getTime()));

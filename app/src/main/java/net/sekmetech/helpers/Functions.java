@@ -89,9 +89,9 @@ public class Functions {
     public void UpdatevakitTable() {
         if (!HaveNetworkConnection()) return;
         //get preferences
-        String countryID = prefs.getString(mContext.getString(R.string.prefCountryID), mContext.getString(R.string.defaultUlkeID)),
-                cityID = prefs.getString(mContext.getString(R.string.prefCityID), mContext.getString(R.string.defaultSehirID)),
-                townID = prefs.getString(mContext.getString(R.string.prefTownID), mContext.getString(R.string.defaultIlceID)),
+        String countryID = prefs.getString(mContext.getString(R.string.pref1CountryID), mContext.getString(R.string.defaultUlkeID)),
+                cityID = prefs.getString(mContext.getString(R.string.pref1CityID), mContext.getString(R.string.defaultSehirID)),
+                townID = prefs.getString(mContext.getString(R.string.pref1TownID), mContext.getString(R.string.defaultIlceID)),
                 updateLink;
         if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
         else updateLink = countryID + "/" + cityID + "/" + townID;
@@ -162,8 +162,8 @@ public class Functions {
     //http://stackoverflow.com/questions/23222063/android-custom-notification-layout-with-remoteviews
     //http://stackoverflow.com/questions/32901922/android-notification-with-custom-xml-layout-not-showing
     public void Notification() {
-        int town = Integer.parseInt(prefs.getString(mContext.getString(R.string.prefTownID), mContext.getString(R.string.defaultIlceID)));
-        String townName = prefs.getString(mContext.getString(R.string.prefTown), mContext.getString(R.string.Istanbul));
+        int town = Integer.parseInt(prefs.getString(mContext.getString(R.string.pref1TownID), mContext.getString(R.string.defaultIlceID)));
+        String townName = prefs.getString(mContext.getString(R.string.pref1Town), mContext.getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         if (tablo.GetId() == 0) return;//eğer kayıt bulunamadıysa işlemi sonlandır
         String tblImsak = tablo.GetImsak(),

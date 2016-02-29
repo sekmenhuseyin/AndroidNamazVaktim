@@ -34,4 +34,5 @@
     <string name="remainingTime">Remaining Time</string>
     <string name="vakit_left">Time Left</string>
     <string name="vakit_remaining">Remaining Time</string>
+    <string name="kibleAngle">Qibla Angle</string>
 </resources>

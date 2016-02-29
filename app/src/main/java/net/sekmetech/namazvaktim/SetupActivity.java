@@ -224,12 +224,13 @@ public class SetupActivity extends AppCompatActivity {
                 townID = db.GetAnyID(Ilce.name, nameTown);
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getString(R.string.prefCountry), nameCountry);
-        editor.putString(getString(R.string.prefCountryID), countryID);
-        editor.putString(getString(R.string.prefCity), nameCity);
-        editor.putString(getString(R.string.prefCityID), cityID);
-        editor.putString(getString(R.string.prefTown), nameTown);
-        editor.putString(getString(R.string.prefTownID), townID);
+        editor.putString(getString(R.string.pref1Country), nameCountry);
+        editor.putString(getString(R.string.pref1CountryID), countryID);
+        editor.putString(getString(R.string.pref1City), nameCity);
+        editor.putString(getString(R.string.pref1CityID), cityID);
+        editor.putString(getString(R.string.pref1Town), nameTown);
+        editor.putString(getString(R.string.pref1TownID), townID);
+        editor.putInt(getString(R.string.prefCityCount), 1);
         editor.putBoolean(getString(R.string.prefSetup), true);
         editor.apply();
         //show home screen and update vakits there

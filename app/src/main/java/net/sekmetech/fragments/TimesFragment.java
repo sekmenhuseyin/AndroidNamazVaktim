@@ -99,8 +99,8 @@ public class TimesFragment extends Fragment {
         txtYatsi.setTextColor(Color.BLACK);
         lblYatsi.setTextColor(Color.BLACK);
         //variables
-        int town = Integer.parseInt(prefs.getString(getString(R.string.prefTownID), getString(R.string.defaultIlceID)));
-        String townName = prefs.getString(getString(R.string.prefTown), getString(R.string.Istanbul));
+        int town = Integer.parseInt(prefs.getString(getString(R.string.pref1TownID), getString(R.string.defaultIlceID)));
+        String townName = prefs.getString(getString(R.string.pref1Town), getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
         if (tablo.GetId() == 0) fn.UpdatevakitTable();
