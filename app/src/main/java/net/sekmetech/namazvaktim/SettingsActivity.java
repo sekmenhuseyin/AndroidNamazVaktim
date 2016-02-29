@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2016. Tüm hakları saklıdır.
- */
-
 package net.sekmetech.namazvaktim;
 
 import android.os.Bundle;
@@ -11,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import net.sekmetech.helpers.Functions;
+
+/*
+ * Copyright (c) 2016. Tüm hakları saklıdır.
+ */
 
 public class SettingsActivity extends AppCompatActivity {
 

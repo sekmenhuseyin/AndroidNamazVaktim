@@ -56,7 +56,7 @@
             android:id="@+id/notifyBtnSettings"
             android:layout_width="@dimen/yirmiiki"
             android:layout_height="@dimen/yirmiiki"
-            android:background="@drawable/settings"
+            android:background="@drawable/settings_effect"
             android:text="" />
     </LinearLayout>
     <!-- aradaki çizgi -->
