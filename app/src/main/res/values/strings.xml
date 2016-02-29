@@ -5,6 +5,7 @@
     <string name="Flag" translatable="false">Flag</string>
     <string name="Logo" translatable="false">logo</string>
     <string name="minus" translatable="false">-</string>
+    <string name="sapma" translatable="false">4.345</string>
     <!-- Preferences -->
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
     <string name="timeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>

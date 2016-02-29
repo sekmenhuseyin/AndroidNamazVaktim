@@ -4,18 +4,13 @@
     android:layout_height="match_parent"
     tools:context="net.sekmetech.fragments.CompassFragmant">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:measureWithLargestChild="false"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/lblKible"
@@ -36,21 +31,11 @@
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_none"
                 android:textSize="@dimen/yirmibesT" />
+        </TableRow>
 
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/lblAngle"
@@ -71,23 +56,15 @@
                 android:padding="@dimen/bes"
                 android:text="@string/sifir"
                 android:textSize="@dimen/yirmibesT" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:orientation="vertical">
+        </TableRow>
 
         <ImageView
             android:id="@+id/imgKible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:clickable="false"
             android:contentDescription="@string/tabKible"
             android:src="@drawable/pusula" />
-    </LinearLayout>
+    </TableLayout>
 
 </FrameLayout>

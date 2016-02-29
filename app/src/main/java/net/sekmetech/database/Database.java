@@ -210,9 +210,7 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = "SELECT " + Vakit._id + " FROM " + Vakit.name + " WHERE " + Vakit.Ilce_id + "=" + ilce + " and " + Vakit.tarih + "='" + tarih + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            sonuc = true;
-        }
+        if (cursor.moveToFirst()) sonuc = true;
         cursor.close();
         db.close();
         return sonuc;
@@ -224,9 +222,19 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = "SELECT _id FROM " + tablo + " WHERE Ad='" + Ad + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));
-        }
+        if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));
+        cursor.close();
+        db.close();
+        return sonuc;
+    }
+
+    //kıble açısını göster
+    public String GetKible(String townID) {
+        String sonuc = "";
+        String selectQuery = "SELECT " + Ilce.Kible + " FROM " + Ilce.name + " WHERE " + Ilce._id + "=" + townID;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ilce.Kible));
         cursor.close();
         db.close();
         return sonuc;
@@ -253,5 +261,4 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return tablo;
     }
-
 }

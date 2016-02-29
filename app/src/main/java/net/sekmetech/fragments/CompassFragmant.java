@@ -32,15 +32,13 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
     float[] geomag = new float[3];
     float[] orientVals = new float[3];
     double azimuth = 0;
-    TextView tvHeading;
     View myInflatedView;
     Context mContext;
     // record the compass picture angle turned
-    private float currentDegree = 0f, KibleDegree = 0f;
+    private float currentDegree = 0f;
+    private float KibleDegree = 0f;
     // define the display assembly compass picture
     private ImageView image;
-    // device sensor manager
-    private SensorManager mSensorManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +47,13 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
         image = (ImageView) myInflatedView.findViewById(R.id.imgKible);
         RefreshVakit();
         // initialize your android device sensor capabilities
-        mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+        SensorManager mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+        // Register this class as a listener for the accelerometer sensor
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        // ...and the orientation sensor
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
+                SensorManager.SENSOR_DELAY_NORMAL);
         return myInflatedView;
     }
 
@@ -62,7 +66,9 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
         TextView txtAngle = (TextView) myInflatedView.findViewById(R.id.txtAngle);
         //variables
         int town = Integer.parseInt(prefs.getString(getString(R.string.pref1TownID), getString(R.string.defaultIlceID)));
-        KibleDegree = Float.parseFloat(prefs.getString(getString(R.string.kibleAngle), getString(R.string.sifir)));
+        float sapma = Float.parseFloat(prefs.getString(getString(R.string.sapma), getString(R.string.sifir)));
+        KibleDegree = Float.parseFloat(prefs.getString(getString(R.string.pref1Angle), getString(R.string.sifir))) - sapma;
+        //tarih
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
         String today = dfDate.format((new Date()).getTime());//Returns 15/10/2012
         Vakit tablo = db.getVakit(town, today);
@@ -92,7 +98,7 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
                 SensorManager.getOrientation(inR, orientVals);
                 azimuth = Math.toDegrees(orientVals[0]);
                 //Log.d("onSensorChanged", String.valueOf(azimuth)+", "+String.valueOf(roll)+", "+String.valueOf(pitch));
-                float degree = Math.round(azimuth);
+                float degree = Math.round(azimuth) - KibleDegree;
                 // create a rotation animation (reverse turn degree degrees)
                 RotateAnimation ra = new RotateAnimation(
                         currentDegree,

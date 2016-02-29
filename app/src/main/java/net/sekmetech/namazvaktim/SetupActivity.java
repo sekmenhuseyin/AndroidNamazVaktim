@@ -221,7 +221,8 @@ public class SetupActivity extends AppCompatActivity {
         listAdapter = null;
         String countryID = db.GetAnyID(Ulke.name, nameCountry),
                 cityID = db.GetAnyID(Sehir.name, nameCity),
-                townID = db.GetAnyID(Ilce.name, nameTown);
+                townID = db.GetAnyID(Ilce.name, nameTown),
+                kible = db.GetKible(townID);
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.pref1Country), nameCountry);
@@ -230,6 +231,7 @@ public class SetupActivity extends AppCompatActivity {
         editor.putString(getString(R.string.pref1CityID), cityID);
         editor.putString(getString(R.string.pref1Town), nameTown);
         editor.putString(getString(R.string.pref1TownID), townID);
+        editor.putString(getString(R.string.pref1Angle), kible);
         editor.putInt(getString(R.string.prefCityCount), 1);
         editor.putBoolean(getString(R.string.prefSetup), true);
         editor.apply();
