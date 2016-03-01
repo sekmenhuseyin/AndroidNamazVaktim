@@ -24,6 +24,7 @@
                 android:gravity="right"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_kible"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/onbesT" />
 
             <TextView
@@ -34,6 +35,7 @@
                 android:gravity="left"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_none"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/onbesT" />
 
             <TextView
@@ -44,6 +46,7 @@
                 android:gravity="right"
                 android:padding="@dimen/bes"
                 android:text="@string/kibleAngle"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/onbesT" />
 
             <TextView
@@ -54,6 +57,7 @@
                 android:gravity="left"
                 android:padding="@dimen/bes"
                 android:text="@string/sifir"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/onbesT" />
 
         </LinearLayout>
@@ -78,6 +82,7 @@
             android:layout_marginBottom="@dimen/otuz"
             android:gravity="center_horizontal|bottom"
             android:text="@string/compassInfo"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
     </RelativeLayout>
 

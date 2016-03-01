@@ -13,10 +13,8 @@
             android:id="@+id/monthlyTarih"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/yirmi"
             android:background="@color/transparentBlack"
             android:gravity="center"
-            android:padding="@dimen/bes"
             android:text="@string/Istanbul"
             android:textColor="@android:color/white"
             android:textSize="@dimen/yirmiT" />
@@ -25,9 +23,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/yirmi"
         android:background="@android:color/white"
         android:baselineAligned="false"
-        android:padding="@dimen/bes"
         android:weightSum="6">
 
         <LinearLayout
