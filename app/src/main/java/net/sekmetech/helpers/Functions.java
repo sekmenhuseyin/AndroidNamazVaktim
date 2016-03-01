@@ -313,12 +313,16 @@ public class Functions {
         //notification
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(mContext)
-                .setSmallIcon(R.drawable.transparent)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setVisibility(1)
                 .setContent(mContentView)
                 .setContentIntent(resultPendingIntent);
+        //set icon
+        if (prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
+            mBuilder.setSmallIcon(R.drawable.logo);
+        else mBuilder.setSmallIcon(R.drawable.transparent);
+        //show
         mNotificationManager.notify(notifyID, mBuilder.build());
     }
 

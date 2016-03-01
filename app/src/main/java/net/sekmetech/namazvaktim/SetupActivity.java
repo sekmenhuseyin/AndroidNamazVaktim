@@ -234,6 +234,9 @@ public class SetupActivity extends AppCompatActivity {
         editor.putString(getString(R.string.pref1Angle), kible);
         editor.putInt(getString(R.string.prefCityCount), 1);
         editor.putBoolean(getString(R.string.prefSetup), true);
+        editor.putBoolean(getString(R.string.prefAutostart), true);
+        editor.putBoolean(getString(R.string.prefShowNotify), true);
+        editor.putBoolean(getString(R.string.prefIcon), true);
         editor.apply();
         //show home screen and update vakits there
         Intent intent = new Intent(this, SplashActivity.class);

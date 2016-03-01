@@ -4,67 +4,81 @@
     android:layout_height="match_parent"
     tools:context="net.sekmetech.fragments.CompassFragmant">
 
-    <TableLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TableRow
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/lblKible"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_kible"
-                android:textSize="@dimen/yirmibesT" />
+                android:textSize="@dimen/onbesT" />
 
             <TextView
                 android:id="@+id/txtKible"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_none"
-                android:textSize="@dimen/yirmibesT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:textSize="@dimen/onbesT" />
 
             <TextView
                 android:id="@+id/lblAngle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:padding="@dimen/bes"
                 android:text="@string/kibleAngle"
-                android:textSize="@dimen/yirmibesT" />
+                android:textSize="@dimen/onbesT" />
 
             <TextView
                 android:id="@+id/txtAngle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="@dimen/bes"
                 android:text="@string/sifir"
-                android:textSize="@dimen/yirmibesT" />
-        </TableRow>
+                android:textSize="@dimen/onbesT" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imgKible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/otuz"
             android:clickable="false"
             android:contentDescription="@string/tabKible"
             android:src="@drawable/pusula" />
-    </TableLayout>
+
+        <TextView
+            android:id="@+id/lblCompassInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/otuz"
+            android:gravity="center_horizontal|bottom"
+            android:text="@string/compassInfo"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </FrameLayout>

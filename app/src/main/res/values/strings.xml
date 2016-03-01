@@ -13,7 +13,9 @@
     <string name="prefUpdate" translatable="false">LastUpdate</string>
     <string name="prefLang" translatable="false">Language</string>
     <string name="prefCityCount" translatable="false">CityCount</string>
-    <string name="prefShowNotify" translatable="false">ShowNotification</string>
+    <string name="prefAutostart" translatable="false">Autostart</string>
+    <string name="prefShowNotify" translatable="false">ShowNotify</string>
+    <string name="prefIcon" translatable="false">NotifyIcon</string>
     <!-- Preferences selected cities-->
     <string name="pref1Country" translatable="false">Country1</string>
     <string name="pref1CountryID" translatable="false">CountryID1</string>
@@ -48,6 +50,7 @@
     <string name="kibleAngle">Kıble Açısı</string>
     <string name="sifir" translatable="false">0</string>
     <string name="derece" translatable="false"> °</string>
+    <string name="compassInfo">Cihazınızı manyetik alanlardan uzak ve yere paralel bir şekilde tutunuz.</string>
     <!-- Setup screen -->
     <string name="title_activity_setup">Kurulum Sihirbazı</string>
     <string name="Updating">Güncelleniyor…</string>
@@ -61,6 +64,18 @@
     <string name="next">İleri</string>
     <string name="save">Kaydet</string>
     <string name="lang">Dil</string>
+    <!-- Settings -->
+    <string name="sett_Genel">Genel</string>
+    <string name="sett_StartWithPhone">Telefon açıldığında uygulama başlasın</string>
+    <string name="sett_ChangeLang">Dili Değiştir</string>
+    <string name="sett_ChangeCity">Şehri Değiştir</string>
+    <string name="sett_Notification">Bildirimler</string>
+    <string name="sett_ShowNotification">Bildirimi Göster</string>
+    <string name="sett_TransparentNotifyIcon">Bildirim Simgesi Saydam Olsun</string>
+    <string name="sett_About">Hakkında</string>
+    <string name="sett_OnWeb">Web Sitesi</string>
+    <string name="sett_SendEmail">Geliştiriciye eposta gönder</string>
+    <string name="sett_Sounds">Uyarılar</string>
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>

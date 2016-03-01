@@ -20,8 +20,12 @@ public class BootUpReceiver extends BroadcastReceiver {
         if (!prefs.getBoolean(context.getString(R.string.prefSetup), false)) return;
         Functions fn = new Functions(context);
         //actions
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()))
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            if (!prefs.getBoolean(context.getString(R.string.prefAutostart), true)) return;
             fn.SetServiceAlarm();//after boot complete
-        else fn.Notification();//for alarm manager
+        } else {
+            if (!prefs.getBoolean(context.getString(R.string.prefShowNotify), true)) return;
+            fn.Notification();//for alarm manager
+        }
     }
 }
