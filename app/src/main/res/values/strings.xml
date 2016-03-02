@@ -1,29 +1,28 @@
 <resources>
-    <string name="app_name">Namaz Vaktim</string>
-    <string name="database_version" translatable="false">1</string>
-    <string name="google_app_id" translatable="false">996871107088</string>
+    <string name="app_name" translatable="false">Namaz Vaktim</string>
+    <string name="dbVersion" translatable="false">1</string>
     <string name="Flag" translatable="false">Flag</string>
     <string name="Logo" translatable="false">logo</string>
     <string name="minus" translatable="false">-</string>
-    <string name="sapma" translatable="false">4.345</string>
-    <!-- Preferences -->
+    <string name="sapma" translatable="false">0</string>
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
     <string name="timeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
-    <string name="prefSetup" translatable="false">isSetupFinished</string>
-    <string name="prefUpdate" translatable="false">LastUpdate</string>
-    <string name="prefLang" translatable="false">Language</string>
-    <string name="prefCityCount" translatable="false">CityCount</string>
-    <string name="prefAutostart" translatable="false">Autostart</string>
-    <string name="prefShowNotify" translatable="false">ShowNotify</string>
-    <string name="prefIcon" translatable="false">NotifyIcon</string>
+    <!-- Preferences -->
+    <string name="prefSetup" translatable="false">a</string>
+    <string name="prefUpdate" translatable="false">b</string>
+    <string name="prefLang" translatable="false">c</string>
+    <string name="prefCityCount" translatable="false">d</string>
+    <string name="prefAutostart" translatable="false">e</string>
+    <string name="prefShowNotify" translatable="false">f</string>
+    <string name="prefIcon" translatable="false">g</string>
     <!-- Preferences selected cities-->
-    <string name="pref1Country" translatable="false">Country1</string>
-    <string name="pref1CountryID" translatable="false">CountryID1</string>
-    <string name="pref1City" translatable="false">City1</string>
-    <string name="pref1CityID" translatable="false">CityID1</string>
-    <string name="pref1Town" translatable="false">Town1</string>
-    <string name="pref1TownID" translatable="false">TownID1</string>
-    <string name="pref1Angle" translatable="false">QibleAngle1</string>
+    <string name="pref1Country" translatable="false">aa</string>
+    <string name="pref1CountryID" translatable="false">bb</string>
+    <string name="pref1City" translatable="false">cc</string>
+    <string name="pref1CityID" translatable="false">dd</string>
+    <string name="pref1Town" translatable="false">ee</string>
+    <string name="pref1TownID" translatable="false">ff</string>
+    <string name="pref1Angle" translatable="false">gg</string>
     <!-- Tab names -->
     <string name="tabVakit">Vakit</string>
     <string name="tabKible">Kıble</string>
@@ -74,8 +73,13 @@
     <string name="sett_TransparentNotifyIcon">Bildirim Simgesi Saydam Olsun</string>
     <string name="sett_About">Hakkında</string>
     <string name="sett_OnWeb">Web Sitesi</string>
+    <string name="sett_Share">Paylaş</string>
     <string name="sett_SendEmail">Geliştiriciye eposta gönder</string>
     <string name="sett_Sounds">Uyarılar</string>
+    <string name="sett_Saved">Ayarlar Kaydedildi</string>
+    <string name="sett_ringtone">Sesler</string>
+    <string name="sett_silent">Ses Çal</string>
+    <string name="sett_vibrate">Titreşim</string>
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>

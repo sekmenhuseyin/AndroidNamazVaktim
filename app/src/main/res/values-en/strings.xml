@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Namaz Vaktim</string>
     <string name="City">City</string>
     <string name="Country">Country</string>
     <string name="Town">Town</string>
@@ -23,16 +22,31 @@
     <string name="tabImsakiye">Salah Calendar</string>
     <string name="tabKible">Qibla</string>
     <string name="tabOnemliGun">Important Days</string>
-    <string name="Updating">Updating...</string>
+    <string name="Updating">Updating…</string>
     <string name="errorSetup">Setup error</string>
     <string name="lang">Language</string>
     <string name="vakit_israk">Ishraq</string>
     <string name="vakit_evvabin">----</string>
     <string name="errorConnection">Couldn\'t connect to Internet</string>
     <string name="Updated">Updated</string>
-    <string name="DoubleClickToExit">Please click BACK again to exit</string>
-    <string name="remainingTime">Remaining Time</string>
     <string name="vakit_left">Time Left</string>
     <string name="vakit_remaining">Remaining Time</string>
     <string name="kibleAngle">Qibla Angle</string>
+    <string name="sett_About">About</string>
+    <string name="sett_ChangeCity">Change City</string>
+    <string name="sett_ChangeLang">Change Language</string>
+    <string name="sett_Genel">General</string>
+    <string name="sett_Notification">Notifications</string>
+    <string name="sett_OnWeb">More Apps</string>
+    <string name="sett_Saved">Settings saved</string>
+    <string name="sett_SendEmail">send email to developer</string>
+    <string name="sett_Share">Share</string>
+    <string name="sett_ShowNotification">Show Notification</string>
+    <string name="sett_Sounds">Alerts</string>
+    <string name="sett_StartWithPhone">Start with the phone</string>
+    <string name="sett_TransparentNotifyIcon">Transparent Icon</string>
+    <string name="sett_ringtone">Sounds</string>
+    <string name="sett_silent">Play a ringtone</string>
+    <string name="sett_vibrate">Vibrate</string>
+    <string name="compassInfo">Keep your device away of the magnetic field and place the phone in parallel to earth.</string>
 </resources>

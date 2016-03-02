@@ -27,11 +27,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences prefs;
+    private String activeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Functions fn = new Functions(this);
         //locales
         String defaulLocale = Locale.getDefault().getLanguage();
@@ -136,16 +138,22 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 5:
+                    activeFragment = "LibraryFragmant";
                     return new LibraryFragmant();
                 case 4:
+                    activeFragment = "HolyDaysFragmant";
                     return new HolyDaysFragmant();
                 case 3:
+                    activeFragment = "CalendarFragment";
                     return new CalendarFragment();
                 case 2:
+                    activeFragment = "MonthlyFragmant";
                     return new MonthlyFragmant();
                 case 1:
+                    activeFragment = "CompassFragmant";
                     return new CompassFragmant();
                 default:
+                    activeFragment = "TimesFragment";
                     return new TimesFragment();
             }
         }

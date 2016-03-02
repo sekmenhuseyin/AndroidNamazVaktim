@@ -65,7 +65,7 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
         TextView txtKible = (TextView) myInflatedView.findViewById(R.id.txtKible);
         TextView txtAngle = (TextView) myInflatedView.findViewById(R.id.txtAngle);
         //variables
-        int town = Integer.parseInt(prefs.getString(getString(R.string.pref1TownID), getString(R.string.defaultIlceID)));
+        int town = prefs.getInt(getString(R.string.pref1TownID), Integer.parseInt(getString(R.string.defaultIlceID)));
         float sapma = Float.parseFloat(prefs.getString(getString(R.string.sapma), getString(R.string.sifir)));
         KibleDegree = Float.parseFloat(prefs.getString(getString(R.string.pref1Angle), getString(R.string.sifir))) - sapma;
         //tarih

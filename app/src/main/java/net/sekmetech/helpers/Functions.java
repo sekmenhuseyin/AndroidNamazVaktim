@@ -89,13 +89,13 @@ public class Functions {
     public void UpdatevakitTable() {
         if (!HaveNetworkConnection()) return;
         //get preferences
-        String countryID = prefs.getString(mContext.getString(R.string.pref1CountryID), mContext.getString(R.string.defaultUlkeID)),
-                cityID = prefs.getString(mContext.getString(R.string.pref1CityID), mContext.getString(R.string.defaultSehirID)),
-                townID = prefs.getString(mContext.getString(R.string.pref1TownID), mContext.getString(R.string.defaultIlceID)),
-                updateLink;
-        if (countryID.equals(cityID)) updateLink = countryID + "/" + townID;
+        int countryID = prefs.getInt(mContext.getString(R.string.pref1CountryID), Integer.parseInt(mContext.getString(R.string.defaultUlkeID))),
+                cityID = prefs.getInt(mContext.getString(R.string.pref1CityID), Integer.parseInt(mContext.getString(R.string.defaultSehirID))),
+                townID = prefs.getInt(mContext.getString(R.string.pref1TownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
+        String updateLink;
+        if (countryID == cityID) updateLink = countryID + "/" + townID;
         else updateLink = countryID + "/" + cityID + "/" + townID;
-        new DatabaseUpdate(mActivity).execute(updateLink, townID);
+        new DatabaseUpdate(mActivity).execute(updateLink, String.valueOf(townID));
     }
 
     //bugün  ile girilen gün arasındaki fark
@@ -162,7 +162,7 @@ public class Functions {
     //http://stackoverflow.com/questions/23222063/android-custom-notification-layout-with-remoteviews
     //http://stackoverflow.com/questions/32901922/android-notification-with-custom-xml-layout-not-showing
     public void Notification() {
-        int town = Integer.parseInt(prefs.getString(mContext.getString(R.string.pref1TownID), mContext.getString(R.string.defaultIlceID)));
+        int town = prefs.getInt(mContext.getString(R.string.pref1TownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
         String townName = prefs.getString(mContext.getString(R.string.pref1Town), mContext.getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         if (tablo.GetId() == 0) return;//eğer kayıt bulunamadıysa işlemi sonlandır
@@ -320,8 +320,8 @@ public class Functions {
                 .setContentIntent(resultPendingIntent);
         //set icon
         if (prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
-            mBuilder.setSmallIcon(R.drawable.logo);
-        else mBuilder.setSmallIcon(R.drawable.transparent);
+            mBuilder.setSmallIcon(R.drawable.transparent);
+        else mBuilder.setSmallIcon(R.drawable.logo);
         //show
         mNotificationManager.notify(notifyID, mBuilder.build());
     }
@@ -369,7 +369,7 @@ public class Functions {
     }
 
     //set alarm for notify service
-    public void SetServiceAlarm() {
+    public void SetNotification() {
         //set alarm
         Intent notifyIntent = new Intent(mContext, BootUpReceiver.class);
         PendingIntent pending = PendingIntent.getBroadcast(mContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -377,12 +377,7 @@ public class Functions {
         service.setInexactRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), 1000 * 60, pending);
     }
 
-    public boolean isNotificationActive() {
-        Intent notificationIntent = new Intent(mContext, MainActivity.class);
-        PendingIntent test = PendingIntent.getActivity(mContext, notifyID, notificationIntent, PendingIntent.FLAG_NO_CREATE);
-        return test != null;
-    }
-
+    //find if alarm is active
     public boolean isAlarmActive() {
         return (PendingIntent.getBroadcast(mContext, 0,
                 new Intent(mContext, BootUpReceiver.class),

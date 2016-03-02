@@ -98,7 +98,7 @@ public class TimesFragment extends Fragment {
         txtYatsi.setTextColor(Color.BLACK);
         lblYatsi.setTextColor(Color.BLACK);
         //variables
-        int town = Integer.parseInt(prefs.getString(getString(R.string.pref1TownID), getString(R.string.defaultIlceID)));
+        int town = prefs.getInt(getString(R.string.pref1TownID), Integer.parseInt(getString(R.string.defaultIlceID)));
         String townName = prefs.getString(getString(R.string.pref1Town), getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
@@ -218,12 +218,8 @@ public class TimesFragment extends Fragment {
 
         @Override
         public void onFinish() {
-            //refresh aktif vakit and remaining time
-            RefreshVakit();
-            WriteVakits();
-            //restart timer
-            CountDownTimer countDownTimer = new MyCountDownTimer(counterStartTime, 1000);
-            countDownTimer.start();
+            /*getActivity().finish();
+            startActivity(getActivity().getIntent());*/
         }
     }
 }

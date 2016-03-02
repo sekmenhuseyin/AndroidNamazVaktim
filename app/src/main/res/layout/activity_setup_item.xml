@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/bes"
         android:paddingTop="@dimen/bes"
-        android:textSize="@dimen/yirmiT" />
+        android:textSize="@dimen/onbesT" />
 
 </LinearLayout>

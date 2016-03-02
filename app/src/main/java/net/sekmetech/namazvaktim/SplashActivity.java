@@ -36,9 +36,9 @@ public class SplashActivity extends AppCompatActivity {
             finish();
 
         } else {// if not first launch show main page
-            //notify with alarm manager: if not activated before and if need to show notify
+            //notify: if not activated before and if need to show notify
             if (!fn.isAlarmActive() && prefs.getBoolean(getString(R.string.prefShowNotify), true))
-                fn.SetServiceAlarm();
+                fn.SetNotification();
             //show home page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

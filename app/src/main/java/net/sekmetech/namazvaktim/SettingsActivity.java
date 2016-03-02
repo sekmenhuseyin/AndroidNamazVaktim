@@ -91,6 +91,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
         editor.apply();
-        Toast.makeText(this, "Ayarlar Kaydedildi", Toast.LENGTH_SHORT);
+        Toast.makeText(this, R.string.sett_Saved, Toast.LENGTH_SHORT).show();
     }
 }

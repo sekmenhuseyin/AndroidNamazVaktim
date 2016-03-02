@@ -21,18 +21,16 @@ import java.util.ArrayList;
  * http://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
  */
 public class Database extends SQLiteOpenHelper {
-    //The Android's default system path of your application database.
     private static final String DB_PATH = "/data/data/net.sekmetech.namazvaktim/databases/";
     private static final String DB_NAME = "namazvaktim.db";
-    private static final int DB_VERSION = 1;
-    private final Context myContext;
-    private SQLiteDatabase myDataBase;
+    private final Context mContext;
+    private SQLiteDatabase mDataBase;
 
     //Constructor
     //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-        this.myContext = context;
+        super(context, DB_NAME, null, R.string.dbVersion);
+        this.mContext = context;
     }
 
     // Creates a empty database on the system and rewrites it with your own database.
@@ -54,26 +52,20 @@ public class Database extends SQLiteOpenHelper {
     public boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
         try {
-            String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
+            checkDB = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
             //database does't exist yet.
         }
-        if (checkDB != null) {
-            checkDB.close();
-        }
+        if (checkDB != null) checkDB.close();
         return checkDB != null;
     }
 
     // Copies database from assets-folder to the system folder by transfering bytestream.
     private void copyDataBase() throws IOException {
         //Open your local db as the input stream
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
-        // Path to the just created empty db
-        String outFileName = DB_PATH + DB_NAME;
+        InputStream myInput = mContext.getAssets().open(DB_NAME);
         //Open the empty db as the output stream
-        OutputStream myOutput = new FileOutputStream(outFileName);
+        OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
@@ -88,15 +80,14 @@ public class Database extends SQLiteOpenHelper {
 
     public void openDataBase() throws SQLException {
         //Open the database
-        String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
 
     }
 
     @Override
     public synchronized void close() {
-        if (myDataBase != null)
-            myDataBase.close();
+        if (mDataBase != null)
+            mDataBase.close();
         super.close();
     }
 
@@ -118,11 +109,11 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
-        liste.add(myContext.getString(R.string.Turkiye));
+        liste.add(mContext.getString(R.string.Turkiye));
         if (cursor.moveToFirst()) {
             do {
                 tmp = cursor.getString(cursor.getColumnIndex(Ulke.Ad));
-                if (!tmp.equals(myContext.getString(R.string.Turkiye))) liste.add(tmp);
+                if (!tmp.equals(mContext.getString(R.string.Turkiye))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -144,12 +135,12 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
-        if (country.equals(myContext.getString(R.string.Turkiye)))
-            liste.add(myContext.getString(R.string.Istanbul));
+        if (country.equals(mContext.getString(R.string.Turkiye)))
+            liste.add(mContext.getString(R.string.Istanbul));
         if (cursor.moveToFirst()) {
             do {
                 tmp = cursor.getString(cursor.getColumnIndex(Sehir.Ad));
-                if (!tmp.equals(myContext.getString(R.string.Istanbul))) liste.add(tmp);
+                if (!tmp.equals(mContext.getString(R.string.Istanbul))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -171,12 +162,12 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
-        if (city.equals(myContext.getString(R.string.Istanbul)))
-            liste.add(myContext.getString(R.string.Istanbul));
+        if (city.equals(mContext.getString(R.string.Istanbul)))
+            liste.add(mContext.getString(R.string.Istanbul));
         if (cursor.moveToFirst()) {
             do {
                 tmp = cursor.getString(cursor.getColumnIndex(Ilce.Ad));
-                if (!tmp.equals(myContext.getString(R.string.Istanbul))) liste.add(tmp);
+                if (!tmp.equals(mContext.getString(R.string.Istanbul))) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection
@@ -219,7 +210,7 @@ public class Database extends SQLiteOpenHelper {
     //returns id of a table
     public String GetAnyID(String tablo, String Ad) {
         String sonuc = "";
-        String selectQuery = "SELECT _id FROM " + tablo + " WHERE Ad='" + Ad + "'";
+        String selectQuery = "SELECT " + Ulke._id + " FROM " + tablo + " WHERE " + Ulke.Ad + "='" + Ad + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));

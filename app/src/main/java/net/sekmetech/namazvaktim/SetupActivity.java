@@ -226,11 +226,11 @@ public class SetupActivity extends AppCompatActivity {
         //save to preferences
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.pref1Country), nameCountry);
-        editor.putString(getString(R.string.pref1CountryID), countryID);
+        editor.putInt(getString(R.string.pref1CountryID), Integer.parseInt(countryID));
         editor.putString(getString(R.string.pref1City), nameCity);
-        editor.putString(getString(R.string.pref1CityID), cityID);
+        editor.putInt(getString(R.string.pref1CityID), Integer.parseInt(cityID));
         editor.putString(getString(R.string.pref1Town), nameTown);
-        editor.putString(getString(R.string.pref1TownID), townID);
+        editor.putInt(getString(R.string.pref1TownID), Integer.parseInt(townID));
         editor.putString(getString(R.string.pref1Angle), kible);
         editor.putInt(getString(R.string.prefCityCount), 1);
         editor.putBoolean(getString(R.string.prefSetup), true);
