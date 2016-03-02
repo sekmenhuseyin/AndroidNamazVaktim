@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016. Tüm hakları saklıdır.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="sett_Genel"
+        android:title="@string/sett_Genel">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="sett_StartWithPhone"
+            android:summary="@string/sett_StartWithPhone"
+            android:title="@string/sett_StartWithPhone" />
+
+        <ListPreference
+            android:entries="@array/Diller"
+            android:entryValues="@array/DilKodlari"
+            android:key="DilKodlari"
+            android:summary="@string/prefLang"
+            android:title="@string/prefLang" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:summary="Username and password information"
+        android:title="Settings">
+        <CheckBoxPreference
+            android:key="checkBox"
+            android:summary="On/Off"
+            android:title="Keep me logged in" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

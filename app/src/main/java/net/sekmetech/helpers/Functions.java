@@ -88,7 +88,7 @@ public class Functions {
     //update procedure
     public void UpdatevakitTable() {
         if (!HaveNetworkConnection()) return;
-        //get preferences
+        //get settings
         int countryID = prefs.getInt(mContext.getString(R.string.pref1CountryID), Integer.parseInt(mContext.getString(R.string.defaultUlkeID))),
                 cityID = prefs.getInt(mContext.getString(R.string.pref1CityID), Integer.parseInt(mContext.getString(R.string.defaultSehirID))),
                 townID = prefs.getInt(mContext.getString(R.string.pref1TownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
@@ -308,7 +308,10 @@ public class Functions {
         mContentView.setTextViewText(R.id.notifyTimeLeft, remaining);
         //settings activity
         Intent settingsIntent = new Intent(mContext, SettingsActivity.class);
-        PendingIntent settingsPendingIntent = PendingIntent.getActivity(mContext, 0, settingsIntent, 0);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        PendingIntent settingsPendingIntent = PendingIntent.getActivity(mContext, 0, settingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mContentView.setOnClickPendingIntent(R.id.notifyBtnSettings, settingsPendingIntent);
         //notification
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);

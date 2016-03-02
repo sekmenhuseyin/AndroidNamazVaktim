@@ -207,7 +207,7 @@ public class SetupActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        //save to preferences
+        //save to settings
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.prefLang), localeCode);
         editor.apply();
@@ -223,7 +223,7 @@ public class SetupActivity extends AppCompatActivity {
                 cityID = db.GetAnyID(Sehir.name, nameCity),
                 townID = db.GetAnyID(Ilce.name, nameTown),
                 kible = db.GetKible(townID);
-        //save to preferences
+        //save to settings
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getString(R.string.pref1Country), nameCountry);
         editor.putInt(getString(R.string.pref1CountryID), Integer.parseInt(countryID));

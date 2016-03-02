@@ -104,4 +104,7 @@
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
