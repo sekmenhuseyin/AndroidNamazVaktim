@@ -8,21 +8,21 @@
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
     <string name="timeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
     <!-- Preferences -->
-    <string name="prefSetup" translatable="false">a</string>
-    <string name="prefUpdate" translatable="false">b</string>
-    <string name="prefLang" translatable="false">c</string>
-    <string name="prefCityCount" translatable="false">d</string>
-    <string name="prefAutostart" translatable="false">e</string>
-    <string name="prefShowNotify" translatable="false">f</string>
-    <string name="prefIcon" translatable="false">g</string>
+    <string name="prefSetup" translatable="false">isSetupFinished</string>
+    <string name="prefUpdate" translatable="false">LastUpdate</string>
+    <string name="prefLang" translatable="false">Language</string>
+    <string name="prefCityCount" translatable="false">CityCount</string>
+    <string name="prefAutostart" translatable="false">Autostart</string>
+    <string name="prefShowNotify" translatable="false">ShowNotify</string>
+    <string name="prefIcon" translatable="false">NotifyIcon</string>
     <!-- Preferences selected cities-->
-    <string name="pref1Country" translatable="false">aa</string>
-    <string name="pref1CountryID" translatable="false">bb</string>
-    <string name="pref1City" translatable="false">cc</string>
-    <string name="pref1CityID" translatable="false">dd</string>
-    <string name="pref1Town" translatable="false">ee</string>
-    <string name="pref1TownID" translatable="false">ff</string>
-    <string name="pref1Angle" translatable="false">gg</string>
+    <string name="pref1Country" translatable="false">Country1</string>
+    <string name="pref1CountryID" translatable="false">CountryID1</string>
+    <string name="pref1City" translatable="false">City1</string>
+    <string name="pref1CityID" translatable="false">CityID1</string>
+    <string name="pref1Town" translatable="false">Town1</string>
+    <string name="pref1TownID" translatable="false">TownID1</string>
+    <string name="pref1Angle" translatable="false">QibleAngle1</string>
     <!-- Tab names -->
     <string name="tabVakit">Vakit</string>
     <string name="tabKible">Kıble</string>
@@ -55,6 +55,7 @@
     <string name="Updating">Güncelleniyor…</string>
     <string name="Updated">Vakitler güncellendi</string>
     <string name="UpdateLink" translatable="false">http://diyanet-api.herokuapp.com/namaz_vakti/%s/Aylik</string>
+    <string name="UpdateLink2" translatable="false">http://eardic.com/ezanvakti/%s/Aylik</string>
     <string name="get" translatable="false">GET</string>
     <string name="utf8" translatable="false">UTF-8</string>
     <string name="Country">Ülke</string>

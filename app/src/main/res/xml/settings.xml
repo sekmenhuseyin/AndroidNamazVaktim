@@ -3,30 +3,24 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:key="sett_Genel"
-        android:title="@string/sett_Genel">
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="sett_StartWithPhone"
-            android:summary="@string/sett_StartWithPhone"
-            android:title="@string/sett_StartWithPhone" />
 
-        <ListPreference
-            android:entries="@array/Diller"
-            android:entryValues="@array/DilKodlari"
-            android:key="DilKodlari"
-            android:summary="@string/prefLang"
-            android:title="@string/prefLang" />
-    </PreferenceCategory>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/prefAutostart"
+        android:summary="@string/sett_StartWithPhone"
+        android:title="@string/sett_StartWithPhone" />
 
-    <PreferenceCategory
-        android:summary="Username and password information"
-        android:title="Settings">
-        <CheckBoxPreference
-            android:key="checkBox"
-            android:summary="On/Off"
-            android:title="Keep me logged in" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/prefShowNotify"
+        android:summary="@string/sett_ShowNotification"
+        android:title="@string/sett_ShowNotification" />
 
-    </PreferenceCategory>
+    <ListPreference
+        android:entries="@array/Diller"
+        android:entryValues="@array/DilKodlari"
+        android:key="@string/prefLang"
+        android:summary="@string/lang"
+        android:title="@string/lang" />
+
 </PreferenceScreen>
