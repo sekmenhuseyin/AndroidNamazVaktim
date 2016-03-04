@@ -78,6 +78,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.swShowNotify:
                 editor.putBoolean(getString(R.string.prefShowNotify), swNotify.isChecked());
+                if (!swNotify.isChecked()) {
+                    fn.CancelAlarm();
+                    fn.CancelNotify();
+                } else {
+                    fn.SetNotification();
+                }
                 break;
 
             case R.id.swSound:

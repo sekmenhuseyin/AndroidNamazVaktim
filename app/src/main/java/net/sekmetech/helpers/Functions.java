@@ -400,10 +400,25 @@ public class Functions {
         service.setInexactRepeating(AlarmManager.RTC, Calendar.getInstance().getTimeInMillis(), 1000 * 60, pending);
     }
 
+    //cancel the notification
+    public void CancelNotify() {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) mContext.getSystemService(ns);
+        nMgr.cancel(notifyID);
+    }
+
     //find if alarm is active
     public boolean isAlarmActive() {
         return (PendingIntent.getBroadcast(mContext, 0,
                 new Intent(mContext, BootUpReceiver.class),
                 PendingIntent.FLAG_NO_CREATE) != null);
+    }
+
+    //cancel the alarm
+    public void CancelAlarm() {
+        Intent intent = new Intent(mContext, BootUpReceiver.class);
+        PendingIntent sender = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(sender);
     }
 }
