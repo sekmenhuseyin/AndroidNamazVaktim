@@ -97,7 +97,6 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
             if (SensorManager.getRotationMatrix(inR, I, gravity, geomag)) {
                 SensorManager.getOrientation(inR, orientVals);
                 azimuth = Math.toDegrees(orientVals[0]);
-                //Log.d("onSensorChanged", String.valueOf(azimuth)+", "+String.valueOf(roll)+", "+String.valueOf(pitch));
                 float degree = Math.round(azimuth) - KibleDegree;
                 // create a rotation animation (reverse turn degree degrees)
                 RotateAnimation ra = new RotateAnimation(
