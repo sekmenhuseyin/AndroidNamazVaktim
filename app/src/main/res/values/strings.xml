@@ -6,23 +6,24 @@
     <string name="minus" translatable="false">-</string>
     <string name="sapma" translatable="false">0</string>
     <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
-    <string name="timeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
+    <string name="datetimeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
+    <string name="timeFormat" translatable="false">"HH:mm"</string>
     <!-- Preferences -->
-    <string name="prefSetup" translatable="false">isSetupFinished</string>
-    <string name="prefUpdate" translatable="false">LastUpdate</string>
-    <string name="prefLang" translatable="false">Language</string>
-    <string name="prefCityCount" translatable="false">CityCount</string>
-    <string name="prefAutostart" translatable="false">Autostart</string>
-    <string name="prefShowNotify" translatable="false">ShowNotify</string>
-    <string name="prefIcon" translatable="false">NotifyIcon</string>
+    <string name="prefSetup" translatable="false">q</string>
+    <string name="prefUpdate" translatable="false">w</string>
+    <string name="prefLang" translatable="false">e</string>
+    <string name="prefCityCount" translatable="false">r</string>
+    <string name="prefAutostart" translatable="false">t</string>
+    <string name="prefShowNotify" translatable="false">y</string>
+    <string name="prefIcon" translatable="false">u</string>
     <!-- Preferences selected cities-->
-    <string name="pref1Country" translatable="false">Country1</string>
-    <string name="pref1CountryID" translatable="false">CountryID1</string>
-    <string name="pref1City" translatable="false">City1</string>
-    <string name="pref1CityID" translatable="false">CityID1</string>
-    <string name="pref1Town" translatable="false">Town1</string>
-    <string name="pref1TownID" translatable="false">TownID1</string>
-    <string name="pref1Angle" translatable="false">QibleAngle1</string>
+    <string name="prefCountry" translatable="false">o</string>
+    <string name="prefCountryID" translatable="false">p</string>
+    <string name="prefCity" translatable="false">a</string>
+    <string name="prefCityID" translatable="false">s</string>
+    <string name="prefTown" translatable="false">d</string>
+    <string name="prefTownID" translatable="false">f</string>
+    <string name="prefAngle" translatable="false">g</string>
     <!-- Tab names -->
     <string name="tabVakit">Vakit</string>
     <string name="tabKible">Kıble</string>
@@ -105,7 +106,4 @@
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

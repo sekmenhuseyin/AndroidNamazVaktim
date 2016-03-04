@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import net.sekmetech.helpers.Functions;
@@ -70,7 +69,7 @@ public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
         // params comes from the execute() call: params[0] is the url.
         try {
             String contentAsString = "";
-            URL url = new URL(String.format(myContext.getString(R.string.UpdateLink2), params[0]));
+            URL url = new URL(String.format(myContext.getString(R.string.UpdateLink), params[0]));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -114,10 +113,42 @@ public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
                 contentAsString = myContext.getString(R.string.Updated);
             } else {
                 url = new URL(String.format(myContext.getString(R.string.UpdateLink2), params[0]));
+                conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
                 response = conn.getResponseCode();
-                Log.d("hüseyin", String.valueOf(response) + ": " + url);
-                Log.d("hüseyin", String.valueOf(conn.getErrorStream()) + ": " + url);
+                if (response == 200) {
+                    // Convert the InputStream into a string
+                    String sb = "", line;
+                    InputStream is = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is, myContext.getString(R.string.utf8)), 8);
+                    while ((line = reader.readLine()) != null) sb += line;
+                    is.close();
+                    //veritabanı ile bağlantı kuruyoruz
+                    Database db = new Database(myContext);
+                    //gelen veri_string değerini json arraye çeviriyoruz.
+                    JSONArray jsonArray = new JSONArray(sb);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        //verilen tarih ve ilçe için kayır kontrolü
+                        String tarih = jsonObject.getString(Vakit.tarih);
+                        boolean varmi = db.VakitVar(Integer.parseInt(params[1]), tarih);
+                        if (!varmi) {//eğer bu ilçe için o tarihte vakti yoksa
+                            Vakit tablo = new Vakit();
+                            tablo.SetTarih(tarih);
+                            tablo.SetImsak(jsonObject.getString(Vakit.imsak));
+                            tablo.SetGunes(jsonObject.getString(Vakit.gunes));
+                            tablo.SettOgle(jsonObject.getString(Vakit.ogle));
+                            tablo.SetIkindi(jsonObject.getString(Vakit.ikindi));
+                            tablo.SetAksam(jsonObject.getString(Vakit.aksam));
+                            tablo.SetYatsi(jsonObject.getString(Vakit.yatsi));
+                            tablo.SetKible(jsonObject.getString(Vakit.kible));
+                            tablo.SetIlce(Integer.parseInt(params[1]));
+                            //yeni vakit kaydı ekle
+                            db.insertNewVakit(tablo);
+                        }
+                    }
+                    contentAsString = myContext.getString(R.string.Updated);
+                }
             }
             return contentAsString;
 

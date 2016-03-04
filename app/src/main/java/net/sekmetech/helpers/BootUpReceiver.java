@@ -19,8 +19,8 @@ public class BootUpReceiver extends BroadcastReceiver {
         //if not installed yet... exit
         if (!prefs.getBoolean(context.getString(R.string.prefSetup), false)) return;
         Functions fn = new Functions(context);
-        //actions
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) && !prefs.getBoolean(context.getString(R.string.prefAutostart), true)) {//after boot complete
+        //actions after boot complete
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) && !prefs.getBoolean(context.getString(R.string.prefAutostart), true)) {
             fn.SetNotification();
         }
     }

@@ -98,8 +98,8 @@ public class TimesFragment extends Fragment {
         txtYatsi.setTextColor(Color.BLACK);
         lblYatsi.setTextColor(Color.BLACK);
         //variables
-        int town = prefs.getInt(getString(R.string.pref1TownID), Integer.parseInt(getString(R.string.defaultIlceID)));
-        String townName = prefs.getString(getString(R.string.pref1Town), getString(R.string.Istanbul));
+        int town = prefs.getInt(getString(R.string.prefTownID), Integer.parseInt(getString(R.string.defaultIlceID)));
+        String townName = prefs.getString(getString(R.string.prefTown), getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
         if (tablo.GetId() == 0) fn.UpdatevakitTable();
@@ -117,7 +117,7 @@ public class TimesFragment extends Fragment {
         Date now = new Date(), imsak = now, gunes = now, ogle = now, ikindi = now, aksam = now, yatsi = now;
         //convert textviews to datetimes
         try {
-            SimpleDateFormat df = new SimpleDateFormat(getString(R.string.timeFormat), Locale.ENGLISH);
+            SimpleDateFormat df = new SimpleDateFormat(getString(R.string.datetimeFormat), Locale.ENGLISH);
             imsak = df.parse((today + " " + txtImsak.getText()));
             gunes = df.parse((today + " " + txtGunes.getText()));
             ogle = df.parse((today + " " + txtOgle.getText()));

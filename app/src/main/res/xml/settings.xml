@@ -13,14 +13,12 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="@string/prefShowNotify"
-        android:summary="@string/sett_ShowNotification"
         android:title="@string/sett_ShowNotification" />
 
     <ListPreference
         android:entries="@array/Diller"
         android:entryValues="@array/DilKodlari"
         android:key="@string/prefLang"
-        android:summary="@string/lang"
         android:title="@string/lang" />
 
 </PreferenceScreen>

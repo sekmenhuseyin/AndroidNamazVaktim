@@ -8,8 +8,8 @@
         android:id="@+id/lblListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/bes"
-        android:paddingTop="@dimen/bes"
+        android:paddingBottom="@dimen/on"
+        android:paddingTop="@dimen/on"
         android:textSize="@dimen/onbesT" />
 
 </LinearLayout>

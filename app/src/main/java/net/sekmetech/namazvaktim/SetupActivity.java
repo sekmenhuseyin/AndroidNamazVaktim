@@ -225,13 +225,13 @@ public class SetupActivity extends AppCompatActivity {
                 kible = db.GetKible(townID);
         //save to settings
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getString(R.string.pref1Country), nameCountry);
-        editor.putInt(getString(R.string.pref1CountryID), Integer.parseInt(countryID));
-        editor.putString(getString(R.string.pref1City), nameCity);
-        editor.putInt(getString(R.string.pref1CityID), Integer.parseInt(cityID));
-        editor.putString(getString(R.string.pref1Town), nameTown);
-        editor.putInt(getString(R.string.pref1TownID), Integer.parseInt(townID));
-        editor.putString(getString(R.string.pref1Angle), kible);
+        editor.putString(getString(R.string.prefCountry), nameCountry);
+        editor.putInt(getString(R.string.prefCountryID), Integer.parseInt(countryID));
+        editor.putString(getString(R.string.prefCity), nameCity);
+        editor.putInt(getString(R.string.prefCityID), Integer.parseInt(cityID));
+        editor.putString(getString(R.string.prefTown), nameTown);
+        editor.putInt(getString(R.string.prefTownID), Integer.parseInt(townID));
+        editor.putString(getString(R.string.prefAngle), kible);
         editor.putInt(getString(R.string.prefCityCount), 1);
         editor.putBoolean(getString(R.string.prefSetup), true);
         editor.putBoolean(getString(R.string.prefAutostart), true);

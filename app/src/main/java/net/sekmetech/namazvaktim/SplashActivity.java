@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
 
         } else {// if not first launch show main page
             //notify: if not activated before and if need to show notify
-            if (!fn.isAlarmActive() && prefs.getBoolean(getString(R.string.prefShowNotify), true))
+            if (!fn.isAlarmActive())
                 fn.SetNotification();
             //show home page
             Intent intent = new Intent(this, MainActivity.class);

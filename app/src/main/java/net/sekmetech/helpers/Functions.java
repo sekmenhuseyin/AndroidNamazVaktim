@@ -9,8 +9,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -89,9 +93,9 @@ public class Functions {
     public void UpdatevakitTable() {
         if (!HaveNetworkConnection()) return;
         //get settings
-        int countryID = prefs.getInt(mContext.getString(R.string.pref1CountryID), Integer.parseInt(mContext.getString(R.string.defaultUlkeID))),
-                cityID = prefs.getInt(mContext.getString(R.string.pref1CityID), Integer.parseInt(mContext.getString(R.string.defaultSehirID))),
-                townID = prefs.getInt(mContext.getString(R.string.pref1TownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
+        int countryID = prefs.getInt(mContext.getString(R.string.prefCountryID), Integer.parseInt(mContext.getString(R.string.defaultUlkeID))),
+                cityID = prefs.getInt(mContext.getString(R.string.prefCityID), Integer.parseInt(mContext.getString(R.string.defaultSehirID))),
+                townID = prefs.getInt(mContext.getString(R.string.prefTownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
         String updateLink;
         if (countryID == cityID) updateLink = countryID + "/" + townID;
         else updateLink = countryID + "/" + cityID + "/" + townID;
@@ -162,8 +166,8 @@ public class Functions {
     //http://stackoverflow.com/questions/23222063/android-custom-notification-layout-with-remoteviews
     //http://stackoverflow.com/questions/32901922/android-notification-with-custom-xml-layout-not-showing
     public void Notification() {
-        int town = prefs.getInt(mContext.getString(R.string.pref1TownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
-        String townName = prefs.getString(mContext.getString(R.string.pref1Town), mContext.getString(R.string.Istanbul));
+        int town = prefs.getInt(mContext.getString(R.string.prefTownID), Integer.parseInt(mContext.getString(R.string.defaultIlceID)));
+        String townName = prefs.getString(mContext.getString(R.string.prefTown), mContext.getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         if (tablo.GetId() == 0) return;//eğer kayıt bulunamadıysa işlemi sonlandır
         String tblImsak = tablo.GetImsak(),
@@ -231,7 +235,7 @@ public class Functions {
         mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", 0);
         //convert textviews to datetimes
         try {
-            SimpleDateFormat df = new SimpleDateFormat(mContext.getString(R.string.timeFormat), Locale.ENGLISH);
+            SimpleDateFormat df = new SimpleDateFormat(mContext.getString(R.string.datetimeFormat), Locale.ENGLISH);
             imsak = df.parse((today + " " + tblImsak));
             gunes = df.parse((today + " " + tblGunes));
             ogle = df.parse((today + " " + tblOgle));
@@ -316,17 +320,31 @@ public class Functions {
         //notification
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(mContext)
+                .setSmallIcon(R.drawable.transparent)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setVisibility(1)
                 .setContent(mContentView)
                 .setContentIntent(resultPendingIntent);
-        //set icon
-        if (prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
-            mBuilder.setSmallIcon(R.drawable.transparent);
-        else mBuilder.setSmallIcon(R.drawable.logo);
         //show
         mNotificationManager.notify(notifyID, mBuilder.build());
+        //eğer namaz vakti ise
+        SimpleDateFormat sdf = new SimpleDateFormat(mContext.getString(R.string.timeFormat), Locale.ENGLISH);
+        String currentTime = sdf.format(new Date());
+        if (currentTime.equals(tblImsak) ||
+                currentTime.equals(tblGunes) ||
+                currentTime.equals(tblOgle) ||
+                currentTime.equals(tblIkindi) ||
+                currentTime.equals(tblAksam) ||
+                currentTime.equals(tblYatsi)) {
+            // Vibrate for 500 milliseconds
+            Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
+            //and make a sound alarm
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+            r.play();
+        }
     }
 
     //just update notification
@@ -373,6 +391,8 @@ public class Functions {
 
     //set alarm for notify service
     public void SetNotification() {
+        //if notification disabled exit
+        if (!prefs.getBoolean(mContext.getString(R.string.prefShowNotify), true)) return;
         //set alarm
         Intent notifyIntent = new Intent(mContext, BootUpReceiver.class);
         PendingIntent pending = PendingIntent.getBroadcast(mContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
