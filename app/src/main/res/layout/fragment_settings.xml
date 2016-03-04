@@ -1,15 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/onbes"
-    android:paddingLeft="@dimen/yetmis"
-    android:paddingRight="@dimen/yetmis"
-    android:paddingTop="@dimen/onbes"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.sekmetech.namazvaktim.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/lblCat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sett_Genel"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/yirmibesT" />
+
+    <TextView
+        android:id="@+id/txtLine1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bir"
+        android:background="@android:color/darker_gray"
+        android:text="" />
+
+    <Switch
+        android:id="@+id/swAutoStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/sett_StartWithPhone"
+        android:textColor="@android:color/white" />
+
+    <Switch
+        android:id="@+id/swShowNotify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/sett_ShowNotification"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnChangeCity"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button" />
+
+    <Button
+        android:id="@+id/btnChangeLang"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button" />
+
+    <TextView
+        android:id="@+id/lblCat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sett_Sounds"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/yirmibesT" />
+
+    <TextView
+        android:id="@+id/txtLine2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bir"
+        android:background="@android:color/darker_gray"
+        android:text="" />
+
+    <Switch
+        android:id="@+id/swSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/sett_ringtone"
+        android:textColor="@android:color/white" />
+
+    <Switch
+        android:id="@+id/swVibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/sett_vibrate"
+        android:textColor="@android:color/white" />
+</LinearLayout>
