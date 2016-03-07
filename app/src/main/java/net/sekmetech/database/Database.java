@@ -2,13 +2,14 @@ package net.sekmetech.database;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import net.sekmetech.namazvaktim.R;
+import net.sqlcipher.Cursor;
+import net.sqlcipher.SQLException;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,13 +24,15 @@ import java.util.ArrayList;
 public class Database extends SQLiteOpenHelper {
     private Context mContext;
     private SQLiteDatabase mDataBase;
-    private String DB_PATH, DB_NAME, select, from, and, where, orderby, innerjoin, on, nokta, kesme, esit, carpi, bosluk;
+    private String DB_PATH, DB_NAME, select, from, and, where, orderby, innerjoin, on,
+            nokta, kesme, esit, carpi, bosluk, password;
 
     //Constructor
     //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
         super(context, context.getString(R.string.dbName), null, R.string.dbVersion);
         this.mContext = context;
+        SQLiteDatabase.loadLibs(mContext);
         DB_NAME = mContext.getString(R.string.dbName);
         DB_PATH = mContext.getDatabasePath(DB_NAME).getPath();
         select = mContext.getString(R.string.sqlSelect);
@@ -44,6 +47,8 @@ public class Database extends SQLiteOpenHelper {
         kesme = "'";
         carpi = mContext.getString(R.string.multpily);
         bosluk = " ";
+        password = mContext.getString(R.string.app_name) + R.string.dateFormat + mContext.getString(R.string.dateFormat);
+        Log.d("hüseyin", password);
     }
 
     // Creates a empty database on the system and rewrites it with your own database.
@@ -65,7 +70,7 @@ public class Database extends SQLiteOpenHelper {
     public boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
         try {
-            checkDB = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(DB_PATH, password, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
             //database does't exist yet.
         }
@@ -93,7 +98,7 @@ public class Database extends SQLiteOpenHelper {
 
     public void openDataBase() throws SQLException {
         //Open the database
-        mDataBase = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH, password, null, SQLiteDatabase.OPEN_READONLY);
 
     }
 
@@ -105,11 +110,13 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(android.database.sqlite.SQLiteDatabase db) {
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(android.database.sqlite.SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 
     // ülkeler
@@ -119,8 +126,8 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = select + bosluk + Ulke.Ad + bosluk + from + bosluk + Ulke.name + bosluk +
                 orderby + bosluk + Ulke.Ad;
         // database
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
         liste.add(mContext.getString(R.string.Turkiye));
@@ -132,7 +139,7 @@ public class Database extends SQLiteOpenHelper {
         }
         // closing connection
         cursor.close();
-        db.close();
+        mDataBase.close();
         // return
         return liste;
     }
@@ -147,8 +154,8 @@ public class Database extends SQLiteOpenHelper {
                 bosluk + where + bosluk + Ulke.name + nokta + Ulke.Ad + bosluk + esit + bosluk + kesme +
                 country + kesme + bosluk + orderby + bosluk + Sehir.name + nokta + Sehir.Ad;
         // database
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
         if (country.equals(mContext.getString(R.string.Turkiye)))
@@ -161,7 +168,7 @@ public class Database extends SQLiteOpenHelper {
         }
         // closing connection
         cursor.close();
-        db.close();
+        mDataBase.close();
         // return
         return liste;
     }
@@ -176,8 +183,8 @@ public class Database extends SQLiteOpenHelper {
                 bosluk + where + bosluk + Sehir.name + nokta + Sehir.Ad + bosluk + esit + bosluk + kesme +
                 city + kesme + bosluk + orderby + bosluk + Ilce.name + nokta + Ilce.Ad;
         // database
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
         if (city.equals(mContext.getString(R.string.Istanbul)))
@@ -190,14 +197,14 @@ public class Database extends SQLiteOpenHelper {
         }
         // closing connection
         cursor.close();
-        db.close();
+        mDataBase.close();
         // return
         return liste;
     }
 
     /*add new record to vakit table*/
     public boolean insertNewVakit(Vakit tablo) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        openDataBase();
         ContentValues newRow = new ContentValues();
         newRow.put(Vakit.tarih, tablo.GetTarih());
         newRow.put(Vakit.imsak, tablo.GetImsak());
@@ -208,8 +215,8 @@ public class Database extends SQLiteOpenHelper {
         newRow.put(Vakit.yatsi, tablo.GetYatsi());
         newRow.put(Vakit.kible, tablo.GetKible());
         newRow.put(Vakit.Ilce_id, tablo.GetIlce());
-        db.insert(Vakit.name, null, newRow);
-        db.close();
+        mDataBase.insert(Vakit.name, null, newRow);
+        mDataBase.close();
         return true;
     }
 
@@ -219,11 +226,11 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = select + bosluk + Vakit._id + bosluk + from + bosluk + Vakit.name + bosluk +
                 where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + ilce + bosluk + and + bosluk +
                 Vakit.tarih + bosluk + esit + bosluk + kesme + tarih + kesme;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = true;
         cursor.close();
-        db.close();
+        mDataBase.close();
         return sonuc;
     }
 
@@ -232,11 +239,11 @@ public class Database extends SQLiteOpenHelper {
         String sonuc = "";
         String selectQuery = select + bosluk + Ulke._id + bosluk + from + bosluk + tablo + bosluk +
                 where + bosluk + Ulke.Ad + bosluk + esit + bosluk + kesme + Ad + kesme;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));
         cursor.close();
-        db.close();
+        mDataBase.close();
         return sonuc;
     }
 
@@ -245,11 +252,11 @@ public class Database extends SQLiteOpenHelper {
         String sonuc = "";
         String selectQuery = select + bosluk + Ilce.Kible + bosluk + from + bosluk + Ilce.name + bosluk +
                 where + bosluk + Ilce._id + bosluk + esit + bosluk + townID;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ilce.Kible));
         cursor.close();
-        db.close();
+        mDataBase.close();
         return sonuc;
     }
 
@@ -259,8 +266,8 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = select + bosluk + carpi + bosluk + from + bosluk + Vakit.name + bosluk +
                 where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + IlceId + bosluk + and + bosluk +
                 Vakit.tarih + bosluk + esit + bosluk + kesme + Tarih + kesme;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        openDataBase();
+        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             tablo.SetId(cursor.getInt(cursor.getColumnIndex(Vakit._id)));
             tablo.SetTarih(cursor.getString(cursor.getColumnIndex(Vakit.tarih)));
@@ -273,7 +280,7 @@ public class Database extends SQLiteOpenHelper {
             tablo.SetKible(cursor.getString(cursor.getColumnIndex(Vakit.kible)));
         } else tablo.SetTarih("");
         cursor.close();
-        db.close();
+        mDataBase.close();
         return tablo;
     }
 }
