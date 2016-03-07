@@ -24,7 +24,7 @@ import java.util.Date;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     private Functions fn;
     private SharedPreferences prefs;
-    private Switch swAutoStart, swNotify, swVibrate, swSound;
+    private Switch swAutoStart, swNotify, swVibrate, swSound, swTransparentIcon;
     private Button btnCity, btnLang;
 
     @Override
@@ -44,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         //get buttons and switches
         swAutoStart = (Switch) findViewById(R.id.swAutoStart);
         swNotify = (Switch) findViewById(R.id.swShowNotify);
+        swTransparentIcon = (Switch) findViewById(R.id.swTransparentIcon);
         swSound = (Switch) findViewById(R.id.swSound);
         swVibrate = (Switch) findViewById(R.id.swVibrate);
         btnCity = (Button) findViewById(R.id.btnChangeCity);
@@ -51,11 +52,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         //get values
         swAutoStart.setChecked(prefs.getBoolean(getString(R.string.prefAutostart), true));
         swNotify.setChecked(prefs.getBoolean(getString(R.string.prefShowNotify), true));
+        swTransparentIcon.setChecked(prefs.getBoolean(getString(R.string.prefIcon), true));
         swSound.setChecked(prefs.getBoolean(getString(R.string.prefAlarmSound), true));
         swVibrate.setChecked(prefs.getBoolean(getString(R.string.prefAlarmVibrate), true));
         // Register the onClick listener with the implementation above
         swAutoStart.setOnClickListener(this);
         swNotify.setOnClickListener(this);
+        swTransparentIcon.setOnClickListener(this);
         swSound.setOnClickListener(this);
         swVibrate.setOnClickListener(this);
         btnCity.setOnClickListener(this);
@@ -84,6 +87,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 } else {
                     fn.SetNotification();
                 }
+                break;
+
+            case R.id.swTransparentIcon:
+                editor.putBoolean(getString(R.string.prefIcon), swTransparentIcon.isChecked());
+                fn.CancelNotify();
+                fn.Notification();
                 break;
 
             case R.id.swSound:

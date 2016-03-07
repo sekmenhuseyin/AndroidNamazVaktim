@@ -42,6 +42,14 @@
         android:text="@string/sett_ShowNotification"
         android:textColor="@android:color/white" />
 
+    <Switch
+        android:id="@+id/swTransparentIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/sett_TransparentNotifyIcon"
+        android:textColor="@android:color/white" />
+
     <Button
         android:id="@+id/btnChangeCity"
         style="?android:attr/buttonStyleSmall"

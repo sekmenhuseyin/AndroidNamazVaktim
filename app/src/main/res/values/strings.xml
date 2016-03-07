@@ -10,6 +10,7 @@
     <string name="prefCityCount" translatable="false">r</string>
     <string name="prefAutostart" translatable="false">t</string>
     <string name="prefShowNotify" translatable="false">y</string>
+    <string name="prefIcon" translatable="false">j</string>
     <string name="prefAlarmVibrate" translatable="false">u</string>
     <string name="prefAlarmSound" translatable="false">h</string>
     <!-- Preferences selected cities-->
@@ -68,6 +69,7 @@
     <string name="sett_ChangeCity">Şehri Değiştir</string>
     <string name="sett_Notification">Bildirimler</string>
     <string name="sett_ShowNotification">Bildirim Alanında Vakitleri Göster</string>
+    <string name="sett_TransparentNotifyIcon">Bildirim Simgesi Saydam Olsun</string>
     <string name="sett_About">Hakkında</string>
     <string name="sett_OnWeb">Web Sitesi</string>
     <string name="sett_Share">Paylaş</string>

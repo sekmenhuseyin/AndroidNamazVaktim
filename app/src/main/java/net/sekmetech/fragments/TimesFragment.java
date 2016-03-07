@@ -66,16 +66,17 @@ public class TimesFragment extends Fragment {
         imgAksam = (ImageView) myInflatedView.findViewById(R.id.imgAksam);
         imgYatsi = (ImageView) myInflatedView.findViewById(R.id.imgYatsi);
         //refresh and load vakits
-        RefreshVakit();
-        WriteVakits();
-        CountDownTimer countDownTimer = new MyCountDownTimer(counterStartTime, 1000);
-        countDownTimer.start();
+        if (RefreshVakit()) {
+            WriteVakits();
+            CountDownTimer countDownTimer = new MyCountDownTimer(counterStartTime, 1000);
+            countDownTimer.start();
+        }
         //show page
         return myInflatedView;
     }
 
     //refresh vakit
-    private void RefreshVakit() {
+    private boolean RefreshVakit() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         Database db = new Database(mContext);
         //reset textviews and imageviews
@@ -102,7 +103,10 @@ public class TimesFragment extends Fragment {
         String townName = prefs.getString(getString(R.string.prefTown), getString(R.string.Istanbul));
         Vakit tablo = db.getVakit(town, today);
         //if no vakit found update again
-        if (tablo.GetId() == 0) fn.UpdatevakitTable();
+        if (tablo.GetId() == 0) {
+            fn.UpdatevakitTable();
+            return false;
+        }
         //write values of namaz vakits
         txtImsak.setText(tablo.GetImsak());
         txtGunes.setText(tablo.GetGunes());
@@ -111,6 +115,7 @@ public class TimesFragment extends Fragment {
         txtAksam.setText(tablo.GetAksam());
         txtYatsi.setText(tablo.GetYatsi());
         lblTown.setText(townName);
+        return true;
     }
 
     private void WriteVakits() {

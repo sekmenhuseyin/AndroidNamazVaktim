@@ -320,13 +320,15 @@ public class Functions {
         //notification
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(mContext)
-                .setSmallIcon(R.drawable.transparent)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .setVisibility(1)
                 .setContent(mContentView)
                 .setContentIntent(resultPendingIntent);
         //show
+        if (!prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
+            mBuilder.setSmallIcon(R.drawable.transparent);
+        else mBuilder.setSmallIcon(R.drawable.notification);
         mNotificationManager.notify(notifyID, mBuilder.build());
         //eğer namaz vakti ise
         SimpleDateFormat sdf = new SimpleDateFormat(mContext.getString(R.string.timeFormat), Locale.ENGLISH);
@@ -394,6 +396,8 @@ public class Functions {
         //if notification disabled exit
         if (!prefs.getBoolean(mContext.getString(R.string.prefShowNotify), true)) return;
         if (isAlarmActive()) return;
+        //show first notification
+        Notification();
         //set alarm
         Intent notifyIntent = new Intent(mContext, BootUpReceiver.class);
         PendingIntent pending = PendingIntent.getBroadcast(mContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
