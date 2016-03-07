@@ -69,7 +69,7 @@ public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
         // params comes from the execute() call: params[0] is the url.
         try {
             String contentAsString = "";
-            URL url = new URL(String.format(myContext.getString(R.string.UpdateLink), params[0]));
+            URL url = new URL(myContext.getString(R.string.link1) + String.format(myContext.getString(R.string.updateLink), params[0]));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -112,7 +112,7 @@ public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
                 }
                 contentAsString = myContext.getString(R.string.Updated);
             } else {
-                url = new URL(String.format(myContext.getString(R.string.UpdateLink2), params[0]));
+                url = new URL(myContext.getString(R.string.link2) + String.format(myContext.getString(R.string.updateLink), params[0]));
                 conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
                 response = conn.getResponseCode();

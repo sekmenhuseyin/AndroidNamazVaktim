@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/on"
         android:paddingTop="@dimen/on"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/onbesT" />
 
 </LinearLayout>

@@ -12,6 +12,7 @@
         android:layout_marginBottom="@dimen/onbes"
         android:layout_marginLeft="@dimen/onbes"
         android:layout_toRightOf="@+id/flag"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/yirmiT" />
 
     <ImageView

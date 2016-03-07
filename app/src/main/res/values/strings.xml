@@ -1,13 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Namaz Vaktim</string>
     <string name="dbVersion" translatable="false">1</string>
-    <string name="Flag" translatable="false">Flag</string>
-    <string name="Logo" translatable="false">logo</string>
-    <string name="minus" translatable="false">-</string>
-    <string name="sapma" translatable="false">0</string>
-    <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
-    <string name="datetimeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
-    <string name="timeFormat" translatable="false">"HH:mm"</string>
+    <string name="dbName" translatable="false">database.db</string>
+    <string name="website" translatable="false">https://sekmetech.net/</string>
     <!-- Preferences -->
     <string name="prefSetup" translatable="false">q</string>
     <string name="prefUpdate" translatable="false">w</string>
@@ -56,8 +51,8 @@
     <string name="title_activity_setup">Kurulum Sihirbazı</string>
     <string name="Updating">Güncelleniyor…</string>
     <string name="Updated">Vakitler güncellendi</string>
-    <string name="UpdateLink" translatable="false">http://diyanet-api.herokuapp.com/namaz_vakti/%s/Aylik</string>
-    <string name="UpdateLink2" translatable="false">http://eardic.com/ezanvakti/%s/Aylik</string>
+    <string name="link1" translatable="false">http://diyanet-api.herokuapp.com/namaz_</string>
+    <string name="link2" translatable="false">http://eardic.com/ezan</string>
     <string name="get" translatable="false">GET</string>
     <string name="utf8" translatable="false">UTF-8</string>
     <string name="Country">Ülke</string>
@@ -73,7 +68,6 @@
     <string name="sett_ChangeCity">Şehri Değiştir</string>
     <string name="sett_Notification">Bildirimler</string>
     <string name="sett_ShowNotification">Bildirim Alanında Vakitleri Göster</string>
-    <string name="sett_TransparentNotifyIcon">Bildirim Simgesi Saydam Olsun</string>
     <string name="sett_About">Hakkında</string>
     <string name="sett_OnWeb">Web Sitesi</string>
     <string name="sett_Share">Paylaş</string>
@@ -82,6 +76,8 @@
     <string name="sett_Saved">Ayarlar Kaydedildi</string>
     <string name="sett_ringtone">Ses Çal</string>
     <string name="sett_vibrate">Titreşim</string>
+    <string name="changeLang">Dili Değiştir</string>
+    <string name="changeCity">Şehri Değiştir</string>
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>
@@ -89,20 +85,41 @@
     <string name="defaultSehirID" translatable="false">539</string>
     <string name="defaultIlceID" translatable="false">9541</string>
     <string name="defaultLocale" translatable="false">TR</string>
+    <string name="dateFormat" translatable="false">"dd.MM.yyyy"</string>
+    <string name="datetimeFormat" translatable="false">"dd.MM.yyyy HH:mm"</string>
+    <string name="timeFormat" translatable="false">"HH:mm"</string>
     <!-- arrays -->
-    <string-array name="SehirliUlkeler">
+    <string-array name="SehirliUlkeler" translatable="false">
         <item>TURKIYE</item>
         <item>ABD</item>
         <item>KANADA</item>
     </string-array>
-    <string-array name="Diller">
+    <string-array name="Diller" translatable="false">
         <item>Türkçe</item>
         <item>English</item>
     </string-array>
-    <string-array name="DilKodlari">
+    <string-array name="DilKodlari" translatable="false">
         <item>TR</item>
         <item>EN</item>
     </string-array>
+    <!-- SQL -->
+    <string name="sqlSelect" translatable="false">SELECT</string>
+    <string name="sqlFrom" translatable="false">FROM</string>
+    <string name="sqlWhere" translatable="false">WHERE</string>
+    <string name="sqlInnerJoin" translatable="false">INNER JOIN</string>
+    <string name="sqlOn" translatable="false">ON</string>
+    <string name="sqlAnd" translatable="false">AND</string>
+    <string name="sqlOrderBy" translatable="false">ORDER BY</string>
+    <!-- Others -->
+    <string name="updateLink" translatable="false">vakti/%s/Aylik</string>
+    <string name="Flag" translatable="false">Flag</string>
+    <string name="Logo" translatable="false">logo</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="setBackgroundColor" translatable="false">setBackgroundColor</string>
+    <string name="nokta" translatable="false">.</string>
+    <string name="sqlEquals" translatable="false">=</string>
+    <string name="multpily" translatable="false">*</string>
+    <string name="ss" translatable="false">%s%s</string>
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>

@@ -43,7 +43,7 @@ public class SetupActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private int lastExpandedPosition = -1;
     private String nameCountry, nameCity, nameTown;
-    private Database db = new Database(this);
+    private Database db;
     private String[] SehirliUlkeler, Diller, DilKodlari;
     private int[] images = {R.drawable.lang_tr, R.drawable.lang_en};
     private Boolean expWithImage = true;
@@ -54,6 +54,7 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         // SharedPreferences
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        db = new Database(this);
         Resources res = getResources();
         SehirliUlkeler = res.getStringArray(R.array.SehirliUlkeler);
         Diller = res.getStringArray(R.array.Diller);

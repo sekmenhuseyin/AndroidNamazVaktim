@@ -21,16 +21,29 @@ import java.util.ArrayList;
  * http://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
  */
 public class Database extends SQLiteOpenHelper {
-    private static final String DB_PATH = "/data/data/net.sekmetech.namazvaktim/databases/";
-    private static final String DB_NAME = "namazvaktim.db";
-    private final Context mContext;
+    private Context mContext;
     private SQLiteDatabase mDataBase;
+    private String DB_PATH, DB_NAME, select, from, and, where, orderby, innerjoin, on, nokta, kesme, esit, carpi, bosluk;
 
     //Constructor
     //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
-        super(context, DB_NAME, null, R.string.dbVersion);
+        super(context, context.getString(R.string.dbName), null, R.string.dbVersion);
         this.mContext = context;
+        DB_NAME = mContext.getString(R.string.dbName);
+        DB_PATH = mContext.getDatabasePath(DB_NAME).getPath();
+        select = mContext.getString(R.string.sqlSelect);
+        from = mContext.getString(R.string.sqlFrom);
+        where = mContext.getString(R.string.sqlWhere);
+        innerjoin = mContext.getString(R.string.sqlInnerJoin);
+        on = mContext.getString(R.string.sqlOn);
+        and = mContext.getString(R.string.sqlAnd);
+        orderby = mContext.getString(R.string.sqlOrderBy);
+        nokta = mContext.getString(R.string.nokta);
+        esit = mContext.getString(R.string.sqlEquals);
+        kesme = "'";
+        carpi = mContext.getString(R.string.multpily);
+        bosluk = " ";
     }
 
     // Creates a empty database on the system and rewrites it with your own database.
@@ -52,7 +65,7 @@ public class Database extends SQLiteOpenHelper {
     public boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
         try {
-            checkDB = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
             //database does't exist yet.
         }
@@ -65,7 +78,7 @@ public class Database extends SQLiteOpenHelper {
         //Open your local db as the input stream
         InputStream myInput = mContext.getAssets().open(DB_NAME);
         //Open the empty db as the output stream
-        OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);
+        OutputStream myOutput = new FileOutputStream(DB_PATH);
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
@@ -80,7 +93,7 @@ public class Database extends SQLiteOpenHelper {
 
     public void openDataBase() throws SQLException {
         //Open the database
-        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
 
     }
 
@@ -103,7 +116,8 @@ public class Database extends SQLiteOpenHelper {
     public ArrayList<String> getCountries() {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT " + Ulke.Ad + " FROM " + Ulke.name + " order by " + Ulke.Ad;
+        String selectQuery = select + bosluk + Ulke.Ad + bosluk + from + bosluk + Ulke.name + bosluk +
+                orderby + bosluk + Ulke.Ad;
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -127,9 +141,11 @@ public class Database extends SQLiteOpenHelper {
     public ArrayList<String> getCities(String country) {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT " + Sehir.name + "." + Sehir.Ad +
-                " FROM " + Sehir.name + " INNER JOIN " + Ulke.name + " ON " + Sehir.name + "." + Sehir.Ulke_id + " = " + Ulke.name + "." + Ulke._id +
-                " WHERE " + Ulke.name + "." + Ulke.Ad + " = '" + country + "' ORDER BY " + Sehir.name + "." + Sehir.Ad;
+        String selectQuery = select + bosluk + Sehir.name + nokta + Sehir.Ad + bosluk + from + bosluk +
+                Sehir.name + bosluk + innerjoin + bosluk + Ulke.name + bosluk + on + bosluk + Sehir.name +
+                nokta + Sehir.Ulke_id + bosluk + esit + bosluk + Ulke.name + nokta + Ulke._id +
+                bosluk + where + bosluk + Ulke.name + nokta + Ulke.Ad + bosluk + esit + bosluk + kesme +
+                country + kesme + bosluk + orderby + bosluk + Sehir.name + nokta + Sehir.Ad;
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -154,9 +170,11 @@ public class Database extends SQLiteOpenHelper {
     public ArrayList<String> getTown(String city) {
         ArrayList<String> liste = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT " + Ilce.name + "." + Ilce.Ad +
-                " FROM " + Ilce.name + " INNER JOIN " + Sehir.name + " ON " + Ilce.name + "." + Ilce.Sehir_id + " = " + Sehir.name + "." + Sehir._id +
-                " WHERE " + Sehir.name + "." + Sehir.Ad + " = '" + city + "' ORDER BY " + Ilce.name + "." + Ilce.Ad;
+        String selectQuery = select + bosluk + Ilce.name + nokta + Ilce.Ad + bosluk + from + bosluk +
+                Ilce.name + bosluk + innerjoin + bosluk + Sehir.name + bosluk + on + bosluk + Ilce.name +
+                nokta + Ilce.Sehir_id + bosluk + esit + bosluk + Sehir.name + nokta + Sehir._id +
+                bosluk + where + bosluk + Sehir.name + nokta + Sehir.Ad + bosluk + esit + bosluk + kesme +
+                city + kesme + bosluk + orderby + bosluk + Ilce.name + nokta + Ilce.Ad;
         // database
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -198,7 +216,9 @@ public class Database extends SQLiteOpenHelper {
     //check if vakit exists
     public boolean VakitVar(int ilce, String tarih) {
         boolean sonuc = false;
-        String selectQuery = "SELECT " + Vakit._id + " FROM " + Vakit.name + " WHERE " + Vakit.Ilce_id + "=" + ilce + " and " + Vakit.tarih + "='" + tarih + "'";
+        String selectQuery = select + bosluk + Vakit._id + bosluk + from + bosluk + Vakit.name + bosluk +
+                where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + ilce + bosluk + and + bosluk +
+                Vakit.tarih + bosluk + esit + bosluk + kesme + tarih + kesme;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = true;
@@ -210,7 +230,8 @@ public class Database extends SQLiteOpenHelper {
     //returns id of a table
     public String GetAnyID(String tablo, String Ad) {
         String sonuc = "";
-        String selectQuery = "SELECT " + Ulke._id + " FROM " + tablo + " WHERE " + Ulke.Ad + "='" + Ad + "'";
+        String selectQuery = select + bosluk + Ulke._id + bosluk + from + bosluk + tablo + bosluk +
+                where + bosluk + Ulke.Ad + bosluk + esit + bosluk + kesme + Ad + kesme;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ulke._id));
@@ -222,7 +243,8 @@ public class Database extends SQLiteOpenHelper {
     //kıble açısını göster
     public String GetKible(String townID) {
         String sonuc = "";
-        String selectQuery = "SELECT " + Ilce.Kible + " FROM " + Ilce.name + " WHERE " + Ilce._id + "=" + townID;
+        String selectQuery = select + bosluk + Ilce.Kible + bosluk + from + bosluk + Ilce.name + bosluk +
+                where + bosluk + Ilce._id + bosluk + esit + bosluk + townID;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = cursor.getString(cursor.getColumnIndex(Ilce.Kible));
@@ -234,7 +256,9 @@ public class Database extends SQLiteOpenHelper {
     //get todays namaz vakits for selected towm
     public Vakit getVakit(int IlceId, String Tarih) {
         Vakit tablo = new Vakit();
-        String selectQuery = "SELECT * FROM " + Vakit.name + " WHERE " + Vakit.Ilce_id + "=" + IlceId + " AND " + Vakit.tarih + "='" + Tarih + "'";
+        String selectQuery = select + bosluk + carpi + bosluk + from + bosluk + Vakit.name + bosluk +
+                where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + IlceId + bosluk + and + bosluk +
+                Vakit.tarih + bosluk + esit + bosluk + kesme + Tarih + kesme;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {

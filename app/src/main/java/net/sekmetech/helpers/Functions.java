@@ -248,8 +248,8 @@ public class Functions {
         if (!remaining.contains(mContext.getString(R.string.minus))) {//yatsi zamanı
             mContentView.setTextColor(R.id.notifyLblYatsi, Color.WHITE);
             mContentView.setTextColor(R.id.notifyYatsi, Color.WHITE);
-            mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", Color.RED);
-            mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", Color.RED);
+            mContentView.setInt(R.id.notifyLblYatsi, mContext.getString(R.string.setBackgroundColor), Color.RED);
+            mContentView.setInt(R.id.notifyYatsi, mContext.getString(R.string.setBackgroundColor), Color.RED);
             remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime() + (1000 * 60 * 60 * 24)) / (1000 * 60));
 
         } else {//aksam zamanı
@@ -257,8 +257,8 @@ public class Functions {
             if (!remaining.contains(mContext.getString(R.string.minus))) {
                 mContentView.setTextColor(R.id.notifyLblAksam, Color.WHITE);
                 mContentView.setTextColor(R.id.notifyAksam, Color.WHITE);
-                mContentView.setInt(R.id.notifyLblAksam, "setBackgroundColor", Color.RED);
-                mContentView.setInt(R.id.notifyAksam, "setBackgroundColor", Color.RED);
+                mContentView.setInt(R.id.notifyLblAksam, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                mContentView.setInt(R.id.notifyAksam, mContext.getString(R.string.setBackgroundColor), Color.RED);
                 remaining = DateUtils.formatElapsedTime((yatsi.getTime() - now.getTime()) / (1000 * 60));
 
             } else {//ikindi zamanı
@@ -266,8 +266,8 @@ public class Functions {
                 if (!remaining.contains(mContext.getString(R.string.minus))) {
                     mContentView.setTextColor(R.id.notifyLblIkindi, Color.WHITE);
                     mContentView.setTextColor(R.id.notifyIkindi, Color.WHITE);
-                    mContentView.setInt(R.id.notifyLblIkindi, "setBackgroundColor", Color.RED);
-                    mContentView.setInt(R.id.notifyIkindi, "setBackgroundColor", Color.RED);
+                    mContentView.setInt(R.id.notifyLblIkindi, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                    mContentView.setInt(R.id.notifyIkindi, mContext.getString(R.string.setBackgroundColor), Color.RED);
                     remaining = DateUtils.formatElapsedTime((aksam.getTime() - now.getTime()) / (1000 * 60));
 
                 } else {//öğle zamanı
@@ -275,8 +275,8 @@ public class Functions {
                     if (!remaining.contains(mContext.getString(R.string.minus))) {
                         mContentView.setTextColor(R.id.notifyLblOgle, Color.WHITE);
                         mContentView.setTextColor(R.id.notifyOgle, Color.WHITE);
-                        mContentView.setInt(R.id.notifyLblOgle, "setBackgroundColor", Color.RED);
-                        mContentView.setInt(R.id.notifyOgle, "setBackgroundColor", Color.RED);
+                        mContentView.setInt(R.id.notifyLblOgle, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                        mContentView.setInt(R.id.notifyOgle, mContext.getString(R.string.setBackgroundColor), Color.RED);
                         remaining = DateUtils.formatElapsedTime((ikindi.getTime() - now.getTime()) / (1000 * 60));
 
                     } else {//güneş zamanı
@@ -284,8 +284,8 @@ public class Functions {
                         if (!remaining.contains(mContext.getString(R.string.minus))) {
                             mContentView.setTextColor(R.id.notifyLblGunes, Color.WHITE);
                             mContentView.setTextColor(R.id.notifyGunes, Color.WHITE);
-                            mContentView.setInt(R.id.notifyLblGunes, "setBackgroundColor", Color.RED);
-                            mContentView.setInt(R.id.notifyGunes, "setBackgroundColor", Color.RED);
+                            mContentView.setInt(R.id.notifyLblGunes, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                            mContentView.setInt(R.id.notifyGunes, mContext.getString(R.string.setBackgroundColor), Color.RED);
                             remaining = DateUtils.formatElapsedTime((ogle.getTime() - now.getTime()) / (1000 * 60));
 
                         } else {//imsak zamanı
@@ -293,14 +293,14 @@ public class Functions {
                             if (!remaining.contains(mContext.getString(R.string.minus))) {
                                 mContentView.setTextColor(R.id.notifyLblImsak, Color.WHITE);
                                 mContentView.setTextColor(R.id.notifyImsak, Color.WHITE);
-                                mContentView.setInt(R.id.notifyLblImsak, "setBackgroundColor", Color.RED);
-                                mContentView.setInt(R.id.notifyImsak, "setBackgroundColor", Color.RED);
+                                mContentView.setInt(R.id.notifyLblImsak, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                                mContentView.setInt(R.id.notifyImsak, mContext.getString(R.string.setBackgroundColor), Color.RED);
                                 remaining = DateUtils.formatElapsedTime((gunes.getTime() - now.getTime()) / (1000 * 60));
                             } else {//yatsı zamanı
                                 mContentView.setTextColor(R.id.notifyLblYatsi, Color.WHITE);
                                 mContentView.setTextColor(R.id.notifyYatsi, Color.WHITE);
-                                mContentView.setInt(R.id.notifyLblYatsi, "setBackgroundColor", Color.RED);
-                                mContentView.setInt(R.id.notifyYatsi, "setBackgroundColor", Color.RED);
+                                mContentView.setInt(R.id.notifyLblYatsi, mContext.getString(R.string.setBackgroundColor), Color.RED);
+                                mContentView.setInt(R.id.notifyYatsi, mContext.getString(R.string.setBackgroundColor), Color.RED);
                                 remaining = DateUtils.formatElapsedTime((imsak.getTime() - now.getTime()) / (1000 * 60));
                             }
                         }
@@ -393,6 +393,7 @@ public class Functions {
     public void SetNotification() {
         //if notification disabled exit
         if (!prefs.getBoolean(mContext.getString(R.string.prefShowNotify), true)) return;
+        if (isAlarmActive()) return;
         //set alarm
         Intent notifyIntent = new Intent(mContext, BootUpReceiver.class);
         PendingIntent pending = PendingIntent.getBroadcast(mContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
