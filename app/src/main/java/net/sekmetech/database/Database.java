@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import net.sekmetech.namazvaktim.R;
 import net.sqlcipher.Cursor;
@@ -20,6 +19,9 @@ import java.util.ArrayList;
 /**
  * Created by huseyin on 2.2.2016
  * http://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
+ * https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
+ * https://androidbycode.wordpress.com/2015/02/18/android-database-encryption-using-sqlcipher/
+ * https://github.com/sqlcipher/sqlcipher-android-tests/blob/master/src/main/java/net/zetetic/tests/ImportUnencryptedDatabaseTest.java
  */
 public class Database extends SQLiteOpenHelper {
     private Context mContext;
@@ -47,8 +49,7 @@ public class Database extends SQLiteOpenHelper {
         kesme = "'";
         carpi = mContext.getString(R.string.multpily);
         bosluk = " ";
-        password = mContext.getString(R.string.app_name) + R.string.dateFormat + mContext.getString(R.string.dateFormat);
-        Log.d("hüseyin", password);
+        password = mContext.getString(R.string.app_name) + mContext.getString(R.string.website) + mContext.getString(R.string.datetimeFormat);
     }
 
     // Creates a empty database on the system and rewrites it with your own database.
@@ -68,9 +69,9 @@ public class Database extends SQLiteOpenHelper {
 
     // Check if the database already exist to avoid re-copying the file
     public boolean checkDataBase() {
-        SQLiteDatabase checkDB = null;
+        android.database.sqlite.SQLiteDatabase checkDB = null;
         try {
-            checkDB = SQLiteDatabase.openDatabase(DB_PATH, password, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = android.database.sqlite.SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
             //database does't exist yet.
         }
@@ -79,7 +80,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Copies database from assets-folder to the system folder by transfering bytestream.
-    private void copyDataBase() throws IOException {
+    public void copyDataBase() throws IOException {
         //Open your local db as the input stream
         InputStream myInput = mContext.getAssets().open(DB_NAME);
         //Open the empty db as the output stream
@@ -117,6 +118,16 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(android.database.sqlite.SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public boolean ImportUnencryptedDatabaseTest(String unencryptedDatabase, String encryptedDatabase, String password) {
+        SQLiteDatabase database;
+        database = SQLiteDatabase.openOrCreateDatabase(unencryptedDatabase, "", null);
+        database.rawExecSQL(String.format("ATTACH DATABASE '%s' AS encrypted KEY '%s'", encryptedDatabase, password));
+        database.rawExecSQL("select sqlcipher_export('encrypted')");
+        database.rawExecSQL("DETACH DATABASE encrypted");
+        database.close();
+        return true;
     }
 
     // ülkeler
