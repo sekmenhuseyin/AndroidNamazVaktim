@@ -69,7 +69,7 @@
     <string name="sett_ChangeCity">Şehri Değiştir</string>
     <string name="sett_Notification">Bildirimler</string>
     <string name="sett_ShowNotification">Bildirim Alanında Vakitleri Göster</string>
-    <string name="sett_TransparentNotifyIcon">Bildirim Simgesi Saydam Olsun</string>
+    <string name="sett_TransparentNotifyIcon">Bildirim Simgesini Göster</string>
     <string name="sett_About">Hakkında</string>
     <string name="sett_OnWeb">Web Sitesi</string>
     <string name="sett_Share">Paylaş</string>

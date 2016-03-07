@@ -44,7 +44,7 @@
     <string name="sett_ShowNotification">Show Notification</string>
     <string name="sett_Sounds">Alerts</string>
     <string name="sett_StartWithPhone">Start with the phone</string>
-    <string name="sett_TransparentNotifyIcon">Transparent Icon</string>
+    <string name="sett_TransparentNotifyIcon">Show Notification Icon</string>
     <string name="sett_ringtone">Sounds</string>
     <string name="sett_silent">Play a ringtone</string>
     <string name="sett_vibrate">Vibrate</string>

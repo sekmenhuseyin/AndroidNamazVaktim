@@ -91,6 +91,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.swTransparentIcon:
                 editor.putBoolean(getString(R.string.prefIcon), swTransparentIcon.isChecked());
+                //var olan bilgilendirmeyi iptal edip tekrar oluşturur
                 fn.CancelNotify();
                 fn.Notification();
                 break;

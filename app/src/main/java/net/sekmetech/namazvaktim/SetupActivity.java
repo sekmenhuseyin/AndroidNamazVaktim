@@ -237,6 +237,7 @@ public class SetupActivity extends AppCompatActivity {
         editor.putBoolean(getString(R.string.prefSetup), true);
         editor.putBoolean(getString(R.string.prefAutostart), true);
         editor.putBoolean(getString(R.string.prefShowNotify), true);
+        editor.putBoolean(getString(R.string.prefIcon), true);
         editor.putBoolean(getString(R.string.prefAlarmVibrate), true);
         editor.putBoolean(getString(R.string.prefAlarmSound), true);
         editor.apply();

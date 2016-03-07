@@ -326,9 +326,9 @@ public class Functions {
                 .setContent(mContentView)
                 .setContentIntent(resultPendingIntent);
         //show
-        if (!prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
-            mBuilder.setSmallIcon(R.drawable.transparent);
-        else mBuilder.setSmallIcon(R.drawable.notification);
+        if (prefs.getBoolean(mContext.getString(R.string.prefIcon), true))
+            mBuilder.setSmallIcon(R.drawable.notification);
+        else mBuilder.setSmallIcon(R.drawable.transparent);
         mNotificationManager.notify(notifyID, mBuilder.build());
         //eğer namaz vakti ise
         SimpleDateFormat sdf = new SimpleDateFormat(mContext.getString(R.string.timeFormat), Locale.ENGLISH);
@@ -340,12 +340,16 @@ public class Functions {
                 currentTime.equals(tblAksam) ||
                 currentTime.equals(tblYatsi)) {
             // Vibrate for 500 milliseconds
-            Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-            v.vibrate(500);
+            if (prefs.getBoolean(mContext.getString(R.string.prefAlarmVibrate), true)) {
+                Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(500);
+            }
             //and make a sound alarm
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(mContext, notification);
-            r.play();
+            if (prefs.getBoolean(mContext.getString(R.string.prefAlarmSound), true)) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+                r.play();
+            }
         }
     }
 
