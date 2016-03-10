@@ -1,6 +1,9 @@
 package net.sekmetech.namazvaktim;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.sekmetech.helpers.Functions;
@@ -24,8 +28,7 @@ import java.util.Date;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     private Functions fn;
     private SharedPreferences prefs;
-    private Switch swAutoStart, swNotify, swVibrate, swSound, swTransparentIcon;
-    private Button btnCity, btnLang;
+    private Switch swAutoStart, swNotify, swVibrate, swSound, swShowIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +47,32 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         //get buttons and switches
         swAutoStart = (Switch) findViewById(R.id.swAutoStart);
         swNotify = (Switch) findViewById(R.id.swShowNotify);
-        swTransparentIcon = (Switch) findViewById(R.id.swTransparentIcon);
+        swShowIcon = (Switch) findViewById(R.id.swShowIcon);
         swSound = (Switch) findViewById(R.id.swSound);
         swVibrate = (Switch) findViewById(R.id.swVibrate);
-        btnCity = (Button) findViewById(R.id.btnChangeCity);
-        btnLang = (Button) findViewById(R.id.btnChangeLang);
+        Button btnCity = (Button) findViewById(R.id.btnChangeCity);
+        Button btnLang = (Button) findViewById(R.id.btnChangeLang);
+        //version
+        try {
+            PackageInfo pinfo;
+            pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            int versionNumber = pinfo.versionCode;
+            String versionName = pinfo.versionName;
+            TextView txtVersion = (TextView) findViewById(R.id.txtVersion);
+            txtVersion.setText(String.format(getString(R.string.sd), versionName, versionNumber));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         //get values
         swAutoStart.setChecked(prefs.getBoolean(getString(R.string.prefAutostart), true));
         swNotify.setChecked(prefs.getBoolean(getString(R.string.prefShowNotify), true));
-        swTransparentIcon.setChecked(prefs.getBoolean(getString(R.string.prefIcon), true));
+        swShowIcon.setChecked(prefs.getBoolean(getString(R.string.prefIcon), true));
         swSound.setChecked(prefs.getBoolean(getString(R.string.prefAlarmSound), true));
         swVibrate.setChecked(prefs.getBoolean(getString(R.string.prefAlarmVibrate), true));
         // Register the onClick listener with the implementation above
         swAutoStart.setOnClickListener(this);
         swNotify.setOnClickListener(this);
-        swTransparentIcon.setOnClickListener(this);
+        swShowIcon.setOnClickListener(this);
         swSound.setOnClickListener(this);
         swVibrate.setOnClickListener(this);
         btnCity.setOnClickListener(this);
@@ -69,6 +83,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         SharedPreferences.Editor editor = prefs.edit();
+        Intent intent;
+        boolean settChanged = true;
         switch (v.getId() /*to get clicked view id**/) {
             case R.id.fab:
                 fn.UpdatevakitTable();
@@ -89,8 +105,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
 
-            case R.id.swTransparentIcon:
-                editor.putBoolean(getString(R.string.prefIcon), swTransparentIcon.isChecked());
+            case R.id.swShowIcon:
+                editor.putBoolean(getString(R.string.prefIcon), swShowIcon.isChecked());
                 //var olan bilgilendirmeyi iptal edip tekrar oluşturur
                 fn.CancelNotify();
                 fn.Notification();
@@ -105,18 +121,25 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.btnChangeCity:
-                //editor.putBoolean(getString(R.string.prefAutostart), true);
+                settChanged = false;
+                intent = new Intent(getBaseContext(), SetupActivity.class);
+                intent.putExtra(getString(R.string.tabAyarlar), getString(R.string.prefTown));
+                startActivity(intent);
                 break;
 
             case R.id.btnChangeLang:
-                //editor.putBoolean(getString(R.string.prefAutostart), true);
+                settChanged = false;
+                intent = new Intent(getBaseContext(), SetupActivity.class);
+                intent.putExtra(getString(R.string.tabAyarlar), getString(R.string.prefLang));
+                startActivity(intent);
                 break;
 
             default:
                 break;
         }
         editor.apply();
-        Toast.makeText(this, getString(R.string.sett_Saved), Toast.LENGTH_SHORT).show();
+        if (settChanged)
+            Toast.makeText(this, getString(R.string.sett_Saved), Toast.LENGTH_SHORT).show();
     }
 
 }

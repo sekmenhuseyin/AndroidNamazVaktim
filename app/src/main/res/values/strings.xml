@@ -80,6 +80,8 @@
     <string name="sett_vibrate">Titreşim</string>
     <string name="changeLang">Dili Değiştir</string>
     <string name="changeCity">Şehri Değiştir</string>
+    <string name="sett_Support">Destek</string>
+    <string name="sett_ContactUs">Bize Ulaşın</string>
     <!-- varsayılan değerler -->
     <string name="Turkiye" translatable="false">TURKIYE</string>
     <string name="Istanbul" translatable="false">İSTANBUL</string>
@@ -122,6 +124,7 @@
     <string name="sqlEquals" translatable="false">=</string>
     <string name="multpily" translatable="false">*</string>
     <string name="ss" translatable="false">%s%s</string>
+    <string name="sd" translatable="false">%s.%d</string>
     <!-- errors -->
     <string name="errorSetup">Kurulum hatası</string>
     <string name="errorConnection">İnternete bağlanamadı</string>

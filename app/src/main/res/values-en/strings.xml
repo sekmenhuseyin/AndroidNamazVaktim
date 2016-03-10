@@ -51,4 +51,6 @@
     <string name="compassInfo">Keep your device away of the magnetic field and place the phone in parallel to earth.</string>
     <string name="changeCity">Chamge City</string>
     <string name="changeLang">Change Language</string>
+    <string name="sett_ContactUs">Contact Us</string>
+    <string name="sett_Support">Support</string>
 </resources>

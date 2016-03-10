@@ -42,7 +42,7 @@ public class SetupActivity extends AppCompatActivity {
     //usefull vars
     private SharedPreferences prefs;
     private int lastExpandedPosition = -1;
-    private String nameCountry, nameCity, nameTown;
+    private String nameCountry, nameCity, nameTown, argument;
     private Database db;
     private String[] SehirliUlkeler, Diller, DilKodlari;
     private int[] images = {R.drawable.lang_tr, R.drawable.lang_en};
@@ -63,7 +63,12 @@ public class SetupActivity extends AppCompatActivity {
         expListView = (ExpandableListView) findViewById(R.id.lvExpSetup);
         title = (TextView) findViewById(R.id.lblListHeader);
         // preparing list data
-        prepareListLanguageData();
+        argument = getIntent().getStringExtra(getString(R.string.tabAyarlar));
+        if (argument.equals(getString(R.string.prefTown))) {
+            expWithImage = false;
+            //get country names
+            prepareListData("", "");
+        } else prepareListLanguageData();
         expListView.expandGroup(0);
         // Listview Group click listener
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -96,11 +101,14 @@ public class SetupActivity extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (expWithImage) {
                     //if language clicked
-                    expWithImage = false;
                     setLocale(DilKodlari[childPosition]);
-                    //get country names
-                    prepareListData("", "");
-                    expListView.expandGroup(0);
+                    if (argument.equals(getString(R.string.prefLang))) finishIntent();
+                    else {
+                        expWithImage = false;
+                        //get country names
+                        prepareListData("", "");
+                        expListView.expandGroup(0);
+                    }
 
                 } else if (listDataHeader.get(groupPosition).equals(getString(R.string.Country))) {
                     // if country clicked
@@ -242,6 +250,11 @@ public class SetupActivity extends AppCompatActivity {
         editor.putBoolean(getString(R.string.prefAlarmSound), true);
         editor.apply();
         //show home screen and update vakits there
+        finishIntent();
+    }
+
+    /* close activity */
+    private void finishIntent() {
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         finish();
