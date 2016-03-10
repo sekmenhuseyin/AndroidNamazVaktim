@@ -26,17 +26,19 @@ import java.util.ArrayList;
 public class Database extends SQLiteOpenHelper {
     private Context mContext;
     private SQLiteDatabase mDataBase;
-    private String DB_PATH, DB_NAME, select, from, and, where, orderby, innerjoin, on,
+    private String DB_PATH, DB2_PATH, DB_NAME, DB2_NAME, select, from, and, where, orderby, innerjoin, on,
             nokta, kesme, esit, carpi, bosluk, password;
 
     //Constructor
     //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
-        super(context, context.getString(R.string.dbName), null, R.string.dbVersion);
+        super(context, context.getString(R.string.db2Name), null, R.string.dbVersion);
         this.mContext = context;
         SQLiteDatabase.loadLibs(mContext);
         DB_NAME = mContext.getString(R.string.dbName);
+        DB2_NAME = mContext.getString(R.string.db2Name);
         DB_PATH = mContext.getDatabasePath(DB_NAME).getPath();
+        DB2_PATH = mContext.getDatabasePath(DB2_NAME).getPath();
         select = mContext.getString(R.string.sqlSelect);
         from = mContext.getString(R.string.sqlFrom);
         where = mContext.getString(R.string.sqlWhere);
@@ -60,11 +62,13 @@ public class Database extends SQLiteOpenHelper {
             //of your application so we are gonna be able to overwrite that database with our database.
             this.getReadableDatabase();
             try {
-                copyDataBase();
+                copyDataBase(DB_NAME, DB_PATH);
+                copyDataBase(DB2_NAME, DB2_PATH);
             } catch (IOException e) {
                 throw new Error(String.valueOf(R.string.errorSetup));
             }
         }
+        close();
     }
 
     // Check if the database already exist to avoid re-copying the file
@@ -80,11 +84,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Copies database from assets-folder to the system folder by transfering bytestream.
-    public void copyDataBase() throws IOException {
+    public void copyDataBase(String dbname, String dbpath) throws IOException {
         //Open your local db as the input stream
-        InputStream myInput = mContext.getAssets().open(DB_NAME);
+        InputStream myInput = mContext.getAssets().open(dbname);
         //Open the empty db as the output stream
-        OutputStream myOutput = new FileOutputStream(DB_PATH);
+        OutputStream myOutput = new FileOutputStream(dbpath);
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
@@ -100,7 +104,6 @@ public class Database extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
         //Open the database
         mDataBase = SQLiteDatabase.openDatabase(DB_PATH, password, null, SQLiteDatabase.OPEN_READONLY);
-
     }
 
     @Override
@@ -215,7 +218,7 @@ public class Database extends SQLiteOpenHelper {
 
     /*add new record to vakit table*/
     public boolean insertNewVakit(Vakit tablo) {
-        openDataBase();
+        android.database.sqlite.SQLiteDatabase db = this.getReadableDatabase();
         ContentValues newRow = new ContentValues();
         newRow.put(Vakit.tarih, tablo.GetTarih());
         newRow.put(Vakit.imsak, tablo.GetImsak());
@@ -226,8 +229,8 @@ public class Database extends SQLiteOpenHelper {
         newRow.put(Vakit.yatsi, tablo.GetYatsi());
         newRow.put(Vakit.kible, tablo.GetKible());
         newRow.put(Vakit.Ilce_id, tablo.GetIlce());
-        mDataBase.insert(Vakit.name, null, newRow);
-        mDataBase.close();
+        db.insert(Vakit.name, null, newRow);
+        db.close();
         return true;
     }
 
@@ -237,11 +240,11 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = select + bosluk + Vakit._id + bosluk + from + bosluk + Vakit.name + bosluk +
                 where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + ilce + bosluk + and + bosluk +
                 Vakit.tarih + bosluk + esit + bosluk + kesme + tarih + kesme;
-        openDataBase();
-        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
+        android.database.sqlite.SQLiteDatabase db = this.getReadableDatabase();
+        android.database.Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) sonuc = true;
         cursor.close();
-        mDataBase.close();
+        db.close();
         return sonuc;
     }
 
@@ -277,8 +280,8 @@ public class Database extends SQLiteOpenHelper {
         String selectQuery = select + bosluk + carpi + bosluk + from + bosluk + Vakit.name + bosluk +
                 where + bosluk + Vakit.Ilce_id + bosluk + esit + bosluk + IlceId + bosluk + and + bosluk +
                 Vakit.tarih + bosluk + esit + bosluk + kesme + Tarih + kesme;
-        openDataBase();
-        Cursor cursor = mDataBase.rawQuery(selectQuery, null);
+        android.database.sqlite.SQLiteDatabase db = this.getReadableDatabase();
+        android.database.Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             tablo.SetId(cursor.getInt(cursor.getColumnIndex(Vakit._id)));
             tablo.SetTarih(cursor.getString(cursor.getColumnIndex(Vakit.tarih)));
@@ -291,7 +294,7 @@ public class Database extends SQLiteOpenHelper {
             tablo.SetKible(cursor.getString(cursor.getColumnIndex(Vakit.kible)));
         } else tablo.SetTarih("");
         cursor.close();
-        mDataBase.close();
+        db.close();
         return tablo;
     }
 }

@@ -28,6 +28,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     static final int NUM_ITEMS = 3;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

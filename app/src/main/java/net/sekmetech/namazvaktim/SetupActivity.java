@@ -64,11 +64,12 @@ public class SetupActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.lblListHeader);
         // preparing list data
         argument = getIntent().getStringExtra(getString(R.string.tabAyarlar));
-        if (argument.equals(getString(R.string.prefTown))) {
+        if (argument == null) prepareListLanguageData();
+        else if (argument.equals(getString(R.string.prefTown))) {
             expWithImage = false;
             //get country names
             prepareListData("", "");
-        } else prepareListLanguageData();
+        }
         expListView.expandGroup(0);
         // Listview Group click listener
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -102,13 +103,12 @@ public class SetupActivity extends AppCompatActivity {
                 if (expWithImage) {
                     //if language clicked
                     setLocale(DilKodlari[childPosition]);
-                    if (argument.equals(getString(R.string.prefLang))) finishIntent();
-                    else {
+                    if (argument == null) {
                         expWithImage = false;
                         //get country names
                         prepareListData("", "");
                         expListView.expandGroup(0);
-                    }
+                    } else if (argument.equals(getString(R.string.prefLang))) finishIntent();
 
                 } else if (listDataHeader.get(groupPosition).equals(getString(R.string.Country))) {
                     // if country clicked
