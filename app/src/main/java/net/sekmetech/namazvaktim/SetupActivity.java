@@ -20,6 +20,7 @@ import net.sekmetech.database.Ulke;
 import net.sekmetech.helpers.ExpandableListAdapter;
 import net.sekmetech.helpers.ExpandableListWithImageAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,9 +53,16 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        db = new Database(this);
         // SharedPreferences
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        db = new Database(this);
+        if (!prefs.getBoolean(getString(R.string.prefSetup), false)) {
+            try {//create database
+                db.createDataBase();
+            } catch (IOException ioe) {
+                throw new Error(getString(R.string.errorSetup));
+            }
+        }
         Resources res = getResources();
         SehirliUlkeler = res.getStringArray(R.array.SehirliUlkeler);
         Diller = res.getStringArray(R.array.Diller);
