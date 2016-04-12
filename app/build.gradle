@@ -2,46 +2,54 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        signature {
-            keyAlias 'key'
-            keyPassword 'Bahtiyar2013'
-            storeFile file('D:/Projects/Android/key')
-            storePassword 'Bahtiyar2013'
-        }
     }
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId 'net.sekmetech.namazvaktim'
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 50
         versionName "1.0"
-        signingConfig signingConfigs.signature
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.signature
-            proguardFile 'D:/Projects/Android/NamazVaktim/app/proguard-rules.pro'
             pseudoLocalesEnabled true
+            proguardFile 'D:/OneDrive/Projects/Android/NamazVaktim/app/proguard-rules.pro'
+            zipAlignEnabled false
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             jniDebuggable true
+            renderscriptDebuggable true
+            debuggable true
+            zipAlignEnabled false
         }
     }
     productFlavors {
     }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:23.2.0'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:support-v4:23.2.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/commons-codec.jar')
     compile files('libs/guava-r09.jar')
     compile files('libs/sqlcipher.jar')
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
 }
+apply plugin: 'com.google.gms.google-services'

@@ -15,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import net.sekmetech.fragments.CalendarFragment;
 import net.sekmetech.fragments.CompassFragmant;
 import net.sekmetech.fragments.HolyDaysFragmant;
@@ -29,7 +32,10 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     static final int NUM_ITEMS = 3;
     private boolean doubleBackToExitPressedOnce = false;
-
+    /**
+     * The {@link Tracker} used to record screen views.
+     */
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +64,15 @@ public class MainActivity extends AppCompatActivity {
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);//this will host the section contents.
+        assert mViewPager != null;
         mViewPager.setAdapter(mSectionsPagerAdapter);
         //tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        assert tabLayout != null;
         tabLayout.setupWithViewPager(mViewPager);
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -136,16 +147,28 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 5:
+                    mTracker.setScreenName("Page~LibraryFragmant");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new LibraryFragmant();
                 case 4:
+                    mTracker.setScreenName("Page~HolyDaysFragmant");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new HolyDaysFragmant();
                 case 3:
+                    mTracker.setScreenName("Page~CalendarFragment");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new CalendarFragment();
                 case 2:
+                    mTracker.setScreenName("Page~MonthlyFragmant");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new MonthlyFragmant();
                 case 1:
+                    mTracker.setScreenName("Page~CompassFragmant");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new CompassFragmant();
                 default:
+                    mTracker.setScreenName("Page~TimesFragment");
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
                     return new TimesFragment();
             }
         }

@@ -45,8 +45,7 @@
     <string name="sett_Sounds">Alerts</string>
     <string name="sett_StartWithPhone">Start with the phone</string>
     <string name="sett_TransparentNotifyIcon">Show Notification Icon</string>
-    <string name="sett_ringtone">Sounds</string>
-    <string name="sett_silent">Play a ringtone</string>
+    <string name="sett_ringtone">Play a ringtone</string>
     <string name="sett_vibrate">Vibrate</string>
     <string name="compassInfo">Keep your device away of the magnetic field and place the phone in parallel to earth.</string>
     <string name="changeCity">Chamge City</string>
