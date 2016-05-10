@@ -1,0 +1,269 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frmVakit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|top"
+    android:orientation="vertical"
+    tools:context="net.sekmetech.fragments.TimesFragment">
+
+    <TextView
+        android:id="@+id/lblTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/bes"
+        android:text="@string/Town"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/otuzT"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lblRemainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/vakit_remaining"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/txtRemainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/vakit_none"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/otuzT"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtTarih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/bes"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/yirmi"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgImsak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_imsak" />
+
+            <TextView
+                android:id="@+id/lblImsak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_imsak"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtImsak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblImsak"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgGunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_gunes" />
+
+            <TextView
+                android:id="@+id/lblGunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_gunes"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtGunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblGunes"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgOgle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_ogle" />
+
+            <TextView
+                android:id="@+id/lblOgle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_ogle"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtOgle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblOgle"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/yirmi"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgIkindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_gunes" />
+
+            <TextView
+                android:id="@+id/lblIkindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_ikindi"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtIkindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblIkindi"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgAksam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_aksam" />
+
+            <TextView
+                android:id="@+id/lblAksam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_aksam"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtAksam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblAksam"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgYatsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/vakit_yatsi" />
+
+            <TextView
+                android:id="@+id/lblYatsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/bes"
+                android:text="@string/vakit_yatsi"
+                android:textSize="@dimen/yirmibesT" />
+
+            <TextView
+                android:id="@+id/txtYatsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblYatsi"
+                android:layout_centerHorizontal="true"
+                android:text="@string/vakit_none"
+                android:textSize="@dimen/yirmibesT" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

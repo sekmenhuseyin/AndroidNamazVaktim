@@ -1,12 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.sekmetech.fragments.CompassFragmant">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -21,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="end"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_kible"
                 android:textColor="@android:color/white"
@@ -32,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="@dimen/bes"
                 android:text="@string/vakit_none"
                 android:textColor="@android:color/white"
@@ -43,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="end"
                 android:padding="@dimen/bes"
                 android:text="@string/kibleAngle"
                 android:textColor="@android:color/white"
@@ -54,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="@dimen/bes"
                 android:text="@string/sifir"
                 android:textColor="@android:color/white"
@@ -78,12 +74,11 @@
             android:id="@+id/lblCompassInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/otuz"
-            android:gravity="center_horizontal|bottom"
+            android:layout_below="@+id/imgKible"
+            android:layout_marginTop="@dimen/otuz"
+            android:gravity="center"
             android:text="@string/compassInfo"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
-    </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>
