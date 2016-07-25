@@ -2,6 +2,7 @@ package net.sekmetech.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -44,7 +45,15 @@ public class CompassFragmant extends Fragment implements SensorEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myInflatedView = inflater.inflate(R.layout.fragment_home_compass, container, false);
         mContext = container.getContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         image = (ImageView) myInflatedView.findViewById(R.id.imgKible);
+        //locales
+        String savedLocale = prefs.getString(getString(R.string.prefLang), "");
+        Locale locale = new Locale(savedLocale);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
         RefreshVakit();
         // initialize your android device sensor capabilities
         SensorManager mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);

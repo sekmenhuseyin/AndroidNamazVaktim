@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Namaz Vaktim</string>
     <string name="dbVersion" translatable="false">1</string>
-    <string name="dbName" translatable="false">database.encrypted</string>
-    <string name="db2Name" translatable="false">database.db</string>
+    <string name="dbName" translatable="false">database.db</string>
     <string name="website" translatable="false">https://sekmetech.net/</string>
     <!-- Preferences -->
     <string name="prefSetup" translatable="false">q</string>

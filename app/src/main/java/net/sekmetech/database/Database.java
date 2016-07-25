@@ -2,13 +2,13 @@ package net.sekmetech.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import net.sekmetech.namazvaktim.R;
-import net.sqlcipher.Cursor;
-import net.sqlcipher.SQLException;
-import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,19 +26,16 @@ import java.util.ArrayList;
 public class Database extends SQLiteOpenHelper {
     private Context mContext;
     private SQLiteDatabase mDataBase;
-    private String DB_PATH, DB2_PATH, DB_NAME, DB2_NAME, select, from, and, where, orderby, innerjoin, on,
-            nokta, kesme, esit, carpi, bosluk, password;
+    private String DB_PATH, DB_NAME, select, from, and, where, orderby, innerjoin, on,
+            nokta, kesme, esit, carpi, bosluk;
 
     //Constructor
     //Takes reference of the passed context to access to the application assets and resources.
     public Database(Context context) {
-        super(context, context.getString(R.string.db2Name), null, R.string.dbVersion);
+        super(context, context.getString(R.string.dbName), null, R.string.dbVersion);
         this.mContext = context;
-        SQLiteDatabase.loadLibs(mContext);
         DB_NAME = mContext.getString(R.string.dbName);
-        DB2_NAME = mContext.getString(R.string.db2Name);
         DB_PATH = mContext.getDatabasePath(DB_NAME).getPath();
-        DB2_PATH = mContext.getDatabasePath(DB2_NAME).getPath();
         select = mContext.getString(R.string.sqlSelect);
         from = mContext.getString(R.string.sqlFrom);
         where = mContext.getString(R.string.sqlWhere);
@@ -51,7 +48,6 @@ public class Database extends SQLiteOpenHelper {
         kesme = "'";
         carpi = mContext.getString(R.string.multpily);
         bosluk = " ";
-        password = mContext.getString(R.string.app_name) + mContext.getString(R.string.website) + mContext.getString(R.string.datetimeFormat);
     }
 
     // Creates a empty database on the system and rewrites it with your own database.
@@ -63,7 +59,6 @@ public class Database extends SQLiteOpenHelper {
             this.getReadableDatabase();
             try {
                 copyDataBase(DB_NAME, DB_PATH);
-                copyDataBase(DB2_NAME, DB2_PATH);
             } catch (IOException e) {
                 throw new Error(String.valueOf(R.string.errorSetup));
             }
@@ -103,7 +98,7 @@ public class Database extends SQLiteOpenHelper {
 
     public void openDataBase() throws SQLException {
         //Open the database
-        mDataBase = SQLiteDatabase.openDatabase(DB_PATH, password, null, SQLiteDatabase.OPEN_READONLY);
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
     }
 
     @Override
@@ -121,16 +116,6 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(android.database.sqlite.SQLiteDatabase db, int oldVersion, int newVersion) {
 
-    }
-
-    public boolean ImportUnencryptedDatabaseTest(String unencryptedDatabase, String encryptedDatabase, String password) {
-        SQLiteDatabase database;
-        database = SQLiteDatabase.openOrCreateDatabase(unencryptedDatabase, "", null);
-        database.rawExecSQL(String.format("ATTACH DATABASE '%s' AS encrypted KEY '%s'", encryptedDatabase, password));
-        database.rawExecSQL("select sqlcipher_export('encrypted')");
-        database.rawExecSQL("DETACH DATABASE encrypted");
-        database.close();
-        return true;
     }
 
     // ülkeler
@@ -201,12 +186,11 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = mDataBase.rawQuery(selectQuery, null);
         String tmp;
         // looping through all rows and adding to list
-        if (city.equals(mContext.getString(R.string.Istanbul)))
-            liste.add(mContext.getString(R.string.Istanbul));
+        liste.add(city);
         if (cursor.moveToFirst()) {
             do {
                 tmp = cursor.getString(cursor.getColumnIndex(Ilce.Ad));
-                if (!tmp.equals(mContext.getString(R.string.Istanbul))) liste.add(tmp);
+                if (!tmp.equals(city)) liste.add(tmp);
             } while (cursor.moveToNext());
         }
         // closing connection

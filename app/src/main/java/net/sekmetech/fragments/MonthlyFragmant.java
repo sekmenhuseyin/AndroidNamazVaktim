@@ -2,6 +2,7 @@ package net.sekmetech.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,13 @@ public class MonthlyFragmant extends Fragment {
         Database db = new Database(mContext);
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
+        //locales
+        String savedLocale = prefs.getString(getString(R.string.prefLang), "");
+        Locale locale = new Locale(savedLocale);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
         //get data
         int town = prefs.getInt(getString(R.string.prefTownID), Integer.parseInt(getString(R.string.defaultIlceID)));
         List<Vakit> vakitler = new ArrayList<>();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import net.sekmetech.helpers.Functions;
 
 import java.util.Date;
+import java.util.Locale;
 
 /*
  * Copyright (c) 2016. Tüm hakları saklıdır.
@@ -36,6 +38,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_settings);
         fn = new Functions(this);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //locales
+        String savedLocale = prefs.getString(getString(R.string.prefLang), "");
+        Locale locale = new Locale(savedLocale);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -2,6 +2,7 @@ package net.sekmetech.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -40,9 +41,17 @@ public class TimesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myInflatedView = inflater.inflate(R.layout.fragment_home_times, container, false);
         mContext = container.getContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         SimpleDateFormat dfDate = new SimpleDateFormat(getString(R.string.dateFormat), Locale.ENGLISH);
         today = dfDate.format((new Date()).getTime());//Returns 15/10/2012
         fn = new Functions(this.getActivity());
+        //locales
+        String savedLocale = prefs.getString(getString(R.string.prefLang), "");
+        Locale locale = new Locale(savedLocale);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
         //get textviews
         lblImsak = (TextView) myInflatedView.findViewById(R.id.lblImsak);
         lblGunes = (TextView) myInflatedView.findViewById(R.id.lblGunes);

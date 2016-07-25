@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by huseyin.sekmenoglu on 11.2.2016.
@@ -48,6 +50,14 @@ public class DatabaseUpdate extends AsyncTask<String, Integer, String> {
         this.myContext = activity.getApplicationContext();
         progressDialog = new ProgressDialog(activity);
         fn = new Functions(myContext);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(myContext);
+        //locales
+        String savedLocale = prefs.getString(String.valueOf(R.string.prefLang), "");
+        Locale locale = new Locale(savedLocale);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        myContext.getResources().updateConfiguration(config, myContext.getResources().getDisplayMetrics());
     }
 
     //Arka plan işlemi başlamadan önce ön yüzde değiştirilmesi istenen değişkenlerin ataması yapılır

@@ -77,6 +77,8 @@ public class SetupActivity extends AppCompatActivity {
             expWithImage = false;
             //get country names
             prepareListData("", "");
+        } else {
+            prepareListLanguageData();
         }
         expListView.expandGroup(0);
         // Listview Group click listener
@@ -222,7 +224,7 @@ public class SetupActivity extends AppCompatActivity {
         Locale locale = new Locale(localeCode);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
-        config.locale = locale;
+        config.setLocale(locale);
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         //save to settings
         SharedPreferences.Editor editor = prefs.edit();
